@@ -1,0 +1,32 @@
+HOW TO USE GIT
+- by Aidan for Chappy with love :)
+
+Step 1: Understand Git
+https://www.youtube.com/watch?v=2ReR1YJrNOM
+
+Step 2: Understand basic Git commands:
+HOW TO USE GIT
+- by Aidan for Chappy with love :)
+
+Step 1: Understand Git
+
+https://www.youtube.com/watch?v=2ReR1YJrNOM
+
+Step 2: Understand basic Git commands:
+
+https://www.youtube.com/watch?v=mJ-qvsxPHpY
+
+https://www.youtube.com/watch?v=USjZcfj8yxE
+
+Step 3: Get a working local repo of csc_255
+
+a) Make a GitHub account and send me your name or email associate with your account so I can add your permissions
+b) Clone my csc_255 repository onto your Cygwin system (should have git by default) if you're on mac, install git for mac
+c) Navigate to the directory in which you want to store our csc_255 folder
+d) follow the following commands
+git clone https://github.com/cqllysto/csc_255.git
+
+That should make a local version of the master repositiory on GitHub, then you can add, commit, and push your changes as we work together
+
+FINISHED!
+Also PS: If this sounds too complicated and you don't want to bother then lmk and we can use like google docs or something lol. I just personally want to use git because it's used professionally for most programming applications and a lot of job descriptions as for it
