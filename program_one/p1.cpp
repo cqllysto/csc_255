@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-// Andrew Chapuis & Aidan Wright
-// CSC 255
-// Program 1a
-// 08/24/2023
+//Name:Andrew Chapuis and Aidan Wright
+//Course: CSC 255
+//Program 1
+//Date: 08/28/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include <fstream>    // gets file functions of open and close
@@ -64,11 +63,5 @@ bool stringList::add(string text){
     return(rc);
     
 }
-=======
-//Name:Andrew Chapuis and Aidan Wright
-//Course: CSC 255
-//Program 1
-//Date: 08/28/23
 
 //******************************************************************************
->>>>>>> f3e2a47 (I started a little of program 1)
