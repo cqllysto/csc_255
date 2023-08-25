@@ -25,8 +25,7 @@ stringList::stringList(int listCapacity){
 // Destructor
 stringList::~stringList(){
     if(a){
-        delete []a;
-	a = NULL;
+        delete [] a;
     }
 }
 
@@ -70,7 +69,6 @@ bool stringList::add(string text){
 bool stringList::deleteAt(int index, string &text) {
     return(-1);
 }
-
 
 //******************************************************************************
 //Andrew Chapuis
@@ -118,4 +116,11 @@ bool stringList::insertAt(int index, string text) {
 	rc = true;
     }
     return(rc);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+void clear() {
+    listSize = 0;
 }
