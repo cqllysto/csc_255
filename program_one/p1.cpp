@@ -13,7 +13,7 @@ using namespace std;
 //Aidan Wright
 
 // Constructor
-stringList::stringList(int listCapacity){
+stringList::stringList(int listCapacity) {
     this->listCapacity = listCapacity;
     listSize = 0;
     a = new string[listSize];
@@ -23,7 +23,7 @@ stringList::stringList(int listCapacity){
 //Aidan Wright
 
 // Destructor
-stringList::~stringList(){
+stringList::~stringList() {
     if(a){
         delete [] a;
     }
@@ -32,11 +32,11 @@ stringList::~stringList(){
 //******************************************************************************
 //Aidan Wright
 
-bool stringList::readAt(int index, string &text){
-    bool rc = FALSE;
-    if (index >= 0) && (index < listSize) {
+bool stringList::readAt(int index, string &text) const {
+    bool rc = false;
+    if ((index >= 0) && (index < listSize)) {
         text = a[index];
-	rc = TRUE;
+	rc = true;
     }
     return(rc);
 }
@@ -44,30 +44,28 @@ bool stringList::readAt(int index, string &text){
 //******************************************************************************
 //Aidan Wright
 
-int stringList::count(){
-   return(listSize)
+int stringList::count() const {
+   return(listSize);
 }
 
 //******************************************************************************
 //Aidan Wright
 
 bool stringList::add(string text){
-    bool rc = FALSE;
+    bool rc = false;
     if (listSize < listCapacity) {
 	a[listSize] = text; 
-	if (a[listSize] == text){
-	    rc = TRUE;
-	    listSize++;
-	}
-	return(rc);
+	rc = true;
+	listSize++;
     }
+	return(rc);
 }
 
 //******************************************************************************
 //Andrew Chapuis
 
 bool stringList::deleteAt(int index, string &text) {
-    return(-1);
+    return(false);
 }
 
 //******************************************************************************
@@ -97,7 +95,7 @@ bool stringList::insert(string text) {
 //Andrew Chapuis
 
 void stringList::printIt() const {
-    for (i = 0; i < listSize; i++) {
+    for (int i = 0; i < listSize; i++) {
 	cout << a[i] << "\n";
     }
 }
@@ -108,7 +106,7 @@ void stringList::printIt() const {
 bool stringList::insertAt(int index, string text) {
     bool rc = false;
     if ((index >=0) && (index < listSize) && (listSize < listCapacity)) {
-	for (i = listSize; i > index; i--) {
+	for (int i = listSize; i > index; i--) {
 	    a[i] = a[i - 1];
 	}
 	a[index] = text;
@@ -121,6 +119,6 @@ bool stringList::insertAt(int index, string text) {
 //******************************************************************************
 //Andrew Chapuis
 
-void clear() {
+void stringList::clear() {
     listSize = 0;
 }

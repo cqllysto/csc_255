@@ -21,8 +21,8 @@ class stringList {
 	void printIt() const;
 	int getIndex(std::string text) const;
 	bool readAt(int index, std::string &text) const;
-	int count() const
-}
+	int count() const;
+};
 
 #endif
 

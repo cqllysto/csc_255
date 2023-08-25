@@ -1,0 +1,58 @@
+Do Work - START ********************
+START ********************
+The list has 0 items, which are:
+
+processing the input file ********************
+insert Today got true
+add of is got true
+add of the got true
+add of day got true
+add of that got true
+readAt 1 got true and is
+add of Lord got true
+getIndex day got -1
+add of has got true
+readAt -1 got false and na
+add of made got true
+getIndex happy got -1
+insertAt 5,the got true
+Today
+is
+the
+day
+that
+the
+Lord
+has
+made
+insertAt 1,breakerbreaker got true
+readAt 30 got false and na
+insertAt 0,helperhelper got true
+helperhelper
+Today
+breakerbreaker
+is
+the
+day
+that
+the
+Lord
+has
+made
+deleteAt 30 got false and na
+deleteAt 0 got false and na
+deleteAt 1 got false and na
+deleteAt -1 got false and na
+helperhelper
+Today
+breakerbreaker
+is
+the
+day
+that
+the
+Lord
+has
+made
+List was cleared
+deleteAt 0 got false and na
