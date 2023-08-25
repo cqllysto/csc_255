@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Andrew Chapuis & Aidan Wright
 // CSC 255
 // Program 1a
@@ -63,3 +64,11 @@ bool stringList::add(string text){
     return(rc);
     
 }
+=======
+//Name:Andrew Chapuis and Aidan Wright
+//Course: CSC 255
+//Program 1
+//Date: 08/28/23
+
+//******************************************************************************
+>>>>>>> f3e2a47 (I started a little of program 1)
