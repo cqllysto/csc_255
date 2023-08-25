@@ -11,17 +11,25 @@
 
 using namespace std;
 
+
+
+//******************************************************************************
+//Aidan Wright
+
 // Constructor
 stringList::stringList(int listCapacity){
     this->listCapacity = listCapacity;
     a = new string[listSize];
 }
 
+//******************************************************************************
+//Aidan Wright
+
 // Destructor
 stringList::~stringList(){
     if(a){
-    delete []a;
-    a = NULL;
+        delete []a;
+	a = NULL;
     }
 }
 
@@ -31,13 +39,10 @@ stringList::~stringList(){
 
 bool stringList::readAt(int index, string &text){
     bool rc = FALSE;
-
     if (index >= 0) && (index < listSize){
         text = a[index];
-	
 	rc = TRUE;
     }
-
     return(rc);
 }
 
@@ -54,14 +59,11 @@ int stringList::count(){
 
 bool stringList::add(string text){
     bool rc = FALSE;    
-    a[listSize] = text;
-    
+    a[listSize] = text; 
     if (a[listSize] == text){
         rc = TRUE;
 	listSize++;
     }
     return(rc);
-    
 }
 
-//******************************************************************************
