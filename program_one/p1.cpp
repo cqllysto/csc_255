@@ -122,7 +122,3 @@ bool stringList::readAt(int index, string &text) const {
 int stringList::count() const {
    return(listSize);
 }
-
-
-
-
