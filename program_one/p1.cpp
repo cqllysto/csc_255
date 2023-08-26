@@ -16,7 +16,7 @@ using namespace std;
 stringList::stringList(int listCapacity) {
     this->listCapacity = listCapacity;
     listSize = 0;
-    a = new string[listSize];
+    a = new string[listCapacity];
 }
 
 //******************************************************************************
@@ -24,7 +24,7 @@ stringList::stringList(int listCapacity) {
 
 // Destructor
 stringList::~stringList() {
-    if(a){
+    if(a) {
         delete [] a;
     }
 }
