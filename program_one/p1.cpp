@@ -30,52 +30,6 @@ stringList::~stringList() {
 }
 
 //******************************************************************************
-//Aidan Wright
-
-bool stringList::readAt(int index, string &text) const {
-    bool rc = false;
-    if ((index >= 0) && (index < listSize)) {
-        text = a[index];
-	rc = true;
-    }
-    return(rc);
-}
-
-//******************************************************************************
-//Aidan Wright
-
-int stringList::count() const {
-   return(listSize);
-}
-
-//******************************************************************************
-//Aidan Wright
-
-bool stringList::add(string text){
-    bool rc = false;
-    if (listSize < listCapacity) {
-	a[listSize] = text; 
-	rc = true;
-	listSize++;
-    }
-	return(rc);
-}
-
-//******************************************************************************
-//Andrew Chapuis
-
-bool stringList::deleteAt(int index, string &text) {
-    return(false);
-}
-
-//******************************************************************************
-//Andrew Chapuis
-
-int stringList::getIndex(string text) const {
-    return(-1);
-}
-
-//******************************************************************************
 //Andrew Chapuis
 
 bool stringList::insert(string text) {
@@ -92,12 +46,16 @@ bool stringList::insert(string text) {
 }
 
 //******************************************************************************
-//Andrew Chapuis
+//Aidan Wright
 
-void stringList::printIt() const {
-    for (int i = 0; i < listSize; i++) {
-	cout << a[i] << "\n";
+bool stringList::add(string text){
+    bool rc = false;
+    if (listSize < listCapacity) {
+	a[listSize] = text; 
+	rc = true;
+	listSize++;
     }
+	return(rc);
 }
 
 //******************************************************************************
@@ -119,6 +77,52 @@ bool stringList::insertAt(int index, string text) {
 //******************************************************************************
 //Andrew Chapuis
 
+bool stringList::deleteAt(int index, string &text) {
+    return(false);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
 void stringList::clear() {
     listSize = 0;
 }
+
+//******************************************************************************
+//Andrew Chapuis
+
+void stringList::printIt() const {
+    for (int i = 0; i < listSize; i++) {
+	cout << a[i] << "\n";
+    }
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+int stringList::getIndex(string text) const {
+    return(-1);
+}
+
+//******************************************************************************
+//Aidan Wright
+
+bool stringList::readAt(int index, string &text) const {
+    bool rc = false;
+    if ((index >= 0) && (index < listSize)) {
+        text = a[index];
+	rc = true;
+    }
+    return(rc);
+}
+
+//******************************************************************************
+//Aidan Wright
+
+int stringList::count() const {
+   return(listSize);
+}
+
+
+
+
