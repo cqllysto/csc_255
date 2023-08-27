@@ -4,7 +4,6 @@
 //Date: 08/28/23
 
 #include <iostream>   // gets cin, cout, cerr
-
 #include "p1.h"
 
 using namespace std;
@@ -12,7 +11,8 @@ using namespace std;
 //******************************************************************************
 //Aidan Wright
 
-// Constructor
+// Constructor: causes the array to be sized at "listCapacity" entries
+// with a default size of 100
 stringList::stringList(int listCapacity) {
     this->listCapacity = listCapacity;
     listSize = 0;
@@ -22,7 +22,8 @@ stringList::stringList(int listCapacity) {
 //******************************************************************************
 //Aidan Wright
 
-// Destructor
+// Destructor: makes sure that any dynamically allocated memory
+// is deleted, in this case, the array "a"
 stringList::~stringList() {
     if(a) {
         delete [] a;
@@ -32,12 +33,17 @@ stringList::~stringList() {
 //******************************************************************************
 //Andrew Chapuis
 
+//Insert function: First shifts all entries right, then inserts the inputted 
+//text into the beginning of the string
 bool stringList::insert(string text) {
     bool rc = false;
+    //shifts list entries to the right
     if (listSize < listCapacity) {
-	for (int i = listSize; i > 0; i--) {
+	for (int i = listSize; i > 0; i--) {  
 	    a[i] = a[i - 1];
 	}
+    //sets the inserted text to the beginning of the string
+    //and increments the listSize
 	a[0] = text;
 	listSize++;
 	rc = true;
@@ -48,6 +54,7 @@ bool stringList::insert(string text) {
 //******************************************************************************
 //Aidan Wright
 
+//Add function: inserts the given text at the end of the list
 bool stringList::add(string text){
     bool rc = false;
     if (listSize < listCapacity) {
@@ -61,12 +68,17 @@ bool stringList::add(string text){
 //******************************************************************************
 //Andrew Chapuis
 
+//insertAt function: inserts a given text at the given index of the string
+//and shifts any following entries to the right
 bool stringList::insertAt(int index, string text) {
     bool rc = false;
+    //shifts all entries from the given index to the end of the list
+    //to the right, and increments the listSize
     if ((index >=0) && (index < listSize) && (listSize < listCapacity)) {
 	for (int i = listSize; i > index; i--) {
 	    a[i] = a[i - 1];
 	}
+    //sets the given text to the given index in the string
 	a[index] = text;
 	listSize++;
 	rc = true;
@@ -77,6 +89,7 @@ bool stringList::insertAt(int index, string text) {
 //******************************************************************************
 //Andrew Chapuis
 
+//this is a p1b.cpp problem :)
 bool stringList::deleteAt(int index, string &text) {
     return(false);
 }
@@ -84,6 +97,7 @@ bool stringList::deleteAt(int index, string &text) {
 //******************************************************************************
 //Andrew Chapuis
 
+//empties the list
 void stringList::clear() {
     listSize = 0;
 }
@@ -91,15 +105,17 @@ void stringList::clear() {
 //******************************************************************************
 //Andrew Chapuis
 
+//prints the whole list and the respective indexes
 void stringList::printIt() const {
     for (int i = 0; i < listSize; i++) {
-	cout << a[i] << "\n";
+	cout << "At pos " << i << " there is " << a[i] << "\n";
     }
 }
 
 //******************************************************************************
 //Andrew Chapuis
 
+//this is a p1b.cpp problem :)
 int stringList::getIndex(string text) const {
     return(-1);
 }
@@ -107,6 +123,7 @@ int stringList::getIndex(string text) const {
 //******************************************************************************
 //Aidan Wright
 
+//returns the entry in the list at the given index
 bool stringList::readAt(int index, string &text) const {
     bool rc = false;
     if ((index >= 0) && (index < listSize)) {
@@ -119,6 +136,7 @@ bool stringList::readAt(int index, string &text) const {
 //******************************************************************************
 //Aidan Wright
 
+//returns the size of the list
 int stringList::count() const {
    return(listSize);
 }
