@@ -92,10 +92,10 @@ bool stringList::insertAt(int index, string text) {
 // this is a p1b.cpp problem :)
 bool stringList::deleteAt(int index, string &text) {
     bool rc = false;
-    text = a[index]; 
-    if ((index >= 0) && (index < listSize) && (listSize < listCapacity)) {
-	for (int i = listSize; i >= index; i--) {
-	    a[i - 1] = a[i];
+    if ((index >= 0) && (index < listSize)) {
+	text = a[index]; 
+	for (int i = index; i < listSize; i++) {
+	    a[i] = a[i + 1];
 	}
 	listSize--;
 	rc = true;
