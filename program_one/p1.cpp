@@ -87,11 +87,20 @@ bool stringList::insertAt(int index, string text) {
 }
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 
 // this is a p1b.cpp problem :)
 bool stringList::deleteAt(int index, string &text) {
-    return(false);
+    bool rc = false;
+    text = a[index]; 
+    if ((index >= 0) && (index < listSize) && (listSize < listCapacity)) {
+	for (int i = listSize; i >= index; i--) {
+	    a[i - 1] = a[i];
+	}
+	listSize--;
+	rc = true;
+    }
+    return(rc);
 }
 
 //******************************************************************************
