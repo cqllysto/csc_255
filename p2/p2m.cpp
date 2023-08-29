@@ -2,13 +2,13 @@
 #include <fstream>    // gets file functions of open and close
 #include <string.h>   // gets the string type, which is part of std namespace
 
-#include "p1.h"
+#include "p2.h"
 
 using namespace std;
 
 //******************************************************************************
 
-void doWork(string dataName, int listSize) {
+void doWork(string dataName) {
     int i;
     int val;
     bool rc;
@@ -16,7 +16,7 @@ void doWork(string dataName, int listSize) {
     string action, text;
     int index;
 
-    stringList *myList = new stringList(listSize);
+    stringLinkedList *myList = new stringLinkedList();
 
     cout << "Do Work - START ********************\n";
 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
     int rc = 0;
 
     if (argc == 2) {
-	doWork(argv[1], 30);
+	doWork(argv[1]);
     } else {
 	cerr << "No input file given.\n";
 	rc = -1;
