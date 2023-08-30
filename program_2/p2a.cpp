@@ -12,8 +12,8 @@ using namespace std;
 //Andrew Chapuis
 
 node::node(string text, node *pn) {
-    this -> text = text;
-    this -> pn = pn;
+    this->text = text;
+    this->pn = pn;
 }
 
 //******************************************************************************
@@ -36,11 +36,91 @@ stringLinkedList::stringLinkedList() {
 //Andrew Chapuis
 
 int stringLinkedList::getIndex(string text, node *pn, int index) const {
-    int ind = 0;
     if (pn.text != text) {
-	getIndex(text, pn -> next);
-	ind++;
+	index = getIndex(text, pn->next, index++);
     }
-    index = ind;
     return index;
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+void stringLinkedList::printIt(node *pn, int index) const {
+    if (pn) {
+	cout << "At pos " << index << " there is " << pn.text << "\n";
+	printIt(pn->next, index++);
+    }
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+void stringLinkedList::clear(node *pn) {
+    if (pn) {
+	clear(pn->next);
+	delete pn;
+    }
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+bool stringLinkedList::insert(string text) {
+    bool rc = false;
+    node *p = new node(text, first);
+    if (listCount == 0) {
+	last = p;
+    }
+    first = p;
+    listCount++;
+    rc = true;
+    return(rc);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+bool add(string text) {
+    bool rc = false;
+    node *p = new node(text);
+    if (listCount == 0) {
+	first = p;
+    } else {
+	last->next = p;
+    }
+    last = p;
+    listCount++;
+    rc = true;
+    return(rc);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+bool insertAt(int index, string text) {
+
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+bool deleteAt(int index, string &text) {
+    return(false);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+bool readAt(int index, string &text) const {
+    return(false);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+void clear() {
+    clear(first);
+    first = NULL;
+    last = NULL;
+    listCount = 0;
 }
