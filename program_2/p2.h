@@ -16,15 +16,38 @@ class stringLinkedList;
 
 class node {
     private:
-	node(std::string text, node *pn);
+	node(std::string text = "", node *pn = NULL);
 
 	std::string text;
 	node *next;
-}
+};
 
 //******************************************************************************
 
 class stringLinkedList {
     private:
 	node *first, *last;
+	int listCount
+	
+	int getIndex(std::string text, node *pn, int index) const;
+	void printIt(node *pn, int index) const;
+	void clear(node *pn);
+    public:
+	stringLinkedList();
+	~stringLinkedList();
 
+	//Modifying Functions
+	bool insert(std::string text);
+	bool add(std::string text);
+	bool insertAt(int index, std::string text);
+	bool deleteAt(int index, std::string &text);
+	bool readAt(int index, std::string &text) const;
+	void clear();
+
+	//Non-modifying Functions
+	int getIndex(std::string text) const;
+	void printIt() const;
+	int count() const;
+};
+
+#endif
