@@ -80,7 +80,7 @@ bool stringLinkedList::insert(string text) {
 //******************************************************************************
 //Andrew Chapuis
 
-bool add(string text) {
+bool stringLinkedList::add(string text) {
     bool rc = false;
     node *p = new node(text);
     if (listCount == 0) {
@@ -97,30 +97,51 @@ bool add(string text) {
 //******************************************************************************
 //Andrew Chapuis
 
-bool insertAt(int index, string text) {
-
-}
-
-//******************************************************************************
-//Andrew Chapuis
-
-bool deleteAt(int index, string &text) {
+bool stringLinkedList::insertAt(int index, string text) {
     return(false);
 }
 
 //******************************************************************************
 //Andrew Chapuis
 
-bool readAt(int index, string &text) const {
+bool stringLinkedList::deleteAt(int index, string &text) {
     return(false);
 }
 
 //******************************************************************************
 //Andrew Chapuis
 
-void clear() {
+bool stringLinkedList::readAt(int index, string &text) const {
+    return(false);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+void stringLinkedList::clear() {
     clear(first);
     first = NULL;
     last = NULL;
     listCount = 0;
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+int stringLinkedList::getIndex(string text) const {
+    return(-1);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+void stringLinkedList::printIt() const {
+    printIt(first, 0);
+}
+
+//******************************************************************************
+//Andrew Chapuis
+
+int count() const {
+    return(listCount);
 }

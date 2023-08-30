@@ -27,7 +27,7 @@ class node {
 class stringLinkedList {
     private:
 	node *first, *last;
-	int listCount
+	int listCount;
 	
 	int getIndex(std::string text, node *pn, int index) const;
 	void printIt(node *pn, int index) const;
