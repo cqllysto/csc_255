@@ -68,11 +68,10 @@ void stringLinkedList::clear(node *pn) {
 
 bool stringLinkedList::insert(string text) {
     bool rc = false;
-    node *p = new node(text, first);
+    first = new node(text, first);
     if (listCount == 0) {
-	last = p;
+	last = first;
     }
-    first = p;
     listCount++;
     rc = true;
     return(rc);
