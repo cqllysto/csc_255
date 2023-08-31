@@ -35,12 +35,13 @@ stringLinkedList::~stringLinkedList() {
 //Andrew Chapuis
 
 int stringLinkedList::getIndex(string text, node *pn, int index) const {
+    int rc = -1;
     if (pn) {
 	if (pn->text != text) {
-	    index = getIndex(text, pn->next, index + 1);
+	    rc = getIndex(text, pn->next, index + 1);
 	}
     }
-    return index;
+    return(index);
 }
 
 //******************************************************************************
@@ -128,7 +129,7 @@ void stringLinkedList::clear() {
 //Andrew Chapuis
 
 int stringLinkedList::getIndex(string text) const {
-    return(-1);
+    return(getIndex(text, first, 0));
 }
 
 //******************************************************************************
