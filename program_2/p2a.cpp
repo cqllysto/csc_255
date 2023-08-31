@@ -13,22 +13,21 @@ using namespace std;
 
 node::node(string text, node *pn) {
     this->text = text;
-    this->pn = pn;
+    next = pn;
 }
 
 //******************************************************************************
 //Andrew Chapuis
 
 stringLinkedList::stringLinkedList() {
-    *first = NULL;
-    *last = NULL;
+    first = last = NULL;
     listCount = 0;
 }
 
 //******************************************************************************
 //Andrew Chapuis
 
-~stringLinkedList::stringLinkedList() {
+stringLinkedList::~stringLinkedList() {
     clear(first);
 }
 
@@ -36,10 +35,15 @@ stringLinkedList::stringLinkedList() {
 //Andrew Chapuis
 
 int stringLinkedList::getIndex(string text, node *pn, int index) const {
-    if (pn.text != text) {
-	index = getIndex(text, pn->next, index++);
+    int rc = -1;
+    if (pn) {
+	if (pn->text != text) {
+	    rc = getIndex(text, pn->next, index + 1);
+	} else {
+	    rc = index;
+	}
     }
-    return index;
+    return(rc);
 }
 
 //******************************************************************************
@@ -47,8 +51,8 @@ int stringLinkedList::getIndex(string text, node *pn, int index) const {
 
 void stringLinkedList::printIt(node *pn, int index) const {
     if (pn) {
-	cout << "At pos " << index << " there is " << pn.text << "\n";
-	printIt(pn->next, index++);
+	cout << "At pos " << index << " there is " << pn->text << "\n";
+	printIt(pn->next, index + 1);
     }
 }
 
@@ -67,11 +71,10 @@ void stringLinkedList::clear(node *pn) {
 
 bool stringLinkedList::insert(string text) {
     bool rc = false;
-    node *p = new node(text, first);
+    first = new node(text, first);
     if (listCount == 0) {
-	last = p;
+	last = first;
     }
-    first = p;
     listCount++;
     rc = true;
     return(rc);
@@ -98,7 +101,10 @@ bool stringLinkedList::add(string text) {
 //Andrew Chapuis
 
 bool stringLinkedList::insertAt(int index, string text) {
-    return(false);
+    bool rc = false;
+    if ((index >= 0) && (index <= listCount) {
+    }
+    return(rc);
 }
 
 //******************************************************************************
@@ -120,8 +126,7 @@ bool stringLinkedList::readAt(int index, string &text) const {
 
 void stringLinkedList::clear() {
     clear(first);
-    first = NULL;
-    last = NULL;
+    first = last = NULL;
     listCount = 0;
 }
 
@@ -129,7 +134,7 @@ void stringLinkedList::clear() {
 //Andrew Chapuis
 
 int stringLinkedList::getIndex(string text) const {
-    return(-1);
+    return(getIndex(text, first, 0));
 }
 
 //******************************************************************************
@@ -142,6 +147,6 @@ void stringLinkedList::printIt() const {
 //******************************************************************************
 //Andrew Chapuis
 
-int count() const {
+int stringLinkedList::count() const {
     return(listCount);
 }
