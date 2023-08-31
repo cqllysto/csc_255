@@ -20,6 +20,8 @@ class node {
 
 	std::string text;
 	node *next;
+
+	friend class stringLinkedList;
 };
 
 //******************************************************************************
