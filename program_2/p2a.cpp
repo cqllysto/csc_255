@@ -39,9 +39,11 @@ int stringLinkedList::getIndex(string text, node *pn, int index) const {
     if (pn) {
 	if (pn->text != text) {
 	    rc = getIndex(text, pn->next, index + 1);
+	} else {
+	    rc = index;
 	}
     }
-    return(index);
+    return(rc);
 }
 
 //******************************************************************************
@@ -99,7 +101,10 @@ bool stringLinkedList::add(string text) {
 //Andrew Chapuis
 
 bool stringLinkedList::insertAt(int index, string text) {
-    return(false);
+    bool rc = false;
+    if ((index >= 0) && (index <= listCount) {
+    }
+    return(rc);
 }
 
 //******************************************************************************
