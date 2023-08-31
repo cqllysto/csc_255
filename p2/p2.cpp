@@ -17,18 +17,27 @@ stringLinkedList::stringLinkedList(){
     int listCount = 0;
 }
 
+node::node(string text, node *next){
+    this->text = text;
+    this->next = next;
+};
+
 bool stringLinkedList::insert(string text){
-    //allocate new node and assign date
+    //allocate new node and assign data
     //then make *next point to the first/head of the linked list
     //change the *first/head pointer to point to the new node
     bool rc = false;
     
-    node new_node;
-    new_node.text = text;
-    new_node.next = *first;
+    node *p = new node;
+    node(text){
+    
+    };
+
+    new_node->text = text;
+    new_node->*next = *first;
     *first = *new_node;
     
-    if (a[0] = text){
+    if (*first->text = text){
 	rc = true;
     }
     
@@ -36,15 +45,41 @@ bool stringLinkedList::insert(string text){
 };
 
 bool stringLinkedList::add(string text){
-    bool rc = false;
-
     // make new node, then assign *next of previous node to 
     // current node instead of null
     // update *last to point to added node
-    node a;
-    a.next = NULL;
-    a[count - 1].next = *a;
-    *last = *a;`
+    
+    node *p = new node(text);
+    if (listCount) {
+	last->next = p;
+    } else {
+	first = p;
+    };
+
+    last = p;
+    bool rc = false;
+};
+
+// add: creates a new node and adds it onto the end of the list
+// all cases: adding to a list containing at least one node,
+// adding to an empty list
+bool stringLinkedList::add(string text){
+    bool rc = TRUE;
+    // assign a pointer that points to the new node
+    node *p = new node(text);
+    if (listCount){
+	// change the last node's pointer to point to the new node
+	// instead of pointing to null
+	last->next = p;
+    } else {
+	// assign the first pointer to point to the new node
+	first = p;
+    };
+    // change the last pointer to now point to the new node
+    last = p;
+    return (rc)
+
+
 };
 
 void stringLinkedList::clear(){
