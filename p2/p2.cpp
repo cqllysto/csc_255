@@ -11,58 +11,49 @@ using namespace std;
 //******************************************************************************
 // Aidan Wright
 
+// stringLinkedList Constructor
 stringLinkedList::stringLinkedList(){
     *first = NULL;
     *last = NULL;
     int listCount = 0;
 }
 
+// node Constructor
 node::node(string text, node *next){
     this->text = text;
     this->next = next;
 };
 
+// stringLinkedList Destructor
+~stringLinkedList::stringLinkedList(){
+    clear(first);
+};
+
+
 bool stringLinkedList::insert(string text){
     //allocate new node and assign data
     //then make *next point to the first/head of the linked list
     //change the *first/head pointer to point to the new node
-    bool rc = false;
     
-    node *p = new node;
-    node(text){
-    
-    };
-
-    new_node->text = text;
-    new_node->*next = *first;
-    *first = *new_node;
-    
-    if (*first->text = text){
-	rc = true;
-    }
-    
-    return(rc)
-};
-
-bool stringLinkedList::add(string text){
-    // make new node, then assign *next of previous node to 
-    // current node instead of null
-    // update *last to point to added node
-    
+    // corner cases: if list is empty, if list contains >= 1 node
+    bool rc = true;
     node *p = new node(text);
-    if (listCount) {
-	last->next = p;
+    
+    if (listCount){
+	p->next = first;
     } else {
-	first = p;
+	last = p;
     };
 
-    last = p;
-    bool rc = false;
+    first = p;
+    listCount++;
+    return(rc);
 };
+
 
 // add: creates a new node and adds it onto the end of the list
 // all cases: adding to a list containing at least one node,
-// adding to an empty list
+// adding to an empty list, if list is full
 bool stringLinkedList::add(string text){
     bool rc = TRUE;
     // assign a pointer that points to the new node
@@ -77,11 +68,89 @@ bool stringLinkedList::add(string text){
     };
     // change the last pointer to now point to the new node
     last = p;
-    return (rc)
-
-
+    listCount++;
+    return (rc);
 };
 
+// insertAt: inserts the string at index and returns true
+// cases: 
+// index is invalid (out of bounds of listCount)
+// list is empty
+// index is set to the beginning
+// index is set to the end
+// index is set to the middle
+bool insertAt(int index, string text){
+    bool rc = false;
+    node *p = new node(text, NULL);
+    
+    if (index >= 0) && (index <= listCount){
+	// case 1: index is set to the middle
+	if (listCount) && (index < listCount) && (index > 0){
+	    node *q;
+	    q = first;
+	    for (ind = 0; ind < index - 1, ind++){
+		q = q->next;
+	    };
+	    p->next = q->next;
+	    q->next = p;
+	} else if (index = 0) && (listCount){
+	    p->next = first;
+	    first = p;
+	} else if (index = listCount){
+	    last->next = p;
+	    last = p;
+	} else {
+	    first = p;
+	    last =p;
+	};
+	rc = true;
+	listCount++;
+    };
+};
+
+// public
+void stringLinkedList::printIt() const{
+    
+};
+
+// private
+void stringLinkedList::printIt(node *p, int index){
+    if(p){
+	cout << index << p->text;
+	printIt(p->next, index + 1);
+    };
+};
+
+int stringLinkedList::count() const{
+    return(listCount);
+};
+
+// public clear
 void stringLinkedList::clear(){
+    clear(first);
+    last = first = NULL;
     listCount = 0;
+};
+
+// private clear
+void stringLinkedList::clear(node *p){
+    if (p) {
+	clear(p->next);
+	delete p;
+	p = NULL;
+    };
+};
+
+// p2b problems
+
+int getIndex(string text) const{
+    return(false);
+};
+
+bool deleteAt(int index, string &text){
+    return(false);
+};
+
+bool readAt(int index, string &text){
+    return(false);
 };
