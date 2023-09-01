@@ -9,11 +9,11 @@
 #include <string>
 
 //******************************************************************************
-
+//Aidan Wright
 class stringLinkedList;
 
 //******************************************************************************
-
+//Aidan Wright
 class node {
     private:
 	node(std::string text = "", node *pn = NULL);
@@ -25,7 +25,7 @@ class node {
 };
 
 //******************************************************************************
-
+//Andrew Chapuis
 class stringLinkedList {
     private:
 	node *first, *last;
