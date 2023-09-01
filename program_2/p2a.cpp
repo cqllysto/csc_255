@@ -10,6 +10,7 @@ using namespace std;
 
 //******************************************************************************
 //Aidan Wright
+
 //constructor for the node class
 node::node(string text, node *pn) {
     this->text = text;
@@ -18,6 +19,7 @@ node::node(string text, node *pn) {
 
 //******************************************************************************
 //Andrew Chapuis
+
 //constructor for the stringLinkedList class
 stringLinkedList::stringLinkedList() {
     first = last = NULL;
@@ -26,6 +28,7 @@ stringLinkedList::stringLinkedList() {
 
 //******************************************************************************
 //Andrew Chapuis
+
 //destructor for the stringLinkedList
 stringLinkedList::~stringLinkedList() {
     clear(first);
@@ -33,6 +36,8 @@ stringLinkedList::~stringLinkedList() {
 
 //******************************************************************************
 //Andrew Chapuis
+
+//private method that will be used in a public getIndex method
 //returns the location of the given text
 int stringLinkedList::getIndex(string text, node *pn, int index) const {
     int rc = -1;
@@ -50,6 +55,8 @@ int stringLinkedList::getIndex(string text, node *pn, int index) const {
 
 //******************************************************************************
 //Andrew Chapuis
+
+//private method that will be used in a public printIt method
 //prints the entire list, one index at a time
 void stringLinkedList::printIt(node *pn, int index) const {
     if (pn) {
@@ -60,7 +67,8 @@ void stringLinkedList::printIt(node *pn, int index) const {
 
 //******************************************************************************
 //Aidan Wright
-//clears the whole list
+
+//clears the entire list
 void stringLinkedList::clear(node *pn) {
     if (pn) {
 	clear(pn->next);
@@ -71,11 +79,12 @@ void stringLinkedList::clear(node *pn) {
 
 //******************************************************************************
 //Aidan Wright
+
 //inserts a new node into the beginning of the list
 bool stringLinkedList::insert(string text) {
     bool rc = false;
     first = new node(text, first);
-    //incase the list is empty:
+    //in case the list is empty:
     if (listCount == 0) {
 	last = first;
     }
@@ -86,11 +95,12 @@ bool stringLinkedList::insert(string text) {
 
 //******************************************************************************
 //Andrew Chapuis
+
 //adds a new node to the end of the list
 bool stringLinkedList::add(string text) {
     bool rc = false;
     node *p = new node(text);
-    //incase the list is empty
+    //in case the list is empty
     if (listCount == 0) {
 	first = p;
     } else {
@@ -104,11 +114,12 @@ bool stringLinkedList::add(string text) {
 
 //******************************************************************************
 //Aidan Wright
+
 //inserts a new node at the given index into the list
 bool stringLinkedList::insertAt(int index, string text){
     bool rc = false;
     node *p = new node(text, NULL);
-    //incase the index is out of bounds:
+    //checks whether the index is out of bounds:
     if ((index >= 0) && (index <= listCount)) {
 	//case: index is set to the middle
 	if ((listCount) && (index < listCount) && (index > 0)) {
@@ -142,6 +153,8 @@ bool stringLinkedList::insertAt(int index, string text){
 
 //******************************************************************************
 //Aidan Wright
+
+//This is a p2b problem
 //deletes the node at the given index
 bool stringLinkedList::deleteAt(int index, string &text) {
     return(false);
@@ -149,6 +162,8 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 
 //******************************************************************************
 //Aidan Wright
+
+//This is a p2b problem
 //reads the text in the node at the given index
 bool stringLinkedList::readAt(int index, string &text) const {
     return(false);
@@ -156,7 +171,8 @@ bool stringLinkedList::readAt(int index, string &text) const {
 
 //******************************************************************************
 //Andrew Chapuis
-//recursively deletes the list
+
+//recursively deletes the nodes from the list and resets the list variables
 void stringLinkedList::clear() {
     clear(first);
     first = last = NULL;
@@ -165,21 +181,24 @@ void stringLinkedList::clear() {
 
 //******************************************************************************
 //Andrew Chapuis
-//public memeber for getIndex
+
+//public method of getIndex which recursively looks which node a text is in
 int stringLinkedList::getIndex(string text) const {
     return(getIndex(text, first, 0));
 }
 
 //******************************************************************************
 //Andrew Chapuis
-//public member for printIt
+
+//public method of printIt which will print the entire list
 void stringLinkedList::printIt() const {
     printIt(first, 0);
 }
 
 //******************************************************************************
 //Andrew Chapuis
-//counts the number of nodes in the list
+
+//returns the number of nodes in the list
 int stringLinkedList::count() const {
     return(listCount);
 }
