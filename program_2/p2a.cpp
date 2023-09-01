@@ -111,7 +111,7 @@ bool stringLinkedList::insertAt(int index, string text){
 	    node *q;
 	    q = first;
 	    
-	    for (int ind = 0; ind < index - 1, ind++;) {
+	    for (int ind = 0; ind < (index - 1), ind++;) {
 		q = q->next;
 	    }
 	    p->next = q->next;

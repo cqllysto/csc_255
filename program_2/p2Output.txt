@@ -15,37 +15,44 @@ add of has got true
 readAt -1 got false and na
 add of made got true
 getIndex happy got -1
-insertAt 5,the got false
+insertAt 5,the got true
 At pos 0 there is Today
-At pos 1 there is is
-At pos 2 there is the
-At pos 3 there is day
-At pos 4 there is that
-At pos 5 there is Lord
-At pos 6 there is has
-At pos 7 there is made
-insertAt 1,breakerbreaker got false
+At pos 1 there is the
+At pos 2 there is is
+At pos 3 there is the
+At pos 4 there is day
+At pos 5 there is that
+At pos 6 there is Lord
+At pos 7 there is has
+At pos 8 there is made
+insertAt 1,breakerbreaker got true
 readAt 30 got false and na
-insertAt 0,helperhelper got false
-At pos 0 there is Today
-At pos 1 there is is
-At pos 2 there is the
-At pos 3 there is day
-At pos 4 there is that
-At pos 5 there is Lord
-At pos 6 there is has
-At pos 7 there is made
+insertAt 0,helperhelper got true
+At pos 0 there is helperhelper
+At pos 1 there is Today
+At pos 2 there is breakerbreaker
+At pos 3 there is the
+At pos 4 there is is
+At pos 5 there is the
+At pos 6 there is day
+At pos 7 there is that
+At pos 8 there is Lord
+At pos 9 there is has
+At pos 10 there is made
 deleteAt 30 got false and na
 deleteAt 0 got false and na
 deleteAt 1 got false and na
 deleteAt -1 got false and na
-At pos 0 there is Today
-At pos 1 there is is
-At pos 2 there is the
-At pos 3 there is day
-At pos 4 there is that
-At pos 5 there is Lord
-At pos 6 there is has
-At pos 7 there is made
+At pos 0 there is helperhelper
+At pos 1 there is Today
+At pos 2 there is breakerbreaker
+At pos 3 there is the
+At pos 4 there is is
+At pos 5 there is the
+At pos 6 there is day
+At pos 7 there is that
+At pos 8 there is Lord
+At pos 9 there is has
+At pos 10 there is made
 List was cleared
 deleteAt 0 got false and na
