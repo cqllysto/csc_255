@@ -104,14 +104,14 @@ bool stringLinkedList::add(string text) {
 bool stringLinkedList::insertAt(int index, string text){
     bool rc = false;
     node *p = new node(text, NULL);
-
+    
     if ((index >= 0) && (index <= listCount)) {
 	// case 1: index is set to the middle
 	if ((listCount) && (index < listCount) && (index > 0)) {
 	    node *q;
 	    q = first;
-
-	    for (int ind == 0; ind < index - 1, ind++) {
+	    
+	    for (int ind = 0; ind < index - 1, ind++;) {
 		q = q->next;
 	    }
 	    p->next = q->next;
@@ -119,7 +119,7 @@ bool stringLinkedList::insertAt(int index, string text){
 	} else if ((index == 0) && (listCount)) {
 	    p->next = first;
 	    first = p;
-	} else if (index == listCount) {
+	} else if (index == listCount){
 	    last->next = p;
 	    last = p;
 	} else {
