@@ -3,29 +3,28 @@
 //Program 2
 //Date: 09/01/23
 
-#ifndef __P1H
-#define __P1H
+#ifndef __P2_H
+#define __P2_H
 
 #include <string>
 
-class sLL;
+class stringLinkedList;
 
 class node {
     private:
-	std::string *text;
+	node(std::string text = "", node *p = NULL);	
+	std::string text;
 	node *next;
-	node(string text = “”, node *pn = NULL);	
-    friend class sLL;
-}
+	friend class stringLinkedList;
+};
 
 class stringLinkedList {
     private:
-	node *first;
-	node *last;
-	int listCount();
-	int getIndex(std::string text, node *pn, int index) const;
-	void printIt(node *pn, int index) const;
-	void clear(node *pn);
+	node *first, *last;
+	int listCount;
+	int getIndex(std::string text, node *p, int index) const;
+	void printIt(node *p, int index) const;
+	void clear(node *p);
 
     public:
         stringLinkedList(); //constructor
@@ -39,7 +38,7 @@ class stringLinkedList {
         void clear();
 
 	int getIndex(std::string text) const;
-	void printIT() const;
+	void printIt() const;
 	int count() const; //counts the the size of the list
 };
 

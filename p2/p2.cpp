@@ -36,15 +36,12 @@ bool stringLinkedList::insert(string text){
     //change the *first/head pointer to point to the new node
     // corner cases: if list is empty, if list contains >= 1 node
     bool rc = true;
-    node *p = new node(text);
+    first = new node(text, first);
     
-    if (listCount){
-	p->next = first;
-    } else {
-	last = p;
+    if (listCount == 0) {
+	last = first;
     }
 
-    first = p;
     listCount++;
     return(rc);
 }
@@ -84,18 +81,18 @@ bool stringLinkedList::insertAt(int index, string text){
     bool rc = false;
     node *p = new node(text, NULL);
     
-    if (index >= 0) && (index <= listCount){
+    if ((index >= 0) && (index <= listCount)) {
 	// case 1: index is set to the middle
-	if (listCount) && (index < listCount) && (index > 0){
+	if ((listCount) && (index < listCount) && (index > 0)) {
 	    node *q;
 	    q = first;
 	    
-	    for (int ind = 0; ind < index - 1, ind++){
+	    for (int ind = 0; ind < index - 1, ind++;) {
 		q = q->next;
 	    }
 	    p->next = q->next;
 	    q->next = p;
-	} else if (index = 0) && (listCount){
+	} else if ((index = 0) && (listCount)) {
 	    p->next = first;
 	    first = p;
 	} else if (index = listCount){
@@ -152,20 +149,20 @@ void stringLinkedList::clear(node *p){
 
 //******************************************************************************
 int stringLinkedList::getIndex(string text) const{
-    return(getIndex(first, 0));
+    return(getIndex(text, first, 0));
 }
 
 //******************************************************************************
-int stringLinkedList::getIndex(p, int index) {
+int stringLinkedList::getIndex(string text, node *p, int index) const {
     int rc = -1;
-    if(p){
+    if(p) {
 	if (p->text == text){
 	    rc = index;
 	} else {
-	    rc = getIndex(p->next, index + 1);
+	    rc = getIndex(text, p->next, index + 1);
 	}
     }
-    return rc;
+    return(rc);
 }
 
 //******************************************************************************
@@ -175,6 +172,6 @@ bool stringLinkedList::deleteAt(int index, string &text){
 }
 
 //******************************************************************************
-bool stringLinkedList::readAt(int index, string &text){
+bool stringLinkedList::readAt(int index, string &text) const {
     return(false);
 }
