@@ -63,6 +63,7 @@ void stringLinkedList::clear(node *pn) {
     if (pn) {
 	clear(pn->next);
 	delete pn;
+	pn = NULL;
     }
 }
 
@@ -100,9 +101,33 @@ bool stringLinkedList::add(string text) {
 //******************************************************************************
 //Andrew Chapuis
 
-bool stringLinkedList::insertAt(int index, string text) {
+bool stringLinkedList::insertAt(int index, string text){
     bool rc = false;
-    if ((index >= 0) && (index <= listCount) {
+    node *p = new node(text, NULL);
+
+    if ((index >= 0) && (index <= listCount)) {
+	// case 1: index is set to the middle
+	if ((listCount) && (index < listCount) && (index > 0)) {
+	    node *q;
+	    q = first;
+
+	    for (int ind == 0; ind < index - 1, ind++) {
+		q = q->next;
+	    }
+	    p->next = q->next;
+	    q->next = p;
+	} else if ((index == 0) && (listCount)) {
+	    p->next = first;
+	    first = p;
+	} else if (index == listCount) {
+	    last->next = p;
+	    last = p;
+	} else {
+	    first = p;
+	    last = p;
+	}
+	rc = true;
+	listCount++;
     }
     return(rc);
 }
