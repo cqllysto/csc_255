@@ -92,10 +92,10 @@ bool stringLinkedList::insertAt(int index, string text){
 	    }
 	    p->next = q->next;
 	    q->next = p;
-	} else if ((index = 0) && (listCount)) {
+	} else if ((index == 0) && (listCount)) {
 	    p->next = first;
 	    first = p;
-	} else if (index = listCount){
+	} else if (index == listCount){
 	    last->next = p;
 	    last = p;
 	} else {
