@@ -10,7 +10,7 @@ add of day got true
 add of that got true
 readAt 1 got true and is
 add of Lord got true
-getIndex day got -1
+getIndex day got 3
 add of has got true
 readAt -1 got false and na
 add of made got true

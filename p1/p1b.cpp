@@ -37,13 +37,13 @@ stringList::~stringList() {
 // text into the beginning of the string
 bool stringList::insert(string text) {
     bool rc = false;
-    // shifts list entries to the right
     if (listSize < listCapacity) {
+	// shifts list entries to the right
 	for (int i = listSize; i > 0; i--) {  
 	    a[i] = a[i - 1];
 	}
-    // sets the inserted text to the beginning of the string
-    // and increments the listSize
+	// sets the inserted text to the beginning of the string
+	// and increments the listSize
 	a[0] = text;
 	listSize++;
 	rc = true;
@@ -51,7 +51,7 @@ bool stringList::insert(string text) {
     return(rc);
 }
 
-// ******************************************************************************
+//******************************************************************************
 // Aidan Wright
 
 // Add function: inserts the given text at the end of the list
@@ -65,7 +65,7 @@ bool stringList::add(string text){
     return(rc);
 }
 
-// ******************************************************************************
+//******************************************************************************
 // Andrew Chapuis
 
 // insertAt function: inserts a given text at the given index of the string
@@ -89,7 +89,9 @@ bool stringList::insertAt(int index, string text) {
 //******************************************************************************
 // Aidan Wright
 
-// this is a p1b.cpp problem :)
+// This will delete an entry from the array by shifting the remaining 
+// data to the left and will return the text that was in the deleted index
+// unless the index given is outside the bounds of the list created
 bool stringList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listSize)) {
@@ -106,7 +108,7 @@ bool stringList::deleteAt(int index, string &text) {
 //******************************************************************************
 // Andrew Chapuis
 
-// empties the list
+// This will empty the list
 void stringList::clear() {
     listSize = 0;
 }
@@ -114,7 +116,7 @@ void stringList::clear() {
 //******************************************************************************
 // Andrew Chapuis
 
-// prints the whole list and the respective indexes
+// This prints the entire list and their respective indexes
 void stringList::printIt() const {
     for (int i = 0; i < listSize; i++) {
 	cout << "At pos " << i << " there is " << a[i] << "\n";
@@ -124,7 +126,8 @@ void stringList::printIt() const {
 //******************************************************************************
 // Andrew Chapuis
 
-// this is a p1b.cpp problem :)
+// This function will search the list until it finds the first instance of the
+// text given or it reaches the end of the list.
 int stringList::getIndex(string text) const {
     int rc = -1;
     for (int i = 0; i < listSize; i++) {
@@ -137,9 +140,9 @@ int stringList::getIndex(string text) const {
 }
 
 //******************************************************************************
-// Aidan Wright
+//Aidan Wright
 
-// returns the entry in the list at the given index
+//This returns the entry in the list at the given index
 bool stringList::readAt(int index, string &text) const {
     bool rc = false;
     if ((index >= 0) && (index < listSize)) {
@@ -150,9 +153,9 @@ bool stringList::readAt(int index, string &text) const {
 }
 
 //******************************************************************************
-// Aidan Wright
+//Aidan Wright
 
-// returns the size of the list
+//This returns the size of the list
 int stringList::count() const {
    return(listSize);
 }
