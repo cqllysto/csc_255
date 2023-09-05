@@ -8,7 +8,7 @@ add of is got true
 add of the got true
 add of day got true
 add of that got true
-readAt 1 got true and Today
+readAt 1 got true and is
 add of Lord got true
 getIndex day got 3
 add of has got true
@@ -17,11 +17,11 @@ add of made got true
 getIndex happy got -1
 insertAt 5,the got true
 At pos 0 there is Today
-At pos 1 there is the
-At pos 2 there is is
-At pos 3 there is the
-At pos 4 there is day
-At pos 5 there is that
+At pos 1 there is is
+At pos 2 there is the
+At pos 3 there is day
+At pos 4 there is that
+At pos 5 there is the
 At pos 6 there is Lord
 At pos 7 there is has
 At pos 8 there is made
@@ -31,11 +31,11 @@ insertAt 0,helperhelper got true
 At pos 0 there is helperhelper
 At pos 1 there is Today
 At pos 2 there is breakerbreaker
-At pos 3 there is the
-At pos 4 there is is
-At pos 5 there is the
-At pos 6 there is day
-At pos 7 there is that
+At pos 3 there is is
+At pos 4 there is the
+At pos 5 there is day
+At pos 6 there is that
+At pos 7 there is the
 At pos 8 there is Lord
 At pos 9 there is has
 At pos 10 there is made
@@ -44,11 +44,11 @@ deleteAt 0 got true and helperhelper
 deleteAt 1 got true and breakerbreaker
 deleteAt -1 got false and na
 At pos 0 there is Today
-At pos 1 there is the
-At pos 2 there is is
-At pos 3 there is the
-At pos 4 there is day
-At pos 5 there is that
+At pos 1 there is is
+At pos 2 there is the
+At pos 3 there is day
+At pos 4 there is that
+At pos 5 there is the
 At pos 6 there is Lord
 At pos 7 there is has
 At pos 8 there is made

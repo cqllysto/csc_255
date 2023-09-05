@@ -127,7 +127,7 @@ bool stringLinkedList::insertAt(int index, string text){
 	    q = first;
 	    //make a new pointer called q and travese it through the list
 	    //to point to the node just before the node at the index
-	    for (int ind = 0; ind < index - 1, ind++;) {
+	    for (int ind = 0; ind < index - 1; ind++) {
 		q = q->next;
 	    }
 	    p->next = q->next;
@@ -175,7 +175,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 	    q = first;
 	    if ((index > 0) && (index < listCount - 1)) {
 		node *r;
-		for (int ind = 0; ind < index - 1, ind++;) {
+		for (int ind = 0; ind < index - 1; ind++) {
 		    q = q->next;
 		}
 		r = q->next;
@@ -184,7 +184,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 		delete r;
 		r = NULL;
 	    } else if (index == listCount - 1) { // deleting the last node
-		for (int ind = 0; ind < index - 1, ind++;) {
+		for (int ind = 0; ind < index - 1; ind++) {
 		    q = q->next;
 		}
 		last = q;
@@ -200,7 +200,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 	} else { // list has one node
 	    text = first->text;
 	    delete first;
-	    first, last = NULL;
+	    first = last = NULL;
 	}
     }
    return(rc);
@@ -217,7 +217,7 @@ bool stringLinkedList::readAt(int index, string &text) const {
 	rc = true;
 	node *q;
 	q = first;
-	for (int ind = 0; ind < index, ind++;) {
+	for (int ind = 0; ind < index; ind++) {
 	    q = q->next;
 	}
 	text = q->text;
