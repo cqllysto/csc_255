@@ -122,7 +122,7 @@ bool stringLinkedList::insertAt(int index, string text){
     //checks whether the index is out of bounds:
     if ((index >= 0) && (index <= listCount)) {
 	//case: index is set to the middle
-	if ((listCount) && (index < listCount) && (index > 0)) {
+	if ((index < listCount) && (index > 0)) {
 	    node *q;
 	    q = first;
 	    //make a new pointer called q and travese it through the list
@@ -132,15 +132,18 @@ bool stringLinkedList::insertAt(int index, string text){
 	    }
 	    p->next = q->next;
 	    q->next = p;
-	//case: inserting at the beginning and there is a list
-	} else if ((index == 0) && (listCount)) {
+	//case: inserting at the beginning
+	//and reaassign first to new node
+	} else if (index == 0) {
 	    p->next = first;
 	    first = p;
 	//case: inserting at the end
+	//and reassign last to new node
 	} else if (index == listCount){
 	    last->next = p;
 	    last = p;
 	//case: the list is empty
+	//reassign first and last to new node
 	} else {
 	    first = p;
 	    last = p;
@@ -154,9 +157,10 @@ bool stringLinkedList::insertAt(int index, string text){
 //******************************************************************************
 //Aidan Wright
 
-
+// deleteAt function deletes the node at the given index and returns the 
+// string in the deleted node
 // cases:
-// if index is out of bounds
+// index is out of bounds
 // 	list is empty (nothing to delete)
 // 	if list has one thing (no need to reassign first and last)
 // 	if list has multiple nodes:
@@ -166,8 +170,6 @@ bool stringLinkedList::insertAt(int index, string text){
 bool stringLinkedList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index < listCount) && (index >= 0)) {
-	rc = true;
-	listCount--;
 	// if the list has multiple nodes
 	if (listCount > 1) {
 	    // if deleting a node in the middle of the list
@@ -202,6 +204,8 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 	    delete first;
 	    first = last = NULL;
 	}
+	listCount--;
+	rc = true;
     }
    return(rc);
 }
@@ -213,6 +217,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 bool stringLinkedList::readAt(int index, string &text) const {
     bool rc = false;
 
+    // checks to see if index is out of bounds
     if ((index >= 0) && (index < listCount)) {
 	rc = true;
 	node *q;

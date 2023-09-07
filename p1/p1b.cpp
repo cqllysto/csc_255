@@ -55,7 +55,7 @@ bool stringList::insert(string text) {
 // Aidan Wright
 
 // Add function: inserts the given text at the end of the list
-bool stringList::add(string text){
+bool stringList::add(string text) {
     bool rc = false;
     if (listSize < listCapacity) {
 	a[listSize] = text; 
