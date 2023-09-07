@@ -173,26 +173,24 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 	// if the list has multiple nodes
 	if (listCount > 1) {
 	    // if deleting a node in the middle of the list
-	    node *q;
-	    q = first;
-	    if ((index > 0) && (index < listCount - 1)) {
-		node *r;
+	    node *q = first;
+	    if ((index > 0) && (index <= listCount - 1)) {
 		for (int ind = 0; ind < index - 1; ind++) {
 		    q = q->next;
 		}
-		r = q->next;
-		q->next = q->next->next;
-		text = r->text;
-		delete r;
-		r = NULL;
-	    } else if (index == listCount - 1) { // deleting the last node
-		for (int ind = 0; ind < index - 1; ind++) {
-		    q = q->next;
+		if (index == listCount - 1) {    
+		    last = q;
+		    text = q->text;
+		    delete q->next;
+		    q->next = NULL;
+		} else {
+		    node *r;
+		    r = q->next;
+		    q->next = q->next->next;
+		    text = r->text;
+		    delete r;
+		    r = NULL;
 		}
-		last = q;
-		text = q->text;
-		delete q->next;
-		q->next = NULL;
 	    } else { // deleting the first node
 		first = first->next;
 		text = q->text;
