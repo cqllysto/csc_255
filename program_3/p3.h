@@ -30,12 +30,13 @@ class cStringList {
 	bool insert(std::string text);
 	bool add(std::string text);
 	bool insertAt(int index, std::string text);
+	bool deleteAt(int index, std::string &text);
 	bool readAt(int index, std::string &text);
 	bool deleteFirst(std::string &text);
 	bool deleteLast(std::string &text);
 	void clear();
 	int count() const;
-	int getIndex(std:string text) const;
+	int getIndex(std::string text) const;
 	void printIt() const;
 };
 
