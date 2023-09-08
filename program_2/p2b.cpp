@@ -68,7 +68,8 @@ void stringLinkedList::printIt(node *pn, int index) const {
 //******************************************************************************
 // Aidan Wright
 
-// clears the entire list
+// private method used as a helper function for the public clear method
+// deletes the node then moves onto the next node
 void stringLinkedList::clear(node *pn) {
     if (pn) {
 	clear(pn->next);
@@ -83,6 +84,7 @@ void stringLinkedList::clear(node *pn) {
 // inserts a new node into the beginning of the list
 bool stringLinkedList::insert(string text) {
     bool rc = false;
+    // creates a new node and assigns first to point to it
     first = new node(text, first);
     // in case the list is empty:
     if (listCount == 0) {
@@ -178,12 +180,13 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 		for (int ind = 0; ind < index - 1; ind++) {
 		    q = q->next;
 		}
+		// if deleting the last node
 		if (index == listCount - 1) {    
 		    last = q;
 		    text = q->text;
 		    delete q->next;
 		    q->next = NULL;
-		} else {
+		} else { // deleting a middle node
 		    node *r;
 		    r = q->next;
 		    q->next = q->next->next;
@@ -220,6 +223,7 @@ bool stringLinkedList::readAt(int index, string &text) const {
 	rc = true;
 	node *q;
 	q = first;
+	// walks the pointer down the list until it finds the given text
 	for (int ind = 0; ind < index; ind++) {
 	    q = q->next;
 	}

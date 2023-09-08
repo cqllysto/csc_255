@@ -40,11 +40,11 @@ class stringLinkedList {
 	node *first, *last;
 	int listCount; // integer to keep track of the size of the list
 	
-	// gets the index within the list of a given string
+	// helper function for getIndex
 	int getIndex(std::string text, node *pn, int index) const;
-	// prints the text at the given index
+	// helper function for printIt
 	void printIt(node *pn, int index) const;
-	// dynamically deletes the node *pn
+	// helper function for clear
 	void clear(node *pn);
     public:
 	stringLinkedList(); // linked list constructor
@@ -59,15 +59,17 @@ class stringLinkedList {
 	bool insertAt(int index, std::string text); 
 	// deletes a node at the given index and returns the text it had
 	bool deleteAt(int index, std::string &text);
-	// returns the text at the given index
-	bool readAt(int index, std::string &text) const;
 	// clears the entire list
 	void clear();
 
 	//Non-modifying Functions
+	// returns the text at the given index
+	bool readAt(int index, std::string &text) const;
 	// gets the index of a given string
 	int getIndex(std::string text) const;
+	// prints the entire list
 	void printIt() const;
+	// counts teh number of things in the list
 	int count() const;
 };
 
