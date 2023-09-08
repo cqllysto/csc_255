@@ -69,7 +69,8 @@ void stringLinkedList::printIt(node *pn, int index) const {
 // Aidan Wright
 
 // private method used as a helper function for the public clear method
-// deletes the node then moves onto the next node
+// recursively deletes the node after the node passed into the function
+// then deletes the node passed in
 void stringLinkedList::clear(node *pn) {
     if (pn) {
 	clear(pn->next);
@@ -171,6 +172,7 @@ bool stringLinkedList::insertAt(int index, string text){
 // 		delete the last node (reassign last to previous)
 bool stringLinkedList::deleteAt(int index, string &text) {
     bool rc = false;
+    // checks to make sure there are items on the list
     if ((index < listCount) && (index >= 0)) {
 	// if the list has multiple nodes
 	if (listCount > 1) {

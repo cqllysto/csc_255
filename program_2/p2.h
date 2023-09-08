@@ -16,7 +16,7 @@ class stringLinkedList; // Creates an empty class to be friended in the
 
 //******************************************************************************
 // Aidan Wright
-// class definition of a node, containing a pointer called next, and text
+// class definition of a node containing a pointer called next and a string
 class node {
     private:
 	node(std::string text = "", node *pn = NULL);
@@ -69,7 +69,7 @@ class stringLinkedList {
 	int getIndex(std::string text) const;
 	// prints the entire list
 	void printIt() const;
-	// counts teh number of things in the list
+	// counts the number of nodes in the list
 	int count() const;
 };
 
