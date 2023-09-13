@@ -22,6 +22,8 @@ class cStringList {
 	void incVal(int &value); 
 	// decrements values and wraps around the date line
 	void decVal(int &value);
+	// Helper function that converts a virtual index into physical
+	int vToP(int value);
 
     public:
 	// These are the constructor and destructor of the class
