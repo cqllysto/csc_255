@@ -63,13 +63,15 @@ int cStringList::vToP(int value) const {
 // and changes the first index to point to it
 bool cStringList::insert(string text) {
     bool rc = false;
-    // if the list is not full
+    // if the list is not full, first and last are not next to each other
+    // and we have space to insert a new first text
     if (listCount < listCapacity) {
-	// if the list is not empty
+	// if the list has something, then move first down one index, 
+	// making the first thing in the list now the second
 	if (listCount) {
-	    // move first back one index
 	    decVal(first);
 	}
+	// inputs the given text into the new first location 
 	a[first] = text;
 	listCount++;
 	rc = true;
@@ -83,12 +85,15 @@ bool cStringList::insert(string text) {
 // adds the given string to the end of the list
 bool cStringList::add(string text) {
     bool rc = false;
-    // if the list is not full
+    // if the list is not full, first and last are not next to each other
+    // and we have space to insert a new first text
     if (listCount < listCapacity) {
-	// if the list is not empty
+	// if the list has something, then move last up one index, 
+	// making the last thing in the list now the second last
 	if (listCount) {
 	    incVal(last);
 	}
+	// insert the given text into the location of the new last index
 	a[last] = text;
 	listCount++;
 	rc = true;
@@ -99,16 +104,24 @@ bool cStringList::add(string text) {
 //******************************************************************************
 // Andrew Chapuis
 
-// p3b problem
+// insert a given text at a given index in the list
 bool cStringList::insertAt(int index, string text) {
     bool rc = false;
+    // check to make sure the index is within bounds and the list is not full
     if ((index <= listCount) && (listCount < listCapacity) && (index >=0)) {
+	// move everything after the given index back one index 
+	// to make room for the new text
 	for (int i = listCount; i > index; i--) {
+	    // make sure that the index is being translated to the physical
+	    // location
 	    a[vToP(i)] = a[vToP(i - 1)]; 
 	}
+	// if the list count is empty, then last does not need to be updated,
+	// however if the list has items, then last does need to be updated
 	if (listCount != 0) {
 	    last++;
 	}
+	// set the text to the physical location of the given index
 	a[vToP(index)] = text;
 	listCount++;
 	rc = true;
@@ -117,16 +130,22 @@ bool cStringList::insertAt(int index, string text) {
 }
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 
-// p3b problem
+// delete the contents of the given index and return the deleted text
 bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
+    // if the index is within the correct bounds
     if ((index >= 0) && (index < listCount)) {
+	// set text to the string that needs to be returned
 	text = a[vToP(index)];
+	// beginning at the index to be deleted, shift everything behind it
+	// up one index, taking care to translate the virtual to physical 
 	for(int i = index; i < listCount - 1; i++) {
 	    a[vToP(i)] = a[vToP(i + 1)];
 	}
+	// if the list only has one thing, then last can stay where it is
+	// otherwise, last has to move down one index
 	if (listCount != 1) {
 	    last--;
 	}
@@ -137,12 +156,15 @@ bool cStringList::deleteAt(int index, string &text) {
 }
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 
-// p3b problem
+// read the string at the given index
 bool cStringList::readAt(int index, string &text) {
     bool rc = false;
+    // if the index is within the bounds of our list
     if ((index >= 0) && (index < listCount)) {
+	// the text to be returned is set to contents of the given location
+	// taking care to translate the virtual index to the physical one
 	text = a[vToP(index)];
 	rc = true;
     }
