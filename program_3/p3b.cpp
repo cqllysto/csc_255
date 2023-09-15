@@ -52,7 +52,7 @@ void cStringList::decVal(int &value) {
 
 // private helper function that will convert a virtual index passed by 
 // into the physical index that it represents in our circular array
-int cStringList::vToP(int value) {
+int cStringList::vToP(int value) const {
     return((value + first) % listCapacity);
 }
 
@@ -120,6 +120,7 @@ bool cStringList::insertAt(int index, string text) {
 bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listCount)) {
+	text = a[vToP(index)];
 	for(int i = index; i < listCount; i++) {
 	    a[vToP(i)] = a[vToP(i + 1)];
 	}
