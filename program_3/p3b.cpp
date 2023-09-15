@@ -106,6 +106,9 @@ bool cStringList::insertAt(int index, string text) {
 	for (int i = listCount; i > index; i--) {
 	    a[vToP(i)] = a[vToP(i - 1)]; 
 	}
+	if (listCount != 0) {
+	    last++;
+	}
 	a[vToP(index)] = text;
 	listCount++;
 	rc = true;
@@ -121,8 +124,11 @@ bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listCount)) {
 	text = a[vToP(index)];
-	for(int i = index; i < listCount; i++) {
+	for(int i = index; i < listCount - 1; i++) {
 	    a[vToP(i)] = a[vToP(i + 1)];
+	}
+	if (listCount != 1) {
+	    last--;
 	}
 	listCount--;
 	rc = true;

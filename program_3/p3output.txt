@@ -38,9 +38,9 @@ At pos 5 there is day
 At pos 6 there is that
 At pos 7 there is the
 At pos 8 there is Lord
-At pos 9 there is amen
+At pos 9 there is has
 At pos 10 there is made
-At pos 11 there is 
+At pos 11 there is amen
 deleteAt 30 got false and na
 deleteFirst  got true and helperhelper
 deleteAt 1 got true and breakerbreaker
@@ -53,7 +53,7 @@ At pos 3 there is day
 At pos 4 there is that
 At pos 5 there is the
 At pos 6 there is Lord
-At pos 7 there is amen
+At pos 7 there is has
 At pos 8 there is made
 List was cleared
 deleteAt 0 got false and na
