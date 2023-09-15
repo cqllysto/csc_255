@@ -33,7 +33,7 @@ cStringList::~cStringList() {
 // Aidan Wright
 
 // increments the given value by one and wraps it to zero
-// if it exceeds the list capacity
+// if it equals the list capacity
 void cStringList::incVal(int &value) {
     value = (value + 1) % listCapacity;
 }
@@ -63,11 +63,10 @@ int cStringList::vToP(int value) const {
 // and changes the first index to point to it
 bool cStringList::insert(string text) {
     bool rc = false;
-    // if the list is not full, first and last are not next to each other
-    // and we have space to insert a new first text
+    // Verify the list is not full
     if (listCount < listCapacity) {
-	// if the list has something, then move first down one index, 
-	// making the first thing in the list now the second
+	// if the list has at least one entry, then decrease first one index,
+	// otherwise first and last will still equal the same index
 	if (listCount) {
 	    decVal(first);
 	}
@@ -85,11 +84,10 @@ bool cStringList::insert(string text) {
 // adds the given string to the end of the list
 bool cStringList::add(string text) {
     bool rc = false;
-    // if the list is not full, first and last are not next to each other
-    // and we have space to insert a new first text
+    // Verify the list is not full
     if (listCount < listCapacity) {
-	// if the list has something, then move last up one index, 
-	// making the last thing in the list now the second last
+	// if the list has at least one entry, then increase first one index,
+	// otherwise first and last will still equal the same index
 	if (listCount) {
 	    incVal(last);
 	}
@@ -217,6 +215,8 @@ bool cStringList::deleteLast(string &text) {
 // empty the list
 void cStringList::clear() {
     listCount = 0;
+    // first and last need to be set equal to each other to allow for accurate
+    // readdition to the list after clearing
     first = last;
 }
 
