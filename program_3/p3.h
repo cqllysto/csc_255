@@ -1,7 +1,8 @@
-//Name: Andrew Chapuis and Aidan Wright
-//Course: CSC 255
-//Program 3
-//Date: 09/11/23
+// Name: Andrew Chapuis and Aidan Wright
+// Team 3
+// Course: CSC 255
+// Program 3
+// Date: 09/11/23
 
 #ifndef __P3_H
 #define __P3_H

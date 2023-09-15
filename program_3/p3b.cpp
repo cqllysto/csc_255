@@ -1,7 +1,8 @@
-//Name: Andrew Chapuis and Aidan Wright
-//Course: CSC 255
-//Program 3
-//Date: 09/11/23
+// Name: Andrew Chapuis and Aidan Wright
+// Team 3
+// Course: CSC 255
+// Program 3
+// Date: 09/11/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p3.h"
@@ -66,7 +67,9 @@ bool cStringList::insert(string text) {
     // Verify the list is not full
     if (listCount < listCapacity) {
 	// if the list has at least one entry, then decrease first one index,
-	// otherwise first and last will still equal the same index
+	// otherwise first and last will still equal the same index.
+	// Last is not affected as the value is being inserted before the list
+	// and there is no shifting happening.
 	if (listCount) {
 	    decVal(first);
 	}
@@ -88,6 +91,8 @@ bool cStringList::add(string text) {
     if (listCount < listCapacity) {
 	// if the list has at least one entry, then increase first one index,
 	// otherwise first and last will still equal the same index
+	// First is not affected as the value is being added after the list
+	// and there is no shifting happening.
 	if (listCount) {
 	    incVal(last);
 	}
