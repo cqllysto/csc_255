@@ -53,7 +53,7 @@ void cStringList::decVal(int &value) {
 // private helper function that will convert a virtual index passed by 
 // into the physical index that it represents in our circular array
 int cStringList::vToP(int value) {
-    return((v + first) % listCapacity);
+    return((value + first) % listCapacity);
 }
 
 //******************************************************************************
@@ -102,7 +102,7 @@ bool cStringList::add(string text) {
 // p3b problem
 bool cStringList::insertAt(int index, string text) {
     bool rc = false;
-    if ((index <= listCount) && (listCount < listCapacity)) {
+    if ((index <= listCount) && (listCount < listCapacity) && (index >=0)) {
 	for (int i = listCount; i > index; i--) {
 	    a[vToP(i)] = a[vToP(i - 1)]; 
 	}
@@ -119,6 +119,13 @@ bool cStringList::insertAt(int index, string text) {
 // p3b problem
 bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
+    if ((index >= 0) && (index < listCount)) {
+	for(int i = index; i < listCount; i++) {
+	    a[vToP(i)] = a[vToP(i + 1)];
+	}
+	listCount--;
+	rc = true;
+    }
     return(rc);
 }
 
@@ -128,6 +135,10 @@ bool cStringList::deleteAt(int index, string &text) {
 // p3b problem
 bool cStringList::readAt(int index, string &text) {
     bool rc = false;
+    if ((index >= 0) && (index < listCount)) {
+	text = a[vToP(index)];
+	rc = true;
+    }
     return(rc);
 }
 
