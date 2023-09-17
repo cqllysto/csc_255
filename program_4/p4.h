@@ -18,7 +18,7 @@ class sNode {
 	int h;
 	sNode *left, *right;
 
-	friend sBST;
+	friend class sBST;
 };
 
 class sBST {
@@ -26,12 +26,12 @@ class sBST {
 	int treeCount;
 	sNode *root;
 
-	std::string findMin(sNode *root);
-	bool insert(std::string, sNode *root);
-	bool remove();
-	bool isIn();
-	bool printIt();
-	bool clear();
+	std::string findMin(sNode *ptr);
+	bool insert(std::string text, sNode *root);
+	bool remove(std::string text, sNode *p);
+	bool isIn(std::string text, sNode *p) const;
+	void printIt(sNode *p) const;
+	void clear(sNode *p);
 	
     public:
 	sBST();
