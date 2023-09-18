@@ -104,3 +104,41 @@ bool sBST::remove(string text, sNode &p) {
     return(rc);
 }
 
+
+//******************************************************************************
+// Aidan Wright
+
+bool sBST::isIn(string text) {
+    return false;
+}
+
+//******************************************************************************
+// Aidan Wright
+
+void clear() {
+    clear(root);
+    treeCount = 0;
+}
+
+void clear(sNode *p) {
+    if (p) {
+	clear(p->right);
+	clear(p->left);
+	delete p;
+	p = NULL;
+    }
+}
+
+//******************************************************************************
+// Aidan Wright
+
+// printIt public
+void sBst::printIt() const {
+    return false;
+}
+
+// Aidan Wright
+// count
+int count() const {
+    return(treeCount);
+}
