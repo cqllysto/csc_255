@@ -2,7 +2,7 @@
 // Course: CSC 255
 // Program 4
 // Team 3
-// Date: 09/01/23
+// Date: 09/18/23
 
 #include <iostream>
 #include "p4.h"
@@ -16,6 +16,7 @@ using namespace std;
 sNode::sNode(string text) {
     this->text = text;
     left = right = NULL;
+    h = 0;
 }
 
 
@@ -34,7 +35,8 @@ sBST::sBST() {
 
 // BST Destructor
 sBST::~sBST() {
-    clear();
+    treeCount = 0;
+    root = NULL;
 }
 
 
@@ -49,13 +51,13 @@ bool sBST::insert(string text) {
 //******************************************************************************
 // Aidan Wright
 // private insert
-bool insert(string text, sNode *&p) {
-    rc = false;
+bool sBST::insert(string text, sNode *&p) {
+    bool rc = false;
     if(p) {
 	if(p->text > text) {
-	    rc = ins(text, p->left);
+	    rc = insert(text, p->left);
 	} else if(p->text < text) {
-	    rc = ins(text, p->right);
+	    rc = insert(text, p->right);
 	}
     } else {
 	p = new sNode(text);
@@ -79,13 +81,15 @@ bool sBST::remove(string text) {
 //******************************************************************************
 // Aidan Wright
 // private remove
-bool sBST::remove(string text, sNode &p) {
+bool sBST::remove(string text, sNode *&p) {
+    bool rc = false;
     if (p) {
 	if (p->text > text) {
 	    rc = remove(text, p->left);
 	} else if (p->text < text) {
 	    rc = remove(text, p->right);
 	} else {
+	    rc = true;
 	    if ((!p->left) && (!p->right)) {
 		delete p;
 		p = NULL;
@@ -93,7 +97,7 @@ bool sBST::remove(string text, sNode &p) {
 	    } else if (!p->right) {
 		sNode *p2 = p->left;
 		delete p;
-		p = p2
+		p = p2;
 		treeCount--;
 	    } else {
 		p->text = findMin(p->right);
@@ -105,22 +109,53 @@ bool sBST::remove(string text, sNode &p) {
 }
 
 
+// findMin
+
+string sBST::findMin(sNode *p) {
+    string rc;
+    if (p) {
+	if (p->left) {
+	    rc = findMin(p->left);
+	} else {
+	    rc = p->text;
+	}
+    }
+    return(rc);
+}
+
+
+
 //******************************************************************************
 // Aidan Wright
 
-bool sBST::isIn(string text) {
-    return false;
+bool sBST::isIn(string text) const {
+    return(isIn(text, root));
+}
+
+
+bool sBST::isIn(string text, sNode *p) const {
+    bool rc = false;
+    if (p) {
+	if (p->text < text) {
+	    rc = isIn(text, p->right);
+	} else if (p->text > text) {
+	    rc = isIn(text, p->left);
+	} else {
+	    rc = true;
+	}
+    }
+    return(rc);
 }
 
 //******************************************************************************
 // Aidan Wright
 
-void clear() {
+void sBST::clear() {
     clear(root);
     treeCount = 0;
 }
 
-void clear(sNode *p) {
+void sBST::clear(sNode *p) {
     if (p) {
 	clear(p->right);
 	clear(p->left);
@@ -133,12 +168,22 @@ void clear(sNode *p) {
 // Aidan Wright
 
 // printIt public
-void sBst::printIt() const {
-    return false;
+void sBST::printIt() const {
+    printIt(root);
+}
+
+// print private
+
+void sBST::printIt(sNode *p) const {
+    if (p) {
+	printIt(p->left);
+	cout << p->text << "\n";
+	printIt(p->right);
+    }
 }
 
 // Aidan Wright
 // count
-int count() const {
+int sBST::count() const {
     return(treeCount);
 }

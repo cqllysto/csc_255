@@ -26,9 +26,9 @@ class sBST {
 	int treeCount;
 	sNode *root;
 
-	std::string findMin(sNode *ptr);
-	bool insert(std::string text, sNode *root);
-	bool remove(std::string text, sNode *p);
+	std::string findMin(sNode *p);
+	bool insert(std::string text, sNode *&p);
+	bool remove(std::string text, sNode *&p);
 	bool isIn(std::string text, sNode *p) const;
 	void printIt(sNode *p) const;
 	void clear(sNode *p);
