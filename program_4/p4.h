@@ -31,7 +31,7 @@ class sBST {
 	bool remove(std::string text, sNode *&p);
 	bool isIn(std::string text, sNode *p) const;
 	void printIt(sNode *p) const;
-	void clear(sNode *p);
+	void clear(sNode *&p);
 	
     public:
 	sBST();
