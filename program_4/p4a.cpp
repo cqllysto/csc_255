@@ -25,8 +25,7 @@ sNode::sNode(string text) {
 
 // BST Constructor
 sBST::sBST() {
-    root = NULL;
-    treeCount = 0;
+    clear();
 }
 
 
@@ -155,7 +154,7 @@ void sBST::clear() {
     treeCount = 0;
 }
 
-void sBST::clear(sNode *p) {
+void sBST::clear(sNode *&p) {
     if (p) {
 	clear(p->right);
 	clear(p->left);
@@ -176,9 +175,13 @@ void sBST::printIt() const {
 
 void sBST::printIt(sNode *p) const {
     if (p) {
-	printIt(p->left);
+	if (p->left != NULL) {
+	    printIt(p->left);
+	}
 	cout << p->text << "\n";
-	printIt(p->right);
+	if (p->right != NULL) {
+	    printIt(p->right);
+	}
     }
 }
 
