@@ -15,7 +15,7 @@ using namespace std;
 // Node Constructor
 sNode::sNode(string text) {
     this->text = text;
-
+    left = right = NULL;
 }
 
 
@@ -24,33 +24,41 @@ sNode::sNode(string text) {
 
 // BST Constructor
 sBST::sBST() {
-    right = left = NULL;
+    root = NULL;
     treeCount = 0;
 }
 
 
+//******************************************************************************
+// Aidan Wright
 
 // BST Destructor
 sBST::~sBST() {
     clear();
 }
 
+
+//******************************************************************************
+// Aidan Wright
 // public insert
 bool sBST::insert(string text) {
-    return(insert(text, &root));
+    return(insert(text, root));
 }
 
+
+//******************************************************************************
+// Aidan Wright
 // private insert
-bool insert(string text, sNode *root) {
+bool insert(string text, sNode *&p) {
     rc = false;
-    if(root) {
-	if(root->text > text) {
-	    rc = ins(text, root->left);
-	} else if(root->text < text) {
-	    rc = ins(text, root->right);
+    if(p) {
+	if(p->text > text) {
+	    rc = ins(text, p->left);
+	} else if(p->text < text) {
+	    rc = ins(text, p->right);
 	}
     } else {
-	root = new sNode(text);
+	p = new sNode(text);
 	rc = true;
 	treeCount++;
     }
@@ -60,32 +68,36 @@ bool insert(string text, sNode *root) {
 
 
 
+//******************************************************************************
+// Aidan Wright
 // public remove
 bool sBST::remove(string text) {
-    return(remove(text, &root));
+    return(remove(text, root));
 }
 
 
+//******************************************************************************
+// Aidan Wright
 // private remove
-bool sBST::remove(string text, sNode *root) {
-    if (root) {
-	if (root->text > text) {
-	    rc = remove(text, root->left);
-	} else if (root->text < text) {
-	    rc = remove(text, root->right);
+bool sBST::remove(string text, sNode &p) {
+    if (p) {
+	if (p->text > text) {
+	    rc = remove(text, p->left);
+	} else if (p->text < text) {
+	    rc = remove(text, p->right);
 	} else {
-	    if ((!root->left) && (!root->right)) {
-		delete root;
-		root = NULL;
+	    if ((!p->left) && (!p->right)) {
+		delete p;
+		p = NULL;
 		treeCount--;
-	    } else if (!root->right) {
-		sNode *p2 = root->left;
-		delete root;
-		root = p2
+	    } else if (!p->right) {
+		sNode *p2 = p->left;
+		delete p;
+		p = p2
 		treeCount--;
 	    } else {
-		root->text = findMin(root->right);
-		remove(root->text, root->right);
+		p->text = findMin(p->right);
+		remove(p->text, p->right);
 	    }
 	}
     }
