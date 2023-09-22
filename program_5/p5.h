@@ -1,11 +1,11 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 4
+// Program 5
 // Date: 09/18/23
 
-#ifndef __P4_H
-#define __P4_H
+#ifndef __P5_H
+#define __P5_H
 
 #include <string>
 
@@ -13,7 +13,7 @@
 // Both
 
 // Declaration so that the class can be friended
-class sBST;
+class sAVL;
 
 //******************************************************************************
 // Both
@@ -28,13 +28,13 @@ class sNode {
 	int h;
 	sNode *left, *right;
 
-	friend class sBST;
+	friend class sAVL;
 };
 
 //******************************************************************************
 // Both
 
-class sBST {
+class sAVL {
     private:
 	// Tracks the number of nodes in the BST
 	int treeCount;
@@ -55,10 +55,16 @@ class sBST {
 	// Clears the tree
 	void clear(sNode *&p);
 	
+	void rotateLeft(sNode *&p1);
+	void rotateRight(sNode *&p1);
+	void bal(sNode *&p);
+	int height(sNode *p);
+	int calcHeight(sNode *p);
+
     public:
 	// Constructor and destructor for the BST
-	sBST();
-	~sBST();
+	sAVL();
+	~sAVL();
 
 	// Public functions that will call their private functions at the 
 	// root of the tree
@@ -72,3 +78,4 @@ class sBST {
 };
 
 #endif
+

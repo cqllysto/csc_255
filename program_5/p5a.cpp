@@ -1,11 +1,11 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 4
-// Date: 09/18/23
+// Program 5
+// Date: 09/25/23
 
 #include <iostream>   // gets cin, cout, cerr
-#include "p4.h"
+#include "p5.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ sNode::sNode(string txt) {
 // Andrew Chapuis
 
 // Constructor for the BST
-sBST::sBST() {
+sAVL::sBST() {
     treeCount = 0;
     root = NULL;
 }
@@ -33,7 +33,7 @@ sBST::sBST() {
 
 // Destructor for the BST. All that required is to call clear, which will
 // delete the entire tree
-sBST::~sBST() {
+sAVL::~sBST() {
     clear(root);
 }
 
@@ -41,7 +41,7 @@ sBST::~sBST() {
 // Andrew Chapuis
 
 // A private function that will find the minimum value in the BST.
-string sBST::findMin(sNode *ptr) {
+string sAVL::findMin(sNode *ptr) {
     string rc;
     // According to the rules, as long as there is a left child, there is 
     // a node with a value less than the current node. If there is no left
@@ -61,7 +61,7 @@ string sBST::findMin(sNode *ptr) {
 
 // A private insert function that will recursively check whether the text to 
 // be inserted is greater or less than the value of the node.
-bool sBST::insert(string text, sNode *&p) {
+bool sAVL::insert(string text, sNode *&p) {
     bool rc = false;
     // If the node exists, then the passed text needs to be compared with 
     // the node's text. If it is not equal, then the function will be called 
@@ -87,7 +87,7 @@ bool sBST::insert(string text, sNode *&p) {
 // Aidan Wright
 
 // A private function that will delete a node from the BST.
-bool sBST::remove(string text, sNode *&p) {
+bool sAVL::remove(string text, sNode *&p) {
     bool rc = false;
     if (p) {
 	// First, the desired node must be found to be deleted, so if the text 
@@ -127,7 +127,7 @@ bool sBST::remove(string text, sNode *&p) {
 // Andrew Chapuis
 
 // A private function that will search the list for the given text.
-bool sBST::isIn(string text, sNode *p) const {
+bool sAVL::isIn(string text, sNode *p) const {
     bool rc = false;
     // If the node exists, the the text will be compared with the node's text.
     // If the text is less than the node's, the function will be called again 
@@ -150,7 +150,7 @@ bool sBST::isIn(string text, sNode *p) const {
 // Andrew Chapuis
 
 // Private function that will print the tree
-void sBST::printIt(sNode *p) const {
+void sAVL::printIt(sNode *p) const {
     // Starting with the passed node, the entire tree will be printed by first
     // printing all the left children, then printing the text in its own node,
     // and finishing by printing all the right children.
@@ -165,7 +165,7 @@ void sBST::printIt(sNode *p) const {
 // Aidan Wright
 
 // A private function that will delete all the nodes in a tree
-void sBST::clear(sNode *&p) {
+void sAVL::clear(sNode *&p) {
     // If the node exists, the function will first be called for the children
     // nodes, before deleting the passed node and setting its pointer to NULL.
     if (p) {
@@ -180,7 +180,7 @@ void sBST::clear(sNode *&p) {
 // Aidan Wright
 
 // Public version of insert that calls the private function at the root
-bool sBST::insert(string text) {
+bool sAVL::insert(string text) {
     return(insert(text, root));
 }
 
@@ -188,7 +188,7 @@ bool sBST::insert(string text) {
 // Aidan Wright
 
 // Public version of remove that calls the private function at the root
-bool sBST::remove(string text) {
+bool sAVL::remove(string text) {
     return(remove(text, root));
 }
 
@@ -196,7 +196,7 @@ bool sBST::remove(string text) {
 // Andrew Chapuis
 
 // Public version of isIn that calls the private function at the root
-bool sBST::isIn(string text) const {
+bool sAVL::isIn(string text) const {
     return(isIn(text, root));
 }
 
@@ -204,7 +204,7 @@ bool sBST::isIn(string text) const {
 // Andrew Chapuis
 
 // Public version of print that calls the private function at the root
-void sBST::printIt() const {
+void sAVL::printIt() const {
     printIt(root);
 }
 
@@ -212,7 +212,7 @@ void sBST::printIt() const {
 // Andrew Chapuis
 
 // Returns the number of nodes that have been inserted into the BST 
-int sBST::count() const {
+int sAVL::count() const {
     return(treeCount);
 }
 
@@ -221,7 +221,8 @@ int sBST::count() const {
 
 // Public version of clear that calls the private function at the root and 
 // resets treeCount for reinsertion
-void sBST::clear() {
+void sAVL::clear() {
     clear(root);
     treeCount = 0;
 }
+
