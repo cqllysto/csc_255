@@ -49,7 +49,7 @@ string sBST::findMin(sNode *ptr) {
     if (ptr->left) {
     	rc = findMin(ptr->left);
     } else {
-    rc = ptr->text;
+	rc = ptr->text;
     }
     return(rc);
 }
