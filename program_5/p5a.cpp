@@ -23,7 +23,7 @@ sNode::sNode(string txt) {
 // Andrew Chapuis
 
 // Constructor for the BST
-sAVL::sBST() {
+sAVL::sAVL() {
     treeCount = 0;
     root = NULL;
 }
@@ -33,8 +33,16 @@ sAVL::sBST() {
 
 // Destructor for the BST. All that required is to call clear, which will
 // delete the entire tree
-sAVL::~sBST() {
+sAVL::~sAVL() {
     clear(root);
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Will return the maximum between two integers
+int sAVL::max(int a, int b) {
+    return(a > b ? a : b);
 }
 
 //******************************************************************************
@@ -150,7 +158,7 @@ bool sAVL::isIn(string text, sNode *p) const {
 // Andrew Chapuis
 
 // Private function that will print the tree
-void sAVL::printIt(sNode *p) const {
+void sAVL::printIt(sNode *p, int &index) const {
     // Starting with the passed node, the entire tree will be printed by first
     // printing all the left children, then printing the text in its own node,
     // and finishing by printing all the right children.
@@ -174,6 +182,57 @@ void sAVL::clear(sNode *&p) {
 	delete p;
 	p = NULL;
     }
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Rotates a tree to the left around its root
+void sAVL::rotateLeft(sNode *&p1) {
+    sNode *p2 = p1->right;
+    p1->right = p2->left;
+    p2->left = p1;
+    p1->h = calcHeight(p1);
+    p1 = p2;
+    p1->h = calcHeight(p1);
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Rotates a tree to the left around its root
+void sAVL::rotateRight(sNode *&p1) {
+    sNode *p2 = p1->left;
+    p1->left = p2->right;
+    p2->right = p1;
+    p1->h = calcHeight(p1);
+    p1 = p2;
+    p1->h = calcHeight(p1);
+}
+
+//******************************************************************************
+// Aidan Wright
+
+void sAVL::bal(sNode *&p) {
+
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+int sAVL::height(sNode *p) const {
+    int rc = 0;
+    if (p) {
+	rc = p->h;
+    }
+    return(rc);
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+int sAVL::calcHeight(sNode *p) const {
+    return(max(height(p->left), height(p->right)) + 1);
 }
 
 //******************************************************************************
