@@ -2,7 +2,7 @@
 // Course: CSC 255
 // Program 4
 // Team 3
-// Date: 09/18/23
+// Date: 09/22/23
 
 #include <iostream>
 #include "p4.h"
@@ -25,7 +25,8 @@ sNode::sNode(string text) {
 
 // BST Constructor
 sBST::sBST() {
-    clear();
+    treeCount = 0;
+    root = NULL;
 }
 
 
@@ -34,8 +35,7 @@ sBST::sBST() {
 
 // BST Destructor
 sBST::~sBST() {
-    treeCount = 0;
-    root = NULL;
+    clear();
 }
 
 
@@ -112,12 +112,10 @@ bool sBST::remove(string text, sNode *&p) {
 
 string sBST::findMin(sNode *p) {
     string rc;
-    if (p) {
-	if (p->left) {
-	    rc = findMin(p->left);
-	} else {
-	    rc = p->text;
-	}
+    if (p->left) {
+    	rc = findMin(p->left);
+    } else {
+    rc = p->text;
     }
     return(rc);
 }
