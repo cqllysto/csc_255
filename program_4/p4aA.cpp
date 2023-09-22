@@ -46,12 +46,10 @@ string sBST::findMin(sNode *ptr) {
     // According to the rules, as long as there is a left child, there is 
     // a node with a value less than the current node. If there is no left
     // child, then the minimum has been found
-    if (ptr) {
-	if (ptr->left) {
-	    rc = findMin(ptr->left);
-	} else {
-	    rc = ptr->text;
-	}
+    if (ptr->left) {
+    	rc = findMin(ptr->left);
+    } else {
+    rc = ptr->text;
     }
     return(rc);
 }
