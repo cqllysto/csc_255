@@ -41,7 +41,7 @@ sAVL::~sAVL() {
 // Andrew Chapuis
 
 // Will return the maximum between two integers
-int sAVL::max(int a, int b) {
+int sAVL::max(int a, int b) const {
     return(a > b ? a : b);
 }
 
@@ -81,6 +81,9 @@ bool sAVL::insert(string text, sNode *&p) {
 	} else if (p->text < text) {
 	    rc = insert(text, p->right);
 	}
+	// Check whether the nodes will need balanced after the new one is 
+	// inserted
+	bal(p);
     // If the node does not exist, then a new node can be allocated with the 
     // text that was passed in.
     } else {
@@ -163,9 +166,11 @@ void sAVL::printIt(sNode *p, int &index) const {
     // printing all the left children, then printing the text in its own node,
     // and finishing by printing all the right children.
     if (p) {
-	printIt(p->left);
-	cout << p->text << "\n";
-	printIt(p->right);
+	printIt(p->left, index);
+	cout << "At " << index << " the string is " << p->text << ": height = "
+	    << p->h << "\n";
+	index++;
+	printIt(p->right, index);
     }
 }
 
@@ -214,7 +219,22 @@ void sAVL::rotateRight(sNode *&p1) {
 // Aidan Wright
 
 void sAVL::bal(sNode *&p) {
-
+    int diff = height(p->left) - height(p->right);
+    if (diff == 2) {
+	int childDiff = height(p->left->left) - height(p->left->right);
+	if (diff < 0) {
+	    rotateLeft(p->left);
+	}
+	rotateRight(p);
+    } else if (diff == -2) {
+	int childDiff = height(p->left->left) - height(p->left->right);
+	if (diff < 0) {
+	    rotateRight(p->right);
+	}
+	rotateLeft(p);
+    } else {
+	p->h = calcHeight(p);
+    }
 }
 
 //******************************************************************************
@@ -231,7 +251,7 @@ int sAVL::height(sNode *p) const {
 //******************************************************************************
 // Andrew Chapuis
 
-int sAVL::calcHeight(sNode *p) const {
+int sAVL::calcHeight(sNode *p) {
     return(max(height(p->left), height(p->right)) + 1);
 }
 
@@ -264,7 +284,9 @@ bool sAVL::isIn(string text) const {
 
 // Public version of print that calls the private function at the root
 void sAVL::printIt() const {
-    printIt(root);
+    // Create a variable that will track which index is being printed.
+    int index = 0;
+    printIt(root, index);
 }
 
 //******************************************************************************

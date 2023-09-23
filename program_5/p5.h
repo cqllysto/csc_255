@@ -56,7 +56,7 @@ class sAVL {
 	void clear(sNode *&p);
 	
 	// Finds the max of two integers
-	int max(int a, int b);
+	int max(int a, int b) const;
 	// Rotates the tree to the left around the node
 	void rotateLeft(sNode *&p1);
 	// Rotates the tree to the right around the node
@@ -64,7 +64,7 @@ class sAVL {
 	// Balances the tree if it is unbalanced
 	void bal(sNode *&p);
 	// Returns the height of a node
-	int height(sNode *p);
+	int height(sNode *p) const;
 	// Calculates the height of a node
 	int calcHeight(sNode *p);
 
