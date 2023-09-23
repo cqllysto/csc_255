@@ -51,14 +51,21 @@ class sAVL {
 	// Checks to see if text is in the BST
 	bool isIn(std::string text, sNode *p) const;
 	// Prints the tree from least to greatest
-	void printIt(sNode *p) const;
+	void printIt(sNode *p, int &index) const;
 	// Clears the tree
 	void clear(sNode *&p);
 	
+	// Finds the max of two integers
+	int max(int a, int b);
+	// Rotates the tree to the left around the node
 	void rotateLeft(sNode *&p1);
+	// Rotates the tree to the right around the node
 	void rotateRight(sNode *&p1);
+	// Balances the tree if it is unbalanced
 	void bal(sNode *&p);
+	// Returns the height of a node
 	int height(sNode *p);
+	// Calculates the height of a node
 	int calcHeight(sNode *p);
 
     public:

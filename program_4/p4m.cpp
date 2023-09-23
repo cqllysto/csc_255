@@ -80,7 +80,7 @@ void doWork(sBST &myTree, string dataName, string removeName,
 
     cout << endl;
 
-    cout << "Checing for text from: " << isInName << endl;
+    cout << "Checking for text from: " << isInName << endl;
 
     while (isInFile >> text) {
 	if (myTree.isIn(text)) {

@@ -36,7 +36,7 @@ stu
 vwx
 yz0
 
-Checing for text from: p4IsIn_1.txt
+Checking for text from: p4IsIn_1.txt
 isIn reports this is in the list: def
 isIn reports this is NOT in the list: ghi
 isIn reports this is in the list: jkl
