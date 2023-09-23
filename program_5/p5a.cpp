@@ -16,7 +16,7 @@ using namespace std;
 sNode::sNode(string txt) {
     text = txt;
     left = right = NULL;
-    h = 0;
+    h = 1;
 }
 
 //******************************************************************************
@@ -106,8 +106,10 @@ bool sAVL::remove(string text, sNode *&p) {
 	// with a child node
 	if (p->text > text) {
 	    rc = remove(text, p->left);
+	    bal(p);
 	} else if (p->text < text) {
 	    rc = remove(text, p->right);
+	    bal(p);
 	// Once the correct node is found, it will be deleted in one of two ways
 	} else {
 	    rc = true;
@@ -128,6 +130,7 @@ bool sAVL::remove(string text, sNode *&p) {
 	    } else {
 		p->text = findMin(p->right);
 		remove(p->text, p->right);
+		bal(p);
 	    }
 	}
     }
@@ -222,13 +225,13 @@ void sAVL::bal(sNode *&p) {
     int diff = height(p->left) - height(p->right);
     if (diff == 2) {
 	int childDiff = height(p->left->left) - height(p->left->right);
-	if (diff < 0) {
+	if (childDiff < 0) {
 	    rotateLeft(p->left);
 	}
 	rotateRight(p);
     } else if (diff == -2) {
-	int childDiff = height(p->left->left) - height(p->left->right);
-	if (diff < 0) {
+	int childDiff = height(p->right->left) - height(p->right->right);
+	if (childDiff > 0) {
 	    rotateRight(p->right);
 	}
 	rotateLeft(p);
