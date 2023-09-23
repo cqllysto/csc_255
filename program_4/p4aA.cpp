@@ -49,7 +49,7 @@ string sBST::findMin(sNode *ptr) {
     if (ptr->left) {
     	rc = findMin(ptr->left);
     } else {
-    rc = ptr->text;
+        rc = ptr->text;
     }
     return(rc);
 }
@@ -66,17 +66,17 @@ bool sBST::insert(string text, sNode *&p) {
     // again with a child node. If it is equal, then the function will end and 
     // return false.
     if (p) {
-	if (p->text > text) {
-	    rc = insert(text, p->left);
-	} else if (p->text < text) {
-	    rc = insert(text, p->right);
-	}
+        if (p->text > text) {
+            rc = insert(text, p->left);
+        } else if (p->text < text) {
+            rc = insert(text, p->right);
+        }
     // If the node does not exist, then a new node can be allocated with the 
     // text that was passed in.
     } else {
-	p = new sNode(text);
-	rc = true;
-	treeCount++;
+        p = new sNode(text);
+        rc = true;
+        treeCount++;
     }
     return(rc);
 }
@@ -88,35 +88,35 @@ bool sBST::insert(string text, sNode *&p) {
 bool sBST::remove(string text, sNode *&p) {
     bool rc = false;
     if (p) {
-	// First, the desired node must be found to be deleted, so if the text 
-	// does not equal the passed text, the function will be called again 
-	// with a child node
-	if (p->text > text) {
-	    rc = remove(text, p->left);
-	} else if (p->text < text) {
-	    rc = remove(text, p->right);
-	// Once the correct node is found, it will be deleted in one of two ways
-	} else {
-	    rc = true;
-	    // If it is a leaf, then it can be deleted
-	    if (!p->left && !p->right) {
-		delete p;
-		p = NULL;
-		treeCount--;
-	    // If it only has a left child, then the path can be subverted so
-	    // that the parent will point to the child after the node is deleted
-	    } else if (!p->right) {
-		sNode *p2 = p->left;
-		delete p;
-		p = p2;
-		treeCount--;
-	    // If it has a right child, it will take the text of the minimum 
-	    // of its right subtree and call the function to remove that text
-	    } else {
-		p->text = findMin(p->right);
-		remove(p->text, p->right);
+        // First, the desired node must be found to be deleted, so if the text 
+        // does not equal the passed text, the function will be called again 
+        // with a child node
+        if (p->text > text) {
+            rc = remove(text, p->left);
+        } else if (p->text < text) {
+            rc = remove(text, p->right);
+        // Once the correct node is found, it will be deleted in one of two ways
+        } else {
+            rc = true;
+            // If it is a leaf, then it can be deleted
+            if (!p->left && !p->right) {
+                delete p;
+                p = NULL;
+                treeCount--;
+            // If it only has a left child, then the path can be subverted so
+            // that the parent will point to the child after the node is deleted
+            } else if (!p->right) {
+                sNode *p2 = p->left;
+                delete p;
+                p = p2;
+                treeCount--;
+            // If it has a right child, it will take the text of the minimum 
+            // of its right subtree and call the function to remove that text
+            } else {
+                p->text = findMin(p->right);
+                remove(p->text, p->right);
+            }
 	    }
-	}
     }
     return(rc);
 }
@@ -153,9 +153,9 @@ void sBST::printIt(sNode *p) const {
     // printing all the left children, then printing the text in its own node,
     // and finishing by printing all the right children.
     if (p) {
-	printIt(p->left);
-	cout << p->text << "\n";
-	printIt(p->right);
+        printIt(p->left);
+        cout << p->text << "\n";
+        printIt(p->right);
     }
 }
 
@@ -167,10 +167,10 @@ void sBST::clear(sNode *&p) {
     // If the node exists, the function will first be called for the children
     // nodes, before deleting the passed node and setting its pointer to NULL.
     if (p) {
-	clear(p->left);
-	clear(p->right);
-	delete p;
-	p = NULL;
+        clear(p->left);
+        clear(p->right);
+        delete p;
+        p = NULL;
     }
 }
 
