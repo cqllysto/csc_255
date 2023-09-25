@@ -197,10 +197,16 @@ void sAVL::clear(sNode *&p) {
 
 // Rotates a tree to the left around its root
 void sAVL::rotateLeft(sNode *&p1) {
+    // create a new pointer to get a handle on the middle node 
+    // of a right heavy subtree
     sNode *p2 = p1->right;
+    // set the right child of the first node to be the left child of the
+    // middle node
     p1->right = p2->left;
+    // set the left child of the middle node to be the first node
     p2->left = p1;
     p1->h = calcHeight(p1);
+    // make the middle node take the place of the top node
     p1 = p2;
     p1->h = calcHeight(p1);
 }
@@ -210,10 +216,16 @@ void sAVL::rotateLeft(sNode *&p1) {
 
 // Rotates a tree to the left around its root
 void sAVL::rotateRight(sNode *&p1) {
+    // create a new pointer to get a handle on the middle node 
+    // of a left heavy subtree
     sNode *p2 = p1->left;
+    // set the left child of the first node to be the right child of the
+    // middle node
     p1->left = p2->right;
+    // set the right child of the middle node to be the first node
     p2->right = p1;
     p1->h = calcHeight(p1);
+    // make the middle node take the place of the top node
     p1 = p2;
     p1->h = calcHeight(p1);
 }
@@ -222,20 +234,40 @@ void sAVL::rotateRight(sNode *&p1) {
 // Aidan Wright
 
 void sAVL::bal(sNode *&p) {
+    // determine the height difference between the left child and right child
     int diff = height(p->left) - height(p->right);
+    // if the tree is left heavy, there is an imbalance
     if (diff == 2) {
+	// calculate the difference in height between the left child's 
+	// children to determine if the tree is left left heavy or 
+	// left right heavy
 	int childDiff = height(p->left->left) - height(p->left->right);
 	if (childDiff < 0) {
+	    // if the subtree is left right heavy, rotate the subtree
+	    // to the left around the middle node rather than the root
+	    // of the subtree
 	    rotateLeft(p->left);
 	}
+	// if the subtree is left left heavy, rotate it to the right
+	// around the root of the subtree
 	rotateRight(p);
+    // if the tree is right heavy, there is an imbalance
     } else if (diff == -2) {
+	// calculate the difference in height between the right child's 
+	// children to determine if the tree is right right heavy or 
+	// right left heavy
 	int childDiff = height(p->right->left) - height(p->right->right);
 	if (childDiff > 0) {
+	    // if the subtree is right left heavy, rotate the subtree
+	    // to the right around the middle node rather than the root
+	    // of the subtree
 	    rotateRight(p->right);
 	}
+	// if the subtree is right right heavy, rotate it to the left
+	// around the root of the subtree
 	rotateLeft(p);
     } else {
+	// if there is not an imbalance, calculate the height of the root
 	p->h = calcHeight(p);
     }
 }
@@ -245,6 +277,7 @@ void sAVL::bal(sNode *&p) {
 
 int sAVL::height(sNode *p) const {
     int rc = 0;
+    // the node exists then set the return condition to the height of the node
     if (p) {
 	rc = p->h;
     }
@@ -255,6 +288,8 @@ int sAVL::height(sNode *p) const {
 // Andrew Chapuis
 
 int sAVL::calcHeight(sNode *p) {
+    // set the height of the subtree root to the max height of either of 
+    // its children plus one
     return(max(height(p->left), height(p->right)) + 1);
 }
 
