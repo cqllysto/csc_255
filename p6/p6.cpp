@@ -94,9 +94,10 @@ void iPQ::swap(int *x, int *y) {
 
 void iPQ::bubbleUp(int index) {
     int per = parent(index);
-    if ((values[per] < values[index]) && (per != index)) {
+    while ((values[per] < values[index]) && (per != index)) {
         swap(&values[index], &values[per]);
-        bubbleUp(per);
+        index = per;
+        per = parent(index);
     }
 }
 
