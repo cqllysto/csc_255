@@ -92,7 +92,7 @@ void iPQ::swap(int *x, int *y) {
 void iPQ::bubbleUp(int index) {
     int per = parent(index);
     while (values[per] < values[index] && index != 0) {
-        swap(values[per], values[index]);
+        swap(&values[per], &values[index]);
         index = per;
         per = parent(index);
     }
@@ -103,8 +103,8 @@ void iPQ::bubbleUp(int index) {
 
 void iPQ::heapify(int index) {
     int bigChild = max(left(index), right(index));
-    while (values[bigChild] > values[index]) {
-        swap(values[bigChild], values[index]);
+    while (values[bigChild] > values[index] && index < qCount) {
+        swap(&values[bigChild], &values[index]);
         index = bigChild;
         bigChild = max(left(index), right(index));
     }
@@ -129,7 +129,18 @@ bool iPQ::enq(int v) {
 // Aidan Wright
 
 bool iPQ::deq(int &v) {
-    
+    bool rc = false;
+    if (qCount) {
+        bool rc = true;
+        for (int i = 0; i < qCount; i++) {
+	        if (values[i] == v) {
+                values[i] = values[qCount];
+	            break;
+	        }
+        }
+        qCount++;
+    }
+    return rc;
 }
 
 //******************************************************************************
@@ -140,12 +151,16 @@ void iPQ::printIt() const {}
 //******************************************************************************
 // Aidan Wright
 
-void iPQ::clear() {}
+void iPQ::clear() {
+    qCount = 0;
+}
 
 //******************************************************************************
 // Aidan Wright
 
-int iPQ::count() const {}
+int iPQ::count() const {
+    return qCount;
+}
 
 
 
