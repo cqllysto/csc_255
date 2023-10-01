@@ -1,12 +1,10 @@
 HOW TO USE GIT
-- by Aidan for Chappy with love :)
 
 Step 1: Understand Git
 https://www.youtube.com/watch?v=2ReR1YJrNOM
 
 Step 2: Understand basic Git commands:
 HOW TO USE GIT
-- by Aidan for Chappy with love :)
 
 Step 1: Understand Git
 
