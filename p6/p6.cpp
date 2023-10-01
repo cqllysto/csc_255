@@ -4,6 +4,7 @@
 // Date: 10/02/23
 
 #include <iostream>  
+#include <cmath>
 #include "p6.h"
 
 using namespace std;
@@ -76,6 +77,15 @@ int iPQ::right(int index) const {
 // Aidan Wright
 
 void iPQ::printIt(int ind, int count) const {
+    // ind = 0, count = 6
+
+    cout << "level[" << ind << "]->";
+
+    int level;
+    for (int i = ind; count > 0; count--, i++) {
+        level = log(ind + 1);
+        cout << "level[" << level << "]" << "->" << values[i];
+    }
 } 
 
 //******************************************************************************
@@ -146,7 +156,9 @@ bool iPQ::deq(int &v) {
 //******************************************************************************
 // Aidan Wright
 
-void iPQ::printIt() const {}
+void iPQ::printIt() const {
+
+}
 
 //******************************************************************************
 // Aidan Wright
