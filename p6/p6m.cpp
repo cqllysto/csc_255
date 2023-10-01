@@ -61,7 +61,7 @@ void part2(iPQ &myPQ) {
     myPQ.clear();
 }
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     iPQ myPQ(200);
 
     part1(myPQ);

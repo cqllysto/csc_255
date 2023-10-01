@@ -34,12 +34,10 @@ iPQ::~iPQ() {
 // Aidan Wright
 
 int iPQ::parent(int index) const {
-    int ind = NULL;
-    if ((index >= 0) && (index < qCount))
-        int ind = 0;
-        if (index != 0) {
-            int ind = (index - 1) / 2;
-        }
+    int ind = 0;
+    if (index > 0) {
+        int ind = (index - 1) / 2;
+    }
     return ind;
 }
 
@@ -47,9 +45,7 @@ int iPQ::parent(int index) const {
 // Aidan Wright
 
 int iPQ::left(int index) const {
-    int ind = NULL;
-    if ((index >= 0) && (index < qCount))
-        ind = index * 2 + 1;
+    int ind = index * 2 + 1;
     return ind;
 }
 
@@ -57,19 +53,7 @@ int iPQ::left(int index) const {
 // Aidan Wright
 
 int iPQ::right(int index) const {
-    int ind = NULL;
-    if ((index >= 0) && (index < qCount))
-        ind = (index + 1) * 2;
-    return ind;
-}
-
-//******************************************************************************
-// Aidan Wright
-
-int iPQ::right(int index) const {
-    int ind = NULL;
-    if ((index >= 0) && (index < qCount))
-        ind = (index + 1) * 2;
+    int ind = (index + 1) * 2;
     return ind;
 }
 
@@ -78,13 +62,21 @@ int iPQ::right(int index) const {
 
 void iPQ::printIt(int ind, int count) const {
     // ind = 0, count = 6
+    int ind2;
 
-    cout << "level[" << ind << "]->";
+    int level = log2(ind + 1);
+    cout << "level[" << level << "]->";
 
-    int level;
-    for (int i = ind; count > 0; count--, i++) {
-        level = log(ind + 1);
-        cout << "level[" << level << "]" << "->" << values[i];
+    for (int i = ind; count > 0 && i < qCount; count--) {
+        cout << values[i] << " ";
+        i++;
+        ind2 = i;
+    }
+    
+    cout << endl;
+
+    if (level < log2(qCount) - 1) {
+        printIt(ind2, pow(2, (level + 1)));
     }
 } 
 
@@ -92,19 +84,19 @@ void iPQ::printIt(int ind, int count) const {
 // Aidan Wright
 
 void iPQ::swap(int *x, int *y) {
-
+    int temp = *x;
+    *x = *y;
+    *y = temp;
 }
 
 //******************************************************************************
 // Aidan Wright
 
-//CHECK BOUNDS
 void iPQ::bubbleUp(int index) {
     int per = parent(index);
-    while (values[per] < values[index] && index != 0) {
-        swap(&values[per], &values[index]);
-        index = per;
-        per = parent(index);
+    if ((values[per] < values[index]) && (per != index)) {
+        swap(&values[index], &values[per]);
+        bubbleUp(per);
     }
 }
 
@@ -112,13 +104,20 @@ void iPQ::bubbleUp(int index) {
 // Aidan Wright
 
 void iPQ::heapify(int index) {
-    int bigChild = max(left(index), right(index));
-    while (values[bigChild] > values[index] && index < qCount) {
+    int l = left(index);
+    int r = right(index);
+    int bigChild = 0;
+    if ((l < qCount && values[l]) > (values[index])) {
+        bigChild = l;
+    } else if ((r < qCount) && (values[r] > values[index])) {
+        bigChild = r;
+    }
+    
+    while (values[bigChild] > values[index]) {
         swap(&values[bigChild], &values[index]);
         index = bigChild;
         bigChild = max(left(index), right(index));
     }
-
 }
 
 //******************************************************************************
@@ -126,7 +125,7 @@ void iPQ::heapify(int index) {
 
 bool iPQ::enq(int v) {
     bool rc = false;
-    if (qCapacity < qCount) {
+    if (qCount < qCapacity) {
         values[qCount] = v;
         bubbleUp(qCount);
         qCount++;
@@ -141,14 +140,11 @@ bool iPQ::enq(int v) {
 bool iPQ::deq(int &v) {
     bool rc = false;
     if (qCount) {
-        bool rc = true;
-        for (int i = 0; i < qCount; i++) {
-	        if (values[i] == v) {
-                values[i] = values[qCount];
-	            break;
-	        }
-        }
-        qCount++;
+        rc = true;
+        qCount--;
+        v = values[0];
+        values[0] = values[qCount];
+        heapify(0);
     }
     return rc;
 }
@@ -157,7 +153,7 @@ bool iPQ::deq(int &v) {
 // Aidan Wright
 
 void iPQ::printIt() const {
-
+    printIt(0, 1);
 }
 
 //******************************************************************************
