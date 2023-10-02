@@ -131,18 +131,18 @@ void iPQ::heapify(int index) {
     // largest value among a parent and its childre
     int largest = index;
     if (l < qCount) {
-	// If the left child has a larger value than its parent, largest will
-	// equal the index of the left child
+        // If the left child has a larger value than its parent, largest will
+        // equal the index of the left child
         if (values[l] > values[largest]) {
-	    largest = l;
-	}
+            largest = l;
+        }
     }
     if (r < qCount) {
-	// if the right child has a larger value than the larger of the left 
-	// child or the parent, largest will equal the index of the right child
-    	if (values[r] > values[largest]) {
-	    largest = r;		    
-	}
+        // if the right child has a larger value than the larger of the left 
+        // child or the parent, largest will equal the index of the right child
+        if (values[r] > values[largest]) {
+            largest = r;		    
+        }
     }
     
     // If the index does not have the largest value, it will swap it with the 
@@ -162,8 +162,8 @@ bool iPQ::enq(int v) {
     bool rc = false;
     if (qCount < qCapacity) {
         // Insert the value at the end of the array
-	values[qCount] = v;
-	// Push the value up the heap if it is greater than its parent
+        values[qCount] = v;
+        // Push the value up the heap if it is greater than its parent
         bubbleUp(qCount);
         qCount++;
         rc = true;
@@ -180,10 +180,10 @@ bool iPQ::deq(int &v) {
     if (qCount) {
         rc = true;
         qCount--;
-	// Sets v to the highest value in the queue
+        // Sets v to the highest value in the queue
         v = values[0];
-	// Moves the last entry in the array to the top and then heapifies it
-	// so that the queue gets updated
+        // Moves the last entry in the array to the top and then heapifies it
+        // so that the queue gets updated
         values[0] = values[qCount];
         heapify(0);
     }

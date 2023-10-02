@@ -17,9 +17,9 @@ void part1(iPQ &myPQ) {
     srand(0);
 
     for (i = 0; i < 100; i++) {
-	v = rand() % 1000;
-	rc = myPQ.enq(v);
-	//cout << i << ": enq of " << i << " got " << (rc ? "TRUE" : "FALSE") << endl;
+        v = rand() % 1000;
+        rc = myPQ.enq(v);
+        //cout << i << ": enq of " << i << " got " << (rc ? "TRUE" : "FALSE") << endl;
     }
 
     cout << "Tree count is " << myPQ.count() << endl;
@@ -29,8 +29,8 @@ void part1(iPQ &myPQ) {
 
 
     for (i = 0; i < 10; i++) {
-	rc = myPQ.deq(v);
-	cout << i << ": deq got " << v << " and " << (rc ? "TRUE" : "FALSE") << endl;
+        rc = myPQ.deq(v);
+        cout << i << ": deq got " << v << " and " << (rc ? "TRUE" : "FALSE") << endl;
     }
 
     myPQ.clear();

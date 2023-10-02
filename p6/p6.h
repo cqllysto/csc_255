@@ -25,7 +25,7 @@ class iPQ {
         void heapify(int index); // performs the heap heapify operation
 
     public:      
-	// Constructor and destructor
+        // Constructor and destructor
         iPQ(int qCapacity = 100);
         ~iPQ();
 
