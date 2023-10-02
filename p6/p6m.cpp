@@ -6,6 +6,8 @@
 
 using namespace std;
 
+//******************************************************************************
+
 void part1(iPQ &myPQ) {
     int i, j;
     int v;
@@ -35,6 +37,8 @@ void part1(iPQ &myPQ) {
     cout << "Tree count is now " << myPQ.count() << endl;
 }
 
+//******************************************************************************
+
 void part2(iPQ &myPQ) {
     int i;
     int v;
@@ -60,6 +64,8 @@ void part2(iPQ &myPQ) {
     }
     myPQ.clear();
 }
+
+//******************************************************************************
 
 int main(int argc, char *argv[]) {
     iPQ myPQ(200);
