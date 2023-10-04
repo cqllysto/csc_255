@@ -54,12 +54,10 @@ string sAVL::findMin(sNode *ptr) {
     // According to the rules, as long as there is a left child, there is 
     // a node with a value less than the current node. If there is no left
     // child, then the minimum has been found
-    if (ptr) {
-	if (ptr->left) {
-	    rc = findMin(ptr->left);
-	} else {
-	    rc = ptr->text;
-	}
+    if (ptr->left) {
+	rc = findMin(ptr->left);
+    } else {
+	rc = ptr->text;
     }
     return(rc);
 }
@@ -83,7 +81,6 @@ bool sAVL::insert(string text, sNode *&p) {
 	}
 	// Check whether the nodes will need balanced after the new one is 
 	// inserted
-	bal(p);
     // If the node does not exist, then a new node can be allocated with the 
     // text that was passed in.
     } else {
@@ -91,6 +88,7 @@ bool sAVL::insert(string text, sNode *&p) {
 	rc = true;
 	treeCount++;
     }
+    bal(p);
     return(rc);
 }
 
@@ -106,10 +104,8 @@ bool sAVL::remove(string text, sNode *&p) {
 	// with a child node
 	if (p->text > text) {
 	    rc = remove(text, p->left);
-	    bal(p);
 	} else if (p->text < text) {
 	    rc = remove(text, p->right);
-	    bal(p);
 	// Once the correct node is found, it will be deleted in one of two ways
 	} else {
 	    rc = true;
@@ -130,10 +126,10 @@ bool sAVL::remove(string text, sNode *&p) {
 	    } else {
 		p->text = findMin(p->right);
 		remove(p->text, p->right);
-		bal(p);
 	    }
 	}
     }
+    bal(p);
     return(rc);
 }
 
@@ -188,7 +184,6 @@ void sAVL::clear(sNode *&p) {
 	clear(p->left);
 	clear(p->right);
 	delete p;
-	p = NULL;
     }
 }
 
@@ -343,5 +338,6 @@ int sAVL::count() const {
 void sAVL::clear() {
     clear(root);
     treeCount = 0;
+    root = NULL;
 }
 
