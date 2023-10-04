@@ -229,41 +229,43 @@ void sAVL::rotateRight(sNode *&p1) {
 // Aidan Wright
 
 void sAVL::bal(sNode *&p) {
-    // determine the height difference between the left child and right child
-    int diff = height(p->left) - height(p->right);
-    // if the tree is left heavy, there is an imbalance
-    if (diff == 2) {
-	// calculate the difference in height between the left child's 
-	// children to determine if the tree is left left heavy or 
-	// left right heavy
-	int childDiff = height(p->left->left) - height(p->left->right);
-	if (childDiff < 0) {
-	    // if the subtree is left right heavy, rotate the subtree
-	    // to the left around the middle node rather than the root
-	    // of the subtree making it left left heavy
-	    rotateLeft(p->left);
+    if (p) {
+	// determine the height difference between the left and right child
+	int diff = height(p->left) - height(p->right);
+	// if the tree is left heavy, there is an imbalance
+	if (diff == 2) {
+	    // calculate the difference in height between the left child's 
+	    // children to determine if the tree is left left heavy or 
+	    // left right heavy
+	    int childDiff = height(p->left->left) - height(p->left->right);
+	    if (childDiff < 0) {
+		// if the subtree is left right heavy, rotate the subtree
+		// to the left around the middle node rather than the root
+		// of the subtree making it left left heavy
+		rotateLeft(p->left);
+	    }
+	    // the tree is left left heavy, and is rotated to the right
+	    // around the root of the tree
+	    rotateRight(p);
+	// if the tree is right heavy, there is an imbalance
+	} else if (diff == -2) {
+	    // calculate the difference in height between the right child's 
+	    // children to determine if the tree is right right heavy or 
+	    // right left heavy
+	    int childDiff = height(p->right->left) - height(p->right->right);
+	    if (childDiff > 0) {
+		// if the subtree is right left heavy, rotate the subtree
+		// to the right around the middle node rather than the root
+		// of the subtree making it right right heavy
+		rotateRight(p->right);
+	    }
+	    // the tree is right right heavy, and is rotated to the left
+	    // around the root of the tree
+	    rotateLeft(p);
+	} else {
+	    // if there is not an imbalance, calculate the height of the root
+	    p->h = calcHeight(p);
 	}
-	// the tree is left left heavy, and is rotated to the right
-	// around the root of the tree
-	rotateRight(p);
-    // if the tree is right heavy, there is an imbalance
-    } else if (diff == -2) {
-	// calculate the difference in height between the right child's 
-	// children to determine if the tree is right right heavy or 
-	// right left heavy
-	int childDiff = height(p->right->left) - height(p->right->right);
-	if (childDiff > 0) {
-	    // if the subtree is right left heavy, rotate the subtree
-	    // to the right around the middle node rather than the root
-	    // of the subtree making it right right heavy
-	    rotateRight(p->right);
-	}
-	// the tree is right right heavy, and is rotated to the left
-	// around the root of the tree
-	rotateLeft(p);
-    } else {
-	// if there is not an imbalance, calculate the height of the root
-	p->h = calcHeight(p);
     }
 }
 
