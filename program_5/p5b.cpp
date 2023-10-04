@@ -2,7 +2,7 @@
 // Team 3
 // Course: CSC 255
 // Program 5
-// Date: 09/25/23
+// Date: 10/04/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p5.h"
@@ -55,7 +55,7 @@ string sAVL::findMin(sNode *ptr) {
     // a node with a value less than the current node. If there is no left
     // child, then the minimum has been found
     if (ptr->left) {
-	rc = findMin(ptr->left);
+        rc = findMin(ptr->left);
     } else {
 	rc = ptr->text;
     }
@@ -74,13 +74,11 @@ bool sAVL::insert(string text, sNode *&p) {
     // again with a child node. If it is equal, then the function will end and 
     // return false.
     if (p) {
-	if (p->text > text) {
+        if (p->text > text) {
 	    rc = insert(text, p->left);
 	} else if (p->text < text) {
 	    rc = insert(text, p->right);
 	}
-	// Check whether the nodes will need balanced after the new one is 
-	// inserted
     // If the node does not exist, then a new node can be allocated with the 
     // text that was passed in.
     } else {
@@ -99,7 +97,7 @@ bool sAVL::insert(string text, sNode *&p) {
 bool sAVL::remove(string text, sNode *&p) {
     bool rc = false;
     if (p) {
-	// First, the desired node must be found to be deleted, so if the text 
+        // First, the desired node must be found to be deleted, so if the text 
 	// does not equal the passed text, the function will be called again 
 	// with a child node
 	if (p->text > text) {
@@ -111,7 +109,7 @@ bool sAVL::remove(string text, sNode *&p) {
 	    rc = true;
 	    // If it is a leaf, then it can be deleted
 	    if (!p->left && !p->right) {
-		delete p;
+	        delete p;
 		p = NULL;
 		treeCount--;
 	    // If it only has a left child, then the path can be subverted so
@@ -145,7 +143,7 @@ bool sAVL::isIn(string text, sNode *p) const {
     // called again with the right child. If it is equal, then the function
     // will return true
     if (p) {
-    	if (p->text > text) {
+        if (p->text > text) {
     	    rc = isIn(text, p->left);
     	} else if (p->text < text) {
     	    rc = isIn(text, p->right);
@@ -165,7 +163,7 @@ void sAVL::printIt(sNode *p, int &index) const {
     // printing all the left children, then printing the text in its own node,
     // and finishing by printing all the right children.
     if (p) {
-	printIt(p->left, index);
+        printIt(p->left, index);
 	cout << "At " << index << " the string is " << p->text << ": height = "
 	    << p->h << "\n";
 	index++;
@@ -230,7 +228,7 @@ void sAVL::rotateRight(sNode *&p1) {
 
 void sAVL::bal(sNode *&p) {
     if (p) {
-	// determine the height difference between the left and right child
+        // determine the height difference between the left and right child
 	int diff = height(p->left) - height(p->right);
 	// if the tree is left heavy, there is an imbalance
 	if (diff == 2) {
@@ -239,7 +237,7 @@ void sAVL::bal(sNode *&p) {
 	    // left right heavy
 	    int childDiff = height(p->left->left) - height(p->left->right);
 	    if (childDiff < 0) {
-		// if the subtree is left right heavy, rotate the subtree
+	        // if the subtree is left right heavy, rotate the subtree
 		// to the left around the middle node rather than the root
 		// of the subtree making it left left heavy
 		rotateLeft(p->left);

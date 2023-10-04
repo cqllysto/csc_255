@@ -2,7 +2,7 @@
 // Team 3
 // Course: CSC 255
 // Program 5
-// Date: 09/18/23
+// Date: 10/04/23
 
 #ifndef __P5_H
 #define __P5_H
@@ -20,7 +20,7 @@ class sAVL;
 
 class sNode {
     private:
-	// Constructor for the node class	
+        // Constructor for the node class	
 	sNode(std::string text = "");
 
 	// The variables that are associated with each node
@@ -36,7 +36,7 @@ class sNode {
 
 class sAVL {
     private:
-	// Tracks the number of nodes in the BST
+        // Tracks the number of nodes in the BST
 	int treeCount;
 	// Points to the root of the entire tree
 	sNode *root;
