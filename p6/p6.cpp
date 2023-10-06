@@ -112,7 +112,7 @@ void iPQ::bubbleUp(int index) {
     // their values will be swapped and then the value will be compared to it's 
     // new parent's value. It will keep swapping until a parent is greater or 
     // the value reaches the top of the queue
-    while ((values[per] < values[index]) && (per != index)) {
+    while ((values[per] < values[index])) {
         swap(&values[index], &values[per]);
         index = per;
         per = parent(index);
