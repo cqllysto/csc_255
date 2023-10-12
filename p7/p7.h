@@ -27,7 +27,6 @@ class intList {
                                     // in which case print only listSize entries 
                                     // If n is less than listSize, 
                                     // then print the last item on the list
-        void printIt() const; //prints the whole list and each index entry
         int getIndex(int key) const; //gets the index of a key
         bool readAt(int index, int &key) const; //reads the key at given index
         int count() const; //counts the size of the list
