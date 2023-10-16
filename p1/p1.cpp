@@ -117,7 +117,7 @@ void stringList::clear() {
 // prints the whole list and the respective indexes
 void stringList::printIt() const {
     for (int i = 0; i < listSize; i++) {
-	cout << "At pos " << i << " there is " << a[i] << "\n";
+	    cout << "At pos " << i << " there is " << a[i] << "\n";
     }
 }
 

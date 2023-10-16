@@ -1,0 +1,70 @@
+n = 20
+***********************************************************
+The time to do the bubbleSort was: 0.002445ms
+The list is sorted
+At pos 0 there is 0
+At pos 1 there is 89172
+At pos 2 there is 180540
+At pos 3 there is 202362
+At pos 4 there is 238335
+At pos 5 there is 289383
+At pos 6 there is 368690
+At pos 7 there is 383426
+At pos 8 there is 455736
+At pos 9 there is 490027
+At pos 10 there is 513926
+At pos 11 there is 516649
+At pos 12 there is 520059
+At pos 13 there is 636915
+At pos 14 there is 641421
+At pos 15 there is 692777
+At pos 16 there is 747793
+At pos 17 there is 760492
+At pos 18 there is 885386
+At pos 19 there is 897763
+***********************************************************
+The time to do the selectionSort was: 0.001886ms
+The list is sorted
+At pos 0 there is 89172
+At pos 1 there is 180540
+At pos 2 there is 202362
+At pos 3 there is 238335
+At pos 4 there is 289383
+At pos 5 there is 368690
+At pos 6 there is 383426
+At pos 7 there is 455736
+At pos 8 there is 490027
+At pos 9 there is 513926
+At pos 10 there is 516649
+At pos 11 there is 520059
+At pos 12 there is 636915
+At pos 13 there is 641421
+At pos 14 there is 692777
+At pos 15 there is 747793
+At pos 16 there is 760492
+At pos 17 there is 885386
+At pos 18 there is 897763
+At pos 19 there is 930886
+***********************************************************
+The time to do the insertionSort was: 0.001396ms
+The list is sorted
+At pos 0 there is 89172
+At pos 1 there is 180540
+At pos 2 there is 202362
+At pos 3 there is 238335
+At pos 4 there is 289383
+At pos 5 there is 368690
+At pos 6 there is 383426
+At pos 7 there is 455736
+At pos 8 there is 490027
+At pos 9 there is 513926
+At pos 10 there is 516649
+At pos 11 there is 520059
+At pos 12 there is 636915
+At pos 13 there is 641421
+At pos 14 there is 692777
+At pos 15 there is 747793
+At pos 16 there is 760492
+At pos 17 there is 885386
+At pos 18 there is 897763
+At pos 19 there is 930886

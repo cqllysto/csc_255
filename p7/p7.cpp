@@ -177,6 +177,8 @@ void intList::selectionSort() {
                 min = j;
             }
         }
+
+        // change this function to not use swap
         if (min != i) {
             swap (a[min], a[i]);
         }
@@ -187,10 +189,45 @@ void intList::insertionSort() {
     for (int i = 1; i < listSize; i++) {
         int key = a[i];
         int j = i - 1;
-        while (j > 0 && a[j] > key) {
+        while (j >= 0 && a[j] > key) {
             a[j + 1] = a[j];
             j = j - 1;
         }
         a[j + 1] = key;
     }
+}
+
+
+void intList::printIt(int n) const {
+    if (n >= listSize) {
+        for (int i = 0; i < listSize; i++) {
+	        cout << "At pos " << i << " there is " << a[i] << "\n";
+        }
+    } else {
+        for (int i = 0; i < n; i++) {
+	        cout << "At pos " << i << " there is " << a[i] << "\n";
+            if (i = n-1) {
+                cout << "At pos " << listSize-1 << " there is " << a[listSize-1] << "\n";
+            }
+        }
+    }
+}
+
+
+int intList::capacity() {
+    return(listCapacity);
+}
+
+//returns true if the list is sorted in ascending order
+// otherwise, it returns false 
+// If it fails, print the index where the failure occurs
+
+bool intList::isSorted() const {
+    bool rc = true;
+    for (int i = 1; i < listSize; i++) {
+        if (a[i-1] > a[i]) {
+            rc = false;
+        }
+    }
+    return rc;
 }
