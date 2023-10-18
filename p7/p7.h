@@ -2,7 +2,7 @@
 // Team 3
 // Course: CSC 255
 // Program 7
-// Date: 10/17/23
+// Date: 10/18/23
 
 #ifndef __P7_H
 #define __P7_H
@@ -10,9 +10,10 @@
 
 class intList {
     private:
-        int *a;
-        int listCapacity; // Memorialize the capacity of the list
+        int *a; // Pointer to the list
+        int listCapacity; // The capacity of the list
         int listSize; // An integer to track the number of entries on the list
+	void swap(int *x, int *y); //swaps two integers with each other
 
     public:
 	intList(int listCapacity = 100); //constructor
@@ -34,7 +35,8 @@ class intList {
         void selectionSort();
         void insertionSort();
 
-        bool isSorted() const; // Returns whether the list is sorted
+	// Returns true if the list is sorted and false if not
+        bool isSorted() const; 
 };
 
 #endif

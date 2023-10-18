@@ -1,6 +1,6 @@
 n = 20
 ***********************************************************
-The time to do the bubbleSort was:     0ms
+The time to do the bubbleSort was: 0.001ms
 The list is sorted
 At pos 0 there is 16807
 At pos 1 there is 27544
@@ -23,7 +23,7 @@ At pos 17 there is 807987
 At pos 18 there is 850878
 At pos 19 there is 943658
 ***********************************************************
-The time to do the selectionSort was:     0ms
+The time to do the selectionSort was: 0.001ms
 The list is sorted
 At pos 0 there is 16807
 At pos 1 there is 27544
@@ -46,7 +46,7 @@ At pos 17 there is 807987
 At pos 18 there is 850878
 At pos 19 there is 943658
 ***********************************************************
-The time to do the insertionSort was: 0.001ms
+The time to do the insertionSort was:     0ms
 The list is sorted
 At pos 0 there is 16807
 At pos 1 there is 27544
@@ -70,7 +70,7 @@ At pos 18 there is 850878
 At pos 19 there is 943658
 n = 20000
 ***********************************************************
-The time to do the bubbleSort was: 416.933ms
+The time to do the bubbleSort was: 410.103ms
 The list is sorted
 At pos 0 there is 9
 At pos 1 there is 27
@@ -94,7 +94,7 @@ At pos 18 there is 707
 At pos 19 there is 741
 At pos 19999 there is 999993
 ***********************************************************
-The time to do the selectionSort was: 162.189ms
+The time to do the selectionSort was: 158.593ms
 The list is sorted
 At pos 0 there is 9
 At pos 1 there is 27
@@ -118,7 +118,7 @@ At pos 18 there is 707
 At pos 19 there is 741
 At pos 19999 there is 999993
 ***********************************************************
-The time to do the insertionSort was: 68.477ms
+The time to do the insertionSort was: 75.032ms
 The list is sorted
 At pos 0 there is 9
 At pos 1 there is 27

@@ -1,7 +1,7 @@
 //Name: Andrew Chapuis and Aidan Wright
 //Course: CSC 255
 //Program 7
-//Date: 10/17/23
+//Date: 10/18/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p7.h"
@@ -33,8 +33,19 @@ intList::~intList() {
 //******************************************************************************
 // Andrew Chapuis
 
+// Creates a helper function to swap two integers with each other
+void intList::swap(int *x, int *y) {
+    // Create a temporary variable to hold the value of x while they are swapped
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
 // Insert function: First shifts all entries right, then inserts the inputted 
-// key into the beginning of the int
+// key into the beginning of the list
 bool intList::insert(int key) {
     bool rc = false;
     // shifts list entries to the right
@@ -51,7 +62,7 @@ bool intList::insert(int key) {
     return(rc);
 }
 
-// ******************************************************************************
+// *****************************************************************************
 // Aidan Wright
 
 // Add function: inserts the given key at the end of the list
@@ -65,7 +76,7 @@ bool intList::add(int key){
     return(rc);
 }
 
-// ******************************************************************************
+// *****************************************************************************
 // Andrew Chapuis
 
 // insertAt function: inserts a given key at the given index of the int
@@ -162,7 +173,7 @@ void intList::bubbleSort() {
     for (int i = listSize - 1; i > 0 ; i--) {
         for (int j = 0; j < i; j++) {
             if (a[j] > a[j + 1]) {
-                swap(a[j], a[j + 1]);
+                swap(&a[j], &a[j + 1]);
             }
         }
     }
@@ -175,12 +186,12 @@ void intList::bubbleSort() {
 // and then swapping that index with the leftmost index that has not been sorted
 void intList::selectionSort() {
     for (int i = 0; i < listSize - 1; i++) {
-	// Initialize minIndex to i each time the loop reiterates
+        // Initialize minIndex to i each time the loop reiterates
         int minIndex = i;
 	// All the keys in the array will be compared with minIndex to find 
 	// the index with the minimum value
         for (int j = i + 1; j < listSize; j++) {
-	    // If a smaller key was found, minIndex will be set to the index 
+            // If a smaller key was found, minIndex will be set to the index 
 	    // being compared
             if (a[j] < a[minIndex]) {
                 minIndex = j;
@@ -188,7 +199,7 @@ void intList::selectionSort() {
         }
 	// If i is not the minIndex swap the values in the array
         if (minIndex != i) {
-            swap (a[minIndex], a[i]);
+            swap(&a[minIndex], &a[i]);
         }
     }
 }
@@ -207,7 +218,7 @@ void intList::insertionSort() {
 	for (int j = i + 1; j > 0; j--) {
 	    // The inserted index is swapped until it is in its sorted place 
 	    if (a[j - 1] > a[j]) {
-		swap(a[j - 1], a[j]);
+		swap(&a[j - 1], &a[j]);
 	    } else {
 		break;
 	    }
