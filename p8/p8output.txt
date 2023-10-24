@@ -1,0 +1,150 @@
+n = 10
+***********************************************************
+The time to do the bubbleSort was: 0.001397ms
+The list is sorted
+At pos 0 there is 238335
+At pos 1 there is 289383
+At pos 2 there is 516649
+At pos 3 there is 636915
+At pos 4 there is 641421
+At pos 5 there is 692777
+At pos 6 there is 747793
+At pos 7 there is 760492
+At pos 8 there is 885386
+At pos 9 there is 930886
+***********************************************************
+The time to do the selectionSort was: 0.001397ms
+The list is sorted
+At pos 0 there is 238335
+At pos 1 there is 289383
+At pos 2 there is 516649
+At pos 3 there is 636915
+At pos 4 there is 641421
+At pos 5 there is 692777
+At pos 6 there is 747793
+At pos 7 there is 760492
+At pos 8 there is 885386
+At pos 9 there is 930886
+***********************************************************
+The time to do the insertionSort was: 0.000978ms
+The list is sorted
+At pos 0 there is 238335
+At pos 1 there is 289383
+At pos 2 there is 516649
+At pos 3 there is 636915
+At pos 4 there is 641421
+At pos 5 there is 692777
+At pos 6 there is 747793
+At pos 7 there is 760492
+At pos 8 there is 885386
+At pos 9 there is 930886
+***********************************************************
+The time to do the heapSort was: 0.000978ms
+The list is sorted
+At pos 0 there is 238335
+At pos 1 there is 289383
+At pos 2 there is 516649
+At pos 3 there is 636915
+At pos 4 there is 641421
+At pos 5 there is 692777
+At pos 6 there is 747793
+At pos 7 there is 760492
+At pos 8 there is 885386
+At pos 9 there is 930886
+n = 40000
+***********************************************************
+The time to do the bubbleSort was: 1154.66ms
+The list is sorted
+At pos 0 there is 3
+At pos 1 there is 13
+At pos 2 there is 26
+At pos 3 there is 64
+At pos 4 there is 81
+At pos 5 there is 91
+At pos 6 there is 93
+At pos 7 there is 196
+At pos 8 there is 214
+At pos 9 there is 262
+At pos 10 there is 323
+At pos 11 there is 361
+At pos 12 there is 434
+At pos 13 there is 463
+At pos 14 there is 501
+At pos 15 there is 513
+At pos 16 there is 541
+At pos 17 there is 543
+At pos 18 there is 549
+At pos 19 there is 569
+At pos 39999 there is 999960
+***********************************************************
+The time to do the selectionSort was: 1555.06ms
+The list is sorted
+At pos 0 there is 3
+At pos 1 there is 13
+At pos 2 there is 26
+At pos 3 there is 64
+At pos 4 there is 81
+At pos 5 there is 91
+At pos 6 there is 93
+At pos 7 there is 196
+At pos 8 there is 214
+At pos 9 there is 262
+At pos 10 there is 323
+At pos 11 there is 361
+At pos 12 there is 434
+At pos 13 there is 463
+At pos 14 there is 501
+At pos 15 there is 513
+At pos 16 there is 541
+At pos 17 there is 543
+At pos 18 there is 549
+At pos 19 there is 569
+At pos 39999 there is 999960
+***********************************************************
+The time to do the insertionSort was: 225.841ms
+The list is sorted
+At pos 0 there is 3
+At pos 1 there is 13
+At pos 2 there is 26
+At pos 3 there is 64
+At pos 4 there is 81
+At pos 5 there is 91
+At pos 6 there is 93
+At pos 7 there is 196
+At pos 8 there is 214
+At pos 9 there is 262
+At pos 10 there is 323
+At pos 11 there is 361
+At pos 12 there is 434
+At pos 13 there is 463
+At pos 14 there is 501
+At pos 15 there is 513
+At pos 16 there is 541
+At pos 17 there is 543
+At pos 18 there is 549
+At pos 19 there is 569
+At pos 39999 there is 999960
+***********************************************************
+The time to do the heapSort was: 2.09475ms
+The list is sorted
+At pos 0 there is 3
+At pos 1 there is 13
+At pos 2 there is 26
+At pos 3 there is 64
+At pos 4 there is 81
+At pos 5 there is 91
+At pos 6 there is 93
+At pos 7 there is 196
+At pos 8 there is 214
+At pos 9 there is 262
+At pos 10 there is 323
+At pos 11 there is 361
+At pos 12 there is 434
+At pos 13 there is 463
+At pos 14 there is 501
+At pos 15 there is 513
+At pos 16 there is 541
+At pos 17 there is 543
+At pos 18 there is 549
+At pos 19 there is 569
+At pos 39999 there is 999960
