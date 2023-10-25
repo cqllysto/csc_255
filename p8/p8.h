@@ -7,7 +7,6 @@
 #ifndef __P8_H
 #define __P8_H
 
-
 class intList {
     private:
         int *a; // Pointer to the list
@@ -16,16 +15,17 @@ class intList {
         int heapSize; // to track the size of the superimposed heap
         
         // Heapsort related functions
-        void heapify(int index);
-        void swap(int &x, int &y); 
-        int left(int index) const;
-        int right(int index) const;
-        void buildHeap();
+        // Pushes a value down if it is in the wrong spot in the heap
+        void heapify(int index); 
+        void swap(int &x, int &y); // Swaps two indices in an array
+        int left(int index) const; // Returns the left child of an index
+        int right(int index) const; // Returns the right child of an index
+        void buildHeap(); // Sorts an array into a heap
 	    
 
     public:
-	    intList(int listCapacity = 100); //constructor
-	    ~intList(); //destructor
+        intList(int listCapacity = 100); //constructor
+	~intList(); //destructor
 	
         bool insert(int key); //inserts a key into beginning of list
         bool add(int key); //adds a key to the end of the list
@@ -38,15 +38,15 @@ class intList {
         int count() const; //counts the size of the list
         int capacity(); // returns the capacity of the list
 
-    
+
         void heapSort();
 
-	    // Sorting functions that will be used and compared
+	// Sorting functions that will be used and compared
         void bubbleSort();
         void selectionSort();
         void insertionSort();
 
-	    // Returns true if the list is sorted and false if not
+	// Returns true if the list is sorted and false if not
         bool isSorted() const; 
 };
 

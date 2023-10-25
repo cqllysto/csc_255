@@ -1,7 +1,8 @@
-//Name: Andrew Chapuis and Aidan Wright
-//Course: CSC 255
-//Program 7
-//Date: 10/18/23
+// Name: Andrew Chapuis and Aidan Wright
+// Team 3
+// Course: CSC 255
+// Program 8
+// Date: 10/25/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
@@ -68,6 +69,7 @@ bool intList::insert(int key) {
 // Add function: inserts the given key at the end of the list
 bool intList::add(int key){
     bool rc = false;
+    // If there is space for another entry to be added, it will be
     if (listSize < listCapacity) {
         a[listSize] = key; 
         rc = true;
@@ -232,6 +234,9 @@ void intList::insertionSort() {
 // Prints a specific number of items on the list unless the passed in number is
 // greater than the size of the list
 void intList::printIt(int n) const {
+    // Print the list size and capacity
+    cout << "printIt with list size: " << listSize << " capacity: " << 
+	listCapacity << "\n";
     // Print the entire list if n is greater than or equal to listSize
     if (n >= listSize) {
         for (int i = 0; i < listSize; i++) {
@@ -283,10 +288,16 @@ bool intList::isSorted() const {
 //******************************************************************************
 // Aidan Wright
 
+// Sorts the list by creating a heap and then sorting it
 void intList::heapSort(){
+    // Sort the array into a heap
     buildHeap();
+    // The top of the heap will be swapped with the last index in the heap
+    // After that, the index at the top is heapified
     while (heapSize > 1) {
         swap(a[0], a[heapSize - 1]);
+	// Deacerasing heapSize ensures that the already sorted indices are not
+	// placed back in the heap.
         heapSize--;
         heapify(0);
     }
@@ -294,10 +305,14 @@ void intList::heapSort(){
 
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
 
+// Turns an array into a heap by heapifying every parent into the correct index
 void intList::buildHeap() {
+    // When the heap is built, set the heapSize equal to the listSize
     heapSize = listSize;
+    // Starting at the last parent, each parent will be heapified into their 
+    // correct index to become a heap
     for(int i = heapSize/2-1; i >= 0; i--) {
         heapify(i);
     }
@@ -306,14 +321,14 @@ void intList::buildHeap() {
 
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
 
 
 void intList::heapify(int index) {
     int l = left(index);
     int r = right(index);
     // Create a variable 'largest' that will keep track of the index with the
-    // largest value among a parent and its childre
+    // largest value among a parent and its children
     int largest = index;
     if (l < heapSize) {
         // If the left child has a larger value than its parent, largest will
@@ -350,7 +365,7 @@ int intList::left(int index) const {
 }
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
 
 // Returns the right child of an index
 int intList::right(int index) const {

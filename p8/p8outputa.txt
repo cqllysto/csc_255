@@ -1,0 +1,259 @@
+n = 10
+***********************************************************
+The time to do the bubbleSort was: 0.001ms
+The list is sorted
+printIt with list size: 10 capacity: 10
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 108930
+At pos 3 there is 211272
+At pos 4 there is 237709
+At pos 5 there is 475249
+At pos 6 there is 650073
+At pos 7 there is 777923
+At pos 8 there is 850878
+At pos 9 there is 943658
+***********************************************************
+The time to do the selectionSort was: 0.001ms
+The list is sorted
+printIt with list size: 10 capacity: 10
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 108930
+At pos 3 there is 211272
+At pos 4 there is 237709
+At pos 5 there is 475249
+At pos 6 there is 650073
+At pos 7 there is 777923
+At pos 8 there is 850878
+At pos 9 there is 943658
+***********************************************************
+The time to do the insertionSort was:     0ms
+The list is sorted
+printIt with list size: 10 capacity: 10
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 108930
+At pos 3 there is 211272
+At pos 4 there is 237709
+At pos 5 there is 475249
+At pos 6 there is 650073
+At pos 7 there is 777923
+At pos 8 there is 850878
+At pos 9 there is 943658
+***********************************************************
+The time to do the heapSort was: 0.001ms
+The list is sorted
+printIt with list size: 10 capacity: 10
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 108930
+At pos 3 there is 211272
+At pos 4 there is 237709
+At pos 5 there is 475249
+At pos 6 there is 650073
+At pos 7 there is 777923
+At pos 8 there is 850878
+At pos 9 there is 943658
+n = 30
+***********************************************************
+The time to do the bubbleSort was: 0.002ms
+The list is sorted
+printIt with list size: 30 capacity: 30
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 97157
+At pos 3 there is 108930
+At pos 4 there is 129560
+At pos 5 there is 211272
+At pos 6 there is 237709
+At pos 7 there is 243042
+At pos 8 there is 280278
+At pos 9 there is 282327
+At pos 10 there is 351816
+At pos 11 there is 378840
+At pos 12 there is 438165
+At pos 13 there is 475249
+At pos 14 there is 484492
+At pos 15 there is 493099
+At pos 16 there is 522503
+At pos 17 there is 531729
+At pos 18 there is 542612
+At pos 19 there is 544303
+At pos 29 there is 943658
+***********************************************************
+The time to do the selectionSort was: 0.001ms
+The list is sorted
+printIt with list size: 30 capacity: 30
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 97157
+At pos 3 there is 108930
+At pos 4 there is 129560
+At pos 5 there is 211272
+At pos 6 there is 237709
+At pos 7 there is 243042
+At pos 8 there is 280278
+At pos 9 there is 282327
+At pos 10 there is 351816
+At pos 11 there is 378840
+At pos 12 there is 438165
+At pos 13 there is 475249
+At pos 14 there is 484492
+At pos 15 there is 493099
+At pos 16 there is 522503
+At pos 17 there is 531729
+At pos 18 there is 542612
+At pos 19 there is 544303
+At pos 29 there is 943658
+***********************************************************
+The time to do the insertionSort was: 0.001ms
+The list is sorted
+printIt with list size: 30 capacity: 30
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 97157
+At pos 3 there is 108930
+At pos 4 there is 129560
+At pos 5 there is 211272
+At pos 6 there is 237709
+At pos 7 there is 243042
+At pos 8 there is 280278
+At pos 9 there is 282327
+At pos 10 there is 351816
+At pos 11 there is 378840
+At pos 12 there is 438165
+At pos 13 there is 475249
+At pos 14 there is 484492
+At pos 15 there is 493099
+At pos 16 there is 522503
+At pos 17 there is 531729
+At pos 18 there is 542612
+At pos 19 there is 544303
+At pos 29 there is 943658
+***********************************************************
+The time to do the heapSort was: 0.002ms
+The list is sorted
+printIt with list size: 30 capacity: 30
+At pos 0 there is 16807
+At pos 1 there is 27544
+At pos 2 there is 97157
+At pos 3 there is 108930
+At pos 4 there is 129560
+At pos 5 there is 211272
+At pos 6 there is 237709
+At pos 7 there is 243042
+At pos 8 there is 280278
+At pos 9 there is 282327
+At pos 10 there is 351816
+At pos 11 there is 378840
+At pos 12 there is 438165
+At pos 13 there is 475249
+At pos 14 there is 484492
+At pos 15 there is 493099
+At pos 16 there is 522503
+At pos 17 there is 531729
+At pos 18 there is 542612
+At pos 19 there is 544303
+At pos 29 there is 943658
+n = 40000
+***********************************************************
+The time to do the bubbleSort was: 1707.18ms
+The list is sorted
+printIt with list size: 40000 capacity: 40000
+At pos 0 there is 9
+At pos 1 there is 26
+At pos 2 there is 27
+At pos 3 there is 41
+At pos 4 there is 96
+At pos 5 there is 96
+At pos 6 there is 98
+At pos 7 there is 107
+At pos 8 there is 110
+At pos 9 there is 120
+At pos 10 there is 133
+At pos 11 there is 165
+At pos 12 there is 282
+At pos 13 there is 284
+At pos 14 there is 351
+At pos 15 there is 355
+At pos 16 there is 410
+At pos 17 there is 416
+At pos 18 there is 439
+At pos 19 there is 470
+At pos 39999 there is 999993
+***********************************************************
+The time to do the selectionSort was: 614.45ms
+The list is sorted
+printIt with list size: 40000 capacity: 40000
+At pos 0 there is 9
+At pos 1 there is 26
+At pos 2 there is 27
+At pos 3 there is 41
+At pos 4 there is 96
+At pos 5 there is 96
+At pos 6 there is 98
+At pos 7 there is 107
+At pos 8 there is 110
+At pos 9 there is 120
+At pos 10 there is 133
+At pos 11 there is 165
+At pos 12 there is 282
+At pos 13 there is 284
+At pos 14 there is 351
+At pos 15 there is 355
+At pos 16 there is 410
+At pos 17 there is 416
+At pos 18 there is 439
+At pos 19 there is 470
+At pos 39999 there is 999993
+***********************************************************
+The time to do the insertionSort was: 296.074ms
+The list is sorted
+printIt with list size: 40000 capacity: 40000
+At pos 0 there is 9
+At pos 1 there is 26
+At pos 2 there is 27
+At pos 3 there is 41
+At pos 4 there is 96
+At pos 5 there is 96
+At pos 6 there is 98
+At pos 7 there is 107
+At pos 8 there is 110
+At pos 9 there is 120
+At pos 10 there is 133
+At pos 11 there is 165
+At pos 12 there is 282
+At pos 13 there is 284
+At pos 14 there is 351
+At pos 15 there is 355
+At pos 16 there is 410
+At pos 17 there is 416
+At pos 18 there is 439
+At pos 19 there is 470
+At pos 39999 there is 999993
+***********************************************************
+The time to do the heapSort was: 3.559ms
+The list is sorted
+printIt with list size: 40000 capacity: 40000
+At pos 0 there is 9
+At pos 1 there is 26
+At pos 2 there is 27
+At pos 3 there is 41
+At pos 4 there is 96
+At pos 5 there is 96
+At pos 6 there is 98
+At pos 7 there is 107
+At pos 8 there is 110
+At pos 9 there is 120
+At pos 10 there is 133
+At pos 11 there is 165
+At pos 12 there is 282
+At pos 13 there is 284
+At pos 14 there is 351
+At pos 15 there is 355
+At pos 16 there is 410
+At pos 17 there is 416
+At pos 18 there is 439
+At pos 19 there is 470
+At pos 39999 there is 999993
