@@ -36,11 +36,13 @@ int max(int x, int y) {
 // Andrew Chapuis
 
 Graph::Graph(int n, bool directed) {
+
     a = new int *[n];
     int *b = new int[n * n];
-    for (i = 0; i < n; i++) {
-	a[i] = &(b[i * n]);
+    for (int i = 0; i < n; i++) {
+	    a[i] = &(b[i * n]);
     }
+
     labels = new intList(n);
     this->n = n;
     vCount = eCount = 0;
@@ -52,8 +54,8 @@ Graph::Graph(int n, bool directed) {
 
 Graph::~Graph() {
     if (a) {
-	delete [] a;
-	a = NULL
+        delete [] a;
+        a = NULL;
     }
 }
 
@@ -63,10 +65,10 @@ Graph::~Graph() {
 int Graph::labelToVid( int label) const {
     int rc = -1;
     for (int i = 0; i < vCount; i++) {
-	if (labels[i] == label) {
-	    rc = i;
-	    break;
-	}
+        if (labels[i] == label) {
+            rc = i;
+            break;
+        }
     }
     return(rc);
 }
@@ -77,9 +79,9 @@ int Graph::labelToVid( int label) const {
 bool Graph::createV(int label) {
     bool rc = false;
     if ((vCount < n) && !isV(label)) {
-	rc = true;
-	labels[vCount] = label;
-	vCount++;
+        rc = true;
+        labels[vCount] = label;
+        vCount++;
     }
     return(rc);
 }
@@ -90,15 +92,97 @@ bool Graph::createV(int label) {
 bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     bool rc = false;
     if (weight > 0) {
-	if ((isV(uLabel) && isV(vLabel)) {
-	    if (a[labelToVid(uLabel)][labelToVid(vLabel)] == 0) {
-		a[labelToVid(uLabel)][labelToVid(vLabel)] = weight
-		eCount++;
-	    }
-	} else if (isV(ulabel) && vCount < n) {
-	    createV(vLabel);
-	    addEdge(uLabel, vLabel, weight);
-	} else if (
-    }
+        if ((isV(uLabel) && isV(vLabel)) {
+            if (a[labelToVid(uLabel)][labelToVid(vLabel)] == 0) {
+                a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+                eCount++;
+            }
+        } else if (isV(ulabel) && vCount < n) {
+            createV(vLabel);
+            addEdge(uLabel, vLabel, weight);
+        } else if () {}
     return(rc);
+    }
 }
+
+//******************************************************************************
+// Aidan Wright
+void Graph::clear(){
+    vCount = eCount = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i][j] = 0;
+        }
+    }
+}
+
+//******************************************************************************
+// Aidan Wright
+bool Graph::isEdge(int uLabel, int vLabel) const {
+    bool rc = -1;
+    int uIndex = labelToVid(uLabel);
+    int vIndex = labelToVid(vLabel);
+    if (a[uIndex][vIndex]) {
+        rc = true;
+    }
+}
+
+//******************************************************************************
+// Aidan Wright
+bool Graph::isV(int label) const {
+    bool rc = -1;
+    int index = labelToVid(label);
+    if (a[index]) {
+        rc = true;
+    }
+}
+
+//******************************************************************************
+// Aidan Wright
+int Graph::inDegree(int label) const {
+    int rc = 0;
+    int index = labelToVid(label);
+     for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[i][index]) {
+                rc += 1;
+            }
+        }
+    }
+}
+
+//******************************************************************************
+// Aidan Wright
+int Graph::outDegree(int label) const {
+    int rc = 0;
+    int index = labelToVid(label);
+     for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[index][j]) {
+                rc += 1;
+            }
+        }
+    }
+}
+
+//******************************************************************************
+// Aidan Wright
+int Graph::sizeV() const {
+    int rc = n*n;
+}
+
+//******************************************************************************
+// Aidan Wright
+int Graph::sizeUsedV() const {
+    int rc = vCount;
+}
+
+//******************************************************************************
+// Aidan Wright
+int Graph::sizeE() const {
+    int rc = eCount;
+}
+
+//******************************************************************************
+// Aidan Wright
+void Graph::printIt() const {}
