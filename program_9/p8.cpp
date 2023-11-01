@@ -295,10 +295,10 @@ void intList::heapSort(){
     // The top of the heap will be swapped with the last index in the heap
     // After that, the index at the top is heapified
     while (heapSize > 1) {
-        swap(a[0], a[heapSize - 1]);
+        heapSize--;
+        swap(a[0], a[heapSize]);
 	// Deacerasing heapSize ensures that the already sorted indices are not
 	// placed back in the heap.
-        heapSize--;
         heapify(0);
     }
 }
