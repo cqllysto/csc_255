@@ -23,7 +23,7 @@ int min(int x, int y) {
 }
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 
 // Returns the maximum between two numbers
 int max(int x, int y) {
@@ -55,6 +55,7 @@ Graph::Graph(int n, bool directed) {
     // Create an array to keep track of the labels of the vertices
     labels = new intList(n);
     this->n = n;
+    // Initialize vCount and eCount to zero
     vCount = eCount = 0;
     this->directed = directed;
 }
@@ -62,6 +63,7 @@ Graph::Graph(int n, bool directed) {
 //******************************************************************************
 // Andrew Chapuis
 
+// Destructor of the Graph
 Graph::~Graph() {
     if (a) {
         delete [] a;
@@ -70,8 +72,9 @@ Graph::~Graph() {
 }
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 
+// Finds the virtual ID of a given label
 int Graph::labelToVid( int label) const {
     return(labels->getIndex(label));
 }
@@ -81,9 +84,12 @@ int Graph::labelToVid( int label) const {
 
 // Creates a vertex
 bool Graph::createV(int label) {
-    bool rc = isV(label);
-    if ((vCount < n) && !rc) {
+    bool rc = false;
+    // If there is space and it is not already a vertex, a new vertex will be 
+    // created
+    if ((vCount < n) && !isV(label)) {
         rc = true;
+	// Add the label to the labels array
         labels->add(label);
         vCount++;
     }
@@ -93,25 +99,37 @@ bool Graph::createV(int label) {
 //******************************************************************************
 // Andrew Chapuis
 
+// Adds an edge, and the vertices if they do not exist, to the graph 
+// unless one of the conditions cannot be met. 
 bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     bool rc = false;
+    // An edge will not be added if there is already an edge there or the weight
+    // is non-positive
     if ((weight > 0) && !isEdge(uLabel, vLabel)) {
+	// An edge will not be added if uLabel and vLabel do not exist and there
+	// is not enough room to be created
         if (!isV(uLabel) && !isV(vLabel) && (vCount < (n - 1))) {
 	    createV(uLabel);
 	    createV(vLabel);
+	    // Set the index of the graph matrix to weight
 	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
 	    eCount++;
 	    rc = true;
+	// An edge will not be added if one of the vertices do not exist and 
+	// there is not enough space to add it
         } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
             createV(vLabel);
 	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
 	    eCount++;
 	    rc = true;
-        } else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
+	// An edge will not be added if one of the vertices do not exist and 
+	// there is not enough space to add it
+	} else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
             createV(uLabel);
 	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
 	    eCount++;
 	    rc = true;
+	// If both vertices already exist, the edge will be created
 	} else if (isV(uLabel) && isV(vLabel)) {
 	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
 	    eCount++;
@@ -123,7 +141,11 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
 
 //******************************************************************************
 // Aidan Wright
+
+// Clears the graph matrix
 void Graph::clear(){
+    // vCount and eCount are both set to zero, and then all the indices of the 
+    // graph matrix and labels array are set to zero
     vCount = eCount = 0;
     for (int i = 0; i < n; i++) {
         labels->clear();
@@ -136,11 +158,15 @@ void Graph::clear(){
 //******************************************************************************
 // Aidan Wright
 
+// Checks to see if an edge already exists
 bool Graph::isEdge(int uLabel, int vLabel) const {
     bool rc = false;
-    if (isV(uLabel) && isV(vLabel)) {
-	int uIndex = labelToVid(uLabel);
-	int vIndex = labelToVid(vLabel);
+    // Find the index of the labels and if both of the vertices exist
+    // and there is a non-zero number in the graph matrix, the function returns
+    // true
+    int uIndex = labelToVid(uLabel);
+    int vIndex = labelToVid(vLabel);
+    if ((uIndex != -1) && (vIndex != -1)) {
 	if (a[uIndex][vIndex]) {
 	    rc = true;
 	}
@@ -151,8 +177,11 @@ bool Graph::isEdge(int uLabel, int vLabel) const {
 //******************************************************************************
 // Aidan Wright
 
+// Checks to see if a vertex already exists
 bool Graph::isV(int label) const {
     bool rc = false;
+    // Finds the index of a label, and if it exists, then the function returns
+    // true
     int index = labelToVid(label);
     if (index != -1) {
         rc = true;
@@ -163,9 +192,14 @@ bool Graph::isV(int label) const {
 //******************************************************************************
 // Aidan Wright
 
+// Returns the number of edges directed to a vertex
 int Graph::inDegree(int label) const {
-    int rc = 0;
+    int rc = -1;
+    // If the node doesn't exist, the function will return -1, otherwise
+    // it will calculate the inDegree of the vertex
     if (isV(label)) {
+	rc = 0;
+	// The index of the label will stay constant as the matrix is searched
 	int index = labelToVid(label);
 	for (int i = 0; i < n; i++) {
 	    if (a[i][index]) {
@@ -180,8 +214,12 @@ int Graph::inDegree(int label) const {
 // Aidan Wright
 
 int Graph::outDegree(int label) const {
-    int rc = 0;
+    int rc = -1;
+    // If the node doesn't exist, the function will return -1, otherwise
+    // it will calculate the inDegree of the vertex
     if (isV(label)) {
+	rc = 0;
+	// The index of the label will stay constant as the matrix is searched
 	int index = labelToVid(label);
 	for (int i = 0; i < n; i++) {
 	    if (a[index][i]) {
@@ -194,12 +232,16 @@ int Graph::outDegree(int label) const {
 
 //******************************************************************************
 // Andrew Chapuis
+
+// Returns the maximum number of vertices that the matrix can have
 int Graph::sizeV() const {
-    return(n * n);
+    return(n);
 }
 
 //******************************************************************************
 // Aidan Wright
+
+// Returns the number of vertices currently in the graph
 int Graph::sizeUsedV() const {
     return(vCount) ;
 }
@@ -207,6 +249,7 @@ int Graph::sizeUsedV() const {
 //******************************************************************************
 // Andrew Chapuis
 
+// Returns the number of edges in the graph
 int Graph::sizeE() const {
     return(eCount);
 }
@@ -214,6 +257,7 @@ int Graph::sizeE() const {
 //******************************************************************************
 // Aidan Wright
 
+// Prints the graph matrix
 void Graph::printIt() const {
     int r, c;
     int key = 0;
@@ -223,8 +267,10 @@ void Graph::printIt() const {
     cout << "  eCount = " << eCount << endl;
     cout << "\nGraph contents:\n";
     for (r = 0; r < vCount; r++) {
-        labels->readAt(r, key);
-	    cout << "  Node(" << r << "," << key << "):";
+        // Prints the label associated with each index
+	labels->readAt(r, key);
+	cout << "  Node(" << r << "," << key << "):";
+	// Prints each row of the graph matrix
 	for (c = 0; c < vCount; c++) {
 	    cout << " " << a[r][c];
 	}
@@ -232,7 +278,8 @@ void Graph::printIt() const {
     }
 
     cout << "Degree table (in, out)\n";
-
+    
+    // Prints the degere of each vertex
     for (r = 0; r < vCount; r++) {
         labels->readAt(r, key);
         cout << "  Node(" << r << "," << key << "):";
