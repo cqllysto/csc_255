@@ -6,7 +6,7 @@
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
-#include "p9.h"
+#include "p9a.h"
 
 using namespace std;
 
@@ -36,13 +36,12 @@ int max(int x, int y) {
 // Andrew Chapuis
 
 Graph::Graph(int n, bool directed) {
-
-    a = new int *[n];
+    int** a = new int*[n];
+    // int *a[n];
     int *b = new int[n * n];
     for (int i = 0; i < n; i++) {
 	    a[i] = &(b[i * n]);
     }
-
     labels = new intList(n);
     this->n = n;
     vCount = eCount = 0;
@@ -64,8 +63,10 @@ Graph::~Graph() {
 
 int Graph::labelToVid( int label) const {
     int rc = -1;
+    int key = 0;
     for (int i = 0; i < vCount; i++) {
-        if (labels[i] == label) {
+        labels->readAt(i, key);
+        if (key == label) {
             rc = i;
             break;
         }
@@ -89,20 +90,30 @@ bool Graph::createV(int label) {
 //******************************************************************************
 // Andrew Chapuis
 
+// Use labels->add(label) to add a new vertex to the Graph
+// To Use labels->getIndex(label) to get the vid number of the vertex with that label; it will return -1 if the
+// labeled vertex is not in the graph.
+// To Use labels->readAt(vid, label) to get the label of the given vid.
+
+
 bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     bool rc = false;
     if (weight > 0) {
-        if ((isV(uLabel) && isV(vLabel)) {
+        if ((isV(uLabel) && isV(vLabel))) {
             if (a[labelToVid(uLabel)][labelToVid(vLabel)] == 0) {
                 a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
                 eCount++;
             }
-        } else if (isV(ulabel) && vCount < n) {
+        } else if (isV(uLabel) && vCount < n) {
             createV(vLabel);
             addEdge(uLabel, vLabel, weight);
-        } else if () {}
-    return(rc);
+        } else if (isV(vLabel) && vCount < n) {
+            createV(uLabel);
+            addEdge(uLabel, vLabel, weight);
+        }
+        rc = true;
     }
+    return(rc);
 }
 
 //******************************************************************************
@@ -125,6 +136,7 @@ bool Graph::isEdge(int uLabel, int vLabel) const {
     if (a[uIndex][vIndex]) {
         rc = true;
     }
+    return rc;
 }
 
 //******************************************************************************
@@ -135,6 +147,7 @@ bool Graph::isV(int label) const {
     if (a[index]) {
         rc = true;
     }
+    return rc;
 }
 
 //******************************************************************************
@@ -149,6 +162,7 @@ int Graph::inDegree(int label) const {
             }
         }
     }
+    return rc;
 }
 
 //******************************************************************************
@@ -163,26 +177,54 @@ int Graph::outDegree(int label) const {
             }
         }
     }
+    return rc;
 }
 
 //******************************************************************************
 // Aidan Wright
 int Graph::sizeV() const {
     int rc = n*n;
+    return rc;
 }
 
 //******************************************************************************
 // Aidan Wright
 int Graph::sizeUsedV() const {
     int rc = vCount;
+    return rc;
 }
 
 //******************************************************************************
 // Aidan Wright
 int Graph::sizeE() const {
     int rc = eCount;
+    return rc;
 }
 
 //******************************************************************************
 // Aidan Wright
-void Graph::printIt() const {}
+void Graph::printIt() const {
+    int r, c;
+    int key = 0;
+    cout << "Graph info:\n";
+    cout << "  Graph size = " << n << endl;
+    cout << "  vCount = " << vCount << endl;
+    cout << "  eCount = " << eCount << endl;
+    cout << "\nGraph contents:\n";
+    for (r = 0; r < vCount; r++) {
+        labels->readAt(r, key);
+	    cout << "  Node(" << r << "," << key << "):";
+	for (c = 0; c < vCount; c++) {
+	    cout << " " << a[r][c];
+	}
+	cout << endl;
+    }
+
+    cout << "Degree table (in, out)\n";
+
+    for (r = 0; r < vCount; r++) {
+        labels->readAt(r, key);
+        cout << "  Node(" << r << "," << key << "):";
+        cout << " " << inDegree(key) << ", " << outDegree(key) << endl;
+    }
+}

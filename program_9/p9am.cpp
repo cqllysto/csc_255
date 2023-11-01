@@ -7,7 +7,7 @@
 using namespace std;
 
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     int unode, vnode, weight;
     Graph myGraph(40, true);
 

@@ -1,0 +1,4 @@
+Graph info:
+  Graph size = 40
+  vCount = 0
+  eCount = 0

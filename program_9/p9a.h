@@ -4,8 +4,8 @@
 // Program 9
 // Date: 11/1/23
 
-#ifndef __P9_H
-#define __P9_H
+#ifndef __P9A_H
+#define __P9A_H
 
 #include "p8.h"
 
@@ -14,7 +14,7 @@ int max(int x, int y); // returns the greater of x and y
 
 class Graph {
     private:
-	int *a; // The pointer for the array of the graph
+	int **a; // The pointer for the array of the graph
 	intList *labels; // A pointer to the list that will store the labels
 	int n; // Memorializes the dimensions of the graph matrix
 	int vCount; // Tracks the number of vertices in the graph
