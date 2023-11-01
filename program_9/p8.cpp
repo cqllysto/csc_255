@@ -240,7 +240,7 @@ void intList::printIt(int n) const {
     // Print the entire list if n is greater than or equal to listSize
     if (n >= listSize) {
         for (int i = 0; i < listSize; i++) {
-	        cout << "At pos " << i << " there is " << a[i] << "\n";
+	    cout << "At pos " << i << " there is " << a[i] << "\n";
         }
     // Only n items will be printed from the list and then the last entry in the
     // list will also be printed
