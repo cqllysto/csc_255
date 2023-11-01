@@ -13,6 +13,7 @@ using namespace std;
 //******************************************************************************
 // Andrew Chapuis
 
+// Returns the minimum between two numbers
 int min(int x, int y) {
     int rc = x;
     if (y < x) {
@@ -24,6 +25,7 @@ int min(int x, int y) {
 //******************************************************************************
 // Andrew Chapuis
 
+// Returns the maximum between two numbers
 int max(int x, int y) {
     int rc = x;
     if (y > x) {
@@ -35,13 +37,22 @@ int max(int x, int y) {
 //******************************************************************************
 // Andrew Chapuis
 
+// Constructor for the Graph class
 Graph::Graph(int n, bool directed) {
-    int** a = new int*[n];
-    // int *a[n];
+    // Set a as a new pointer to an array of pointers
+    a = new int *[n];
+    // Make b an array at the correct length
     int *b = new int[n * n];
+    // Sets the different indices of a as pointers to different sections of b
     for (int i = 0; i < n; i++) {
-	    a[i] = &(b[i * n]);
+	a[i] = &(b[i * n]);
+	// Initialize every value as 0
+	for (int j = 0; j < n; j++) {
+            a[i][j] = 0;
+	}
     }
+    
+    // Create an array to keep track of the labels of the vertices
     labels = new intList(n);
     this->n = n;
     vCount = eCount = 0;
@@ -62,26 +73,18 @@ Graph::~Graph() {
 // Andrew Chapuis
 
 int Graph::labelToVid( int label) const {
-    int rc = -1;
-    int key = 0;
-    for (int i = 0; i < vCount; i++) {
-        labels->readAt(i, key);
-        if (key == label) {
-            rc = i;
-            break;
-        }
-    }
-    return(rc);
+    return(labels->getIndex(label));
 }
 
 //******************************************************************************
 // Andrew Chapuis
 
+// Creates a vertex
 bool Graph::createV(int label) {
-    bool rc = false;
-    if ((vCount < n) && !isV(label)) {
+    bool rc = isV(label);
+    if ((vCount < n) && !rc) {
         rc = true;
-        labels[vCount] = label;
+        labels->add(label);
         vCount++;
     }
     return(rc);
@@ -90,28 +93,30 @@ bool Graph::createV(int label) {
 //******************************************************************************
 // Andrew Chapuis
 
-// Use labels->add(label) to add a new vertex to the Graph
-// To Use labels->getIndex(label) to get the vid number of the vertex with that label; it will return -1 if the
-// labeled vertex is not in the graph.
-// To Use labels->readAt(vid, label) to get the label of the given vid.
-
-
 bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     bool rc = false;
-    if (weight > 0) {
-        if ((isV(uLabel) && isV(vLabel))) {
-            if (a[labelToVid(uLabel)][labelToVid(vLabel)] == 0) {
-                a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-                eCount++;
-            }
-        } else if (isV(uLabel) && vCount < n) {
+    if ((weight > 0) && !isEdge(uLabel, vLabel)) {
+        if (!isV(uLabel) && !isV(vLabel) && (vCount < (n - 1))) {
+	    createV(uLabel);
+	    createV(vLabel);
+	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+	    eCount++;
+	    rc = true;
+        } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
             createV(vLabel);
-            addEdge(uLabel, vLabel, weight);
-        } else if (isV(vLabel) && vCount < n) {
+	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+	    eCount++;
+	    rc = true;
+        } else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
             createV(uLabel);
-            addEdge(uLabel, vLabel, weight);
-        }
-        rc = true;
+	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+	    eCount++;
+	    rc = true;
+	} else if (isV(uLabel) && isV(vLabel)) {
+	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+	    eCount++;
+	    rc = true;
+	}
     }
     return(rc);
 }
@@ -121,7 +126,8 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
 void Graph::clear(){
     vCount = eCount = 0;
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+        labels->clear();
+	for (int j = 0; j < n; j++) {
             a[i][j] = 0;
         }
     }
@@ -129,22 +135,26 @@ void Graph::clear(){
 
 //******************************************************************************
 // Aidan Wright
+
 bool Graph::isEdge(int uLabel, int vLabel) const {
-    bool rc = -1;
-    int uIndex = labelToVid(uLabel);
-    int vIndex = labelToVid(vLabel);
-    if (a[uIndex][vIndex]) {
-        rc = true;
+    bool rc = false;
+    if (isV(uLabel) && isV(vLabel)) {
+	int uIndex = labelToVid(uLabel);
+	int vIndex = labelToVid(vLabel);
+	if (a[uIndex][vIndex]) {
+	    rc = true;
+	}
     }
     return rc;
 }
 
 //******************************************************************************
 // Aidan Wright
+
 bool Graph::isV(int label) const {
-    bool rc = -1;
+    bool rc = false;
     int index = labelToVid(label);
-    if (a[index]) {
+    if (index != -1) {
         rc = true;
     }
     return rc;
@@ -152,57 +162,58 @@ bool Graph::isV(int label) const {
 
 //******************************************************************************
 // Aidan Wright
+
 int Graph::inDegree(int label) const {
     int rc = 0;
-    int index = labelToVid(label);
-     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (a[i][index]) {
-                rc += 1;
-            }
-        }
+    if (isV(label)) {
+	int index = labelToVid(label);
+	for (int i = 0; i < n; i++) {
+	    if (a[i][index]) {
+	    	rc += 1;
+	    }
+	}
     }
     return rc;
 }
 
 //******************************************************************************
 // Aidan Wright
+
 int Graph::outDegree(int label) const {
     int rc = 0;
-    int index = labelToVid(label);
-     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (a[index][j]) {
-                rc += 1;
-            }
-        }
+    if (isV(label)) {
+	int index = labelToVid(label);
+	for (int i = 0; i < n; i++) {
+	    if (a[index][i]) {
+	    	rc += 1;
+	    }
+	}
     }
     return rc;
 }
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
 int Graph::sizeV() const {
-    int rc = n*n;
-    return rc;
+    return(n * n);
 }
 
 //******************************************************************************
 // Aidan Wright
 int Graph::sizeUsedV() const {
-    int rc = vCount;
-    return rc;
+    return(vCount) ;
 }
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
+
 int Graph::sizeE() const {
-    int rc = eCount;
-    return rc;
+    return(eCount);
 }
 
 //******************************************************************************
 // Aidan Wright
+
 void Graph::printIt() const {
     int r, c;
     int key = 0;
