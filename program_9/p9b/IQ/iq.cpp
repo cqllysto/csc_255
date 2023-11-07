@@ -6,14 +6,60 @@
 
 #include <iostream>   // gets cin, cout, cerr
 #include "iq.h"
+#include "../cIntList/cil.h"
 
-iQ::iQ(int n) {};
-iQ::~iQ() {};
-bool iQ::enq(int v) {};
-bool iQ::deq(int &v) {};  
+//******************************************************************************
+// Andrew Chapuis
+iQ::iQ(int n) {
+    j = new cIntList(n);
+};
+
+
+//******************************************************************************
+// Andrew Chapuis
+iQ::~iQ() {
+    if(j) {
+        delete [] j;
+        j = NULL;
+    }
+};
+
+
+//******************************************************************************
+// Andrew Chapuis
+bool iQ::enq(int v) {
+    return(j->add(v));
+};
+
+
+//******************************************************************************
+// Andrew Chapuis
+bool iQ::deq(int &v) {
+    bool rc = false;
+    if (j) {
+        int a = j->count();
+        v = j->getIndex(a);
+        j->deleteLast(a);
+    }    
+    return(rc);
+}; 
+
+
+//******************************************************************************
+// Andrew Chapuis 
 void iQ::clear() {};
-int iQ::count() const {}; 
-void iQ::printiIt() const {};
+
+
+//******************************************************************************
+// Andrew Chapuis
+int iQ::count() const {
+    return(j->count());
+};
+
+
+//******************************************************************************
+// Andrew Chapuis 
+void iQ::printIt() const {};
 
 
 
