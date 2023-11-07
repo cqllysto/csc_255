@@ -32,6 +32,7 @@ Graph::Graph(int n, bool directed) {
         }
     }
     
+    iQ *q = new iQ(n);
     // Create an array to keep track of the labels of the vertices
     labels = new intList(n);
     this->n = n;
@@ -45,15 +46,16 @@ Graph::Graph(int n, bool directed) {
 
 // Destructor of the Graph
 Graph::~Graph() {
-// WE DIDNT DELETE THE LABELS
-// delete [] a [0]
-if (a[0]) {
-        delete [] a[0];
-        a[0] = NULL;
-    }  
+    // delete the both a and labels
     if (a) {
-        delete [] a;
-        a = NULL;
+        delete [] q;
+	q = NULL;
+	delete [] b;
+	b = NULL;
+	delete [] labels;
+	labels = NULL;
+	delete [] a;
+	a = NULL;
     }
 }
 
@@ -101,8 +103,8 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
             eCount++;
             rc = true;
-	        // An edge will not be added if one of the vertices do not exist and 
-	        // there is not enough space to add it
+	// An edge will not be added if one of the vertices do not exist and 
+	// there is not enough space to add it
         } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
             createV(vLabel);
             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
@@ -154,6 +156,21 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     }
 }
 
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Deletes an edge from the graph matrix
+bool Graph::deleteEdge(int uLabel, int vLabel) {
+    bool rc = false;
+    // If the edge exists, then it will be deleted
+    if (isEdge(uLabel, vLabel)) {
+	a[labelToVid(uLabel)][labelToVid(vLabel)] = 0;
+	eCount--;
+	rc = true;
+    }
+    return(rc);
+}
 
 //******************************************************************************
 // Aidan Wright
@@ -295,7 +312,7 @@ void Graph::printIt() const {
 
     cout << "Degree table (in, out)\n";
     
-    // Prints the degere of each vertex
+    // Prints the degree of each vertex
     for (r = 0; r < vCount; r++) {
         labels->readAt(r, key);
         cout << "  Node(" << r << "," << key << "):";
@@ -310,7 +327,7 @@ void Graph::printIt() const {
 int min(int x, int y) {
     int rc = x;
     if (y < x) {
-	    rc = y;
+        rc = y;
     }
     return(rc);
 }
@@ -322,7 +339,7 @@ int min(int x, int y) {
 int max(int x, int y) {
     int rc = x;
     if (y > x) {
-	    rc = y;
+        rc = y;
     }
     return(rc);
 }
@@ -331,6 +348,7 @@ int max(int x, int y) {
 
 //******************************************************************************
 // Aidan Wright
+
 int Graph::vidToLabel(int vid) const {
     int rc = -1;
     labels->readAt(vid, rc);
@@ -339,13 +357,24 @@ int Graph::vidToLabel(int vid) const {
 
 //******************************************************************************
 // Aidan Wright
-void Graph::bfPrint(int label) const {};
+
+void Graph::bfPrint(int label) const {
+    
+};
 
 //******************************************************************************
 // Aidan Wright
-bool Graph::isPath(int ulabel, int vlabel) const {};
+
+bool Graph::isPath(int ulabel, int vlabel) const {
+    bool rc = false;
+
+    return(rc);
+};
 
 //******************************************************************************
 // Aidan Wright
-void Graph::printPaths() const {};
+
+void Graph::printPaths() const {
+
+};
 
