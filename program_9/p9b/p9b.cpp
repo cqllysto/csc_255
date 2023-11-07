@@ -1,8 +1,8 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 9
-// Date: 11/1/23
+// Program 9b
+// Date: 
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
@@ -11,6 +11,7 @@
 using namespace std;
 
 // THE CONSTRUCTOR AND DESTRUCTOR NEED TO BE FIRST IN THE FILE
+// DONT FORGET TO DO DELETE EDGE
 //******************************************************************************
 // Andrew Chapuis
 
