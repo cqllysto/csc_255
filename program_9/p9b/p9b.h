@@ -24,6 +24,7 @@ class Graph {
 
         int labelToVid(int label) const;// Converts a label to a virtual id
 
+        //p9b functions
         int vidToLabel(int vid) const;
         iQ *a;
     public:
@@ -43,6 +44,7 @@ class Graph {
         int sizeE() const; // returns the number of edges in the graph
         void printIt() const; // Prints the graph
 
+        //p9b functions
         void bfPrint(int label) const;
         bool isPath(int ulabel, int vlabel) const;
         void printPaths() const;
