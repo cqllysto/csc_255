@@ -10,30 +10,7 @@
 
 using namespace std;
 
-//******************************************************************************
-// Andrew Chapuis
-
-// Returns the minimum between two numbers
-int min(int x, int y) {
-    int rc = x;
-    if (y < x) {
-	rc = y;
-    }
-    return(rc);
-}
-
-//******************************************************************************
-// Aidan Wright
-
-// Returns the maximum between two numbers
-int max(int x, int y) {
-    int rc = x;
-    if (y > x) {
-	rc = y;
-    }
-    return(rc);
-}
-
+// THE CONSTRUCTOR AND DESTRUCTOR NEED TO BE FIRST IN THE FILE
 //******************************************************************************
 // Andrew Chapuis
 
@@ -45,11 +22,11 @@ Graph::Graph(int n, bool directed) {
     int *b = new int[n * n];
     // Sets the different indices of a as pointers to different sections of b
     for (int i = 0; i < n; i++) {
-	a[i] = &(b[i * n]);
-	// Initialize every value as 0
-	for (int j = 0; j < n; j++) {
+	    a[i] = &(b[i * n]);
+        // Initialize every value as 0
+        for (int j = 0; j < n; j++) {
             a[i][j] = 0;
-	}
+        }
     }
     
     // Create an array to keep track of the labels of the vertices
@@ -65,6 +42,8 @@ Graph::Graph(int n, bool directed) {
 
 // Destructor of the Graph
 Graph::~Graph() {
+// WE DIDNT DELETE THE LABELS
+// delete [] a [0]
     if (a) {
         delete [] a;
         a = NULL;
@@ -89,7 +68,7 @@ bool Graph::createV(int label) {
     // created
     if ((vCount < n) && !isV(label)) {
         rc = true;
-	// Add the label to the labels array
+	    // Add the label to the labels array
         labels->add(label);
         vCount++;
     }
@@ -109,47 +88,77 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
 	// An edge will not be added if uLabel and vLabel do not exist and there
 	// is not enough room to be created
         if (!isV(uLabel) && !isV(vLabel) && (vCount < (n - 1))) {
-	    createV(uLabel);
-	    createV(vLabel);
-	    // Set the index of the graph matrix to weight
-	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-	    eCount++;
-	    rc = true;
-	// An edge will not be added if one of the vertices do not exist and 
-	// there is not enough space to add it
+            createV(uLabel);
+            createV(vLabel);
+            // Set the index of the graph matrix to weight
+            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+            eCount++;
+            rc = true;
+	        // An edge will not be added if one of the vertices do not exist and 
+	        // there is not enough space to add it
         } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
             createV(vLabel);
-	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-	    eCount++;
-	    rc = true;
-	// An edge will not be added if one of the vertices do not exist and 
-	// there is not enough space to add it
-	} else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
+            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+            eCount++;
+            rc = true;
+        // An edge will not be added if one of the vertices do not exist and 
+        // there is not enough space to add it
+        } else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
             createV(uLabel);
-	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-	    eCount++;
-	    rc = true;
-	// If both vertices already exist, the edge will be created
-	} else if (isV(uLabel) && isV(vLabel)) {
-	    a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-	    eCount++;
-	    rc = true;
-	}
+            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+            eCount++;
+            rc = true;
+        // If both vertices already exist, the edge will be created
+        } else if (isV(uLabel) && isV(vLabel)) {
+            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+            eCount++;
+            rc = true;
+        }
     }
     return(rc);
 }
+
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Adds an edge, and the vertices if they do not exist, to the graph 
+// unless one of the conditions cannot be met. 
+bool Graph::addEdge(int uLabel, int vLabel, int weight) {
+    bool rc = false;
+    // An edge will not be added if there is already an edge there or the weight
+    // is non-positive
+    if ((weight > 0) && !isEdge(uLabel, vLabel)) {
+        // An edge will not be added if uLabel and vLabel do not exist and there
+        // is not enough room to be created
+        int count = 0;
+        if (!isV(uLabel)) {count ++;}
+        if (!isV(vLabel)) {count ++;}
+        if (count <= n - vCount) {
+            createV(uLabel);
+            createV(vLabel);
+            int uVid = labelToVid(uLabel);
+            int vVid = labelToVid(vLabel);
+            a[uVid][vVid] = weight;
+            eCount++;
+            rc = true;
+        }
+    return(rc);
+    }
+}
+
 
 //******************************************************************************
 // Aidan Wright
 
 // Clears the graph matrix
-void Graph::clear(){
+void Graph::clear() {
     // vCount and eCount are both set to zero, and then all the indices of the 
     // graph matrix and labels array are set to zero
     vCount = eCount = 0;
     for (int i = 0; i < n; i++) {
         labels->clear();
-	for (int j = 0; j < n; j++) {
+        for (int j = 0; j < n; j++) {
             a[i][j] = 0;
         }
     }
@@ -167,9 +176,9 @@ bool Graph::isEdge(int uLabel, int vLabel) const {
     int uIndex = labelToVid(uLabel);
     int vIndex = labelToVid(vLabel);
     if ((uIndex != -1) && (vIndex != -1)) {
-	if (a[uIndex][vIndex]) {
-	    rc = true;
-	}
+        if (a[uIndex][vIndex]) {
+            rc = true;
+        }
     }
     return rc;
 }
@@ -198,14 +207,14 @@ int Graph::inDegree(int label) const {
     // If the node doesn't exist, the function will return -1, otherwise
     // it will calculate the inDegree of the vertex
     if (isV(label)) {
-	rc = 0;
-	// The index of the label will stay constant as the matrix is searched
-	int index = labelToVid(label);
-	for (int i = 0; i < n; i++) {
-	    if (a[i][index]) {
-	    	rc += 1;
-	    }
-	}
+        rc = 0;
+        // The index of the label will stay constant as the matrix is searched
+        int index = labelToVid(label);
+        for (int i = 0; i < n; i++) {
+            if (a[i][index]) {
+                rc += 1;
+            }
+        }
     }
     return rc;
 }
@@ -218,14 +227,14 @@ int Graph::outDegree(int label) const {
     // If the node doesn't exist, the function will return -1, otherwise
     // it will calculate the inDegree of the vertex
     if (isV(label)) {
-	rc = 0;
-	// The index of the label will stay constant as the matrix is searched
-	int index = labelToVid(label);
-	for (int i = 0; i < n; i++) {
-	    if (a[index][i]) {
-	    	rc += 1;
-	    }
-	}
+        rc = 0;
+        // The index of the label will stay constant as the matrix is searched
+        int index = labelToVid(label);
+        for (int i = 0; i < n; i++) {
+            if (a[index][i]) {
+                rc += 1;
+            }
+        }
     }
     return rc;
 }
@@ -268,13 +277,13 @@ void Graph::printIt() const {
     cout << "\nGraph contents:\n";
     for (r = 0; r < vCount; r++) {
         // Prints the label associated with each index
-	labels->readAt(r, key);
-	cout << "  Node(" << r << "," << key << "):";
-	// Prints each row of the graph matrix
-	for (c = 0; c < vCount; c++) {
-	    cout << " " << a[r][c];
-	}
-	cout << endl;
+        labels->readAt(r, key);
+        cout << "  Node(" << r << "," << key << "):";
+        // Prints each row of the graph matrix
+        for (c = 0; c < vCount; c++) {
+            cout << " " << a[r][c];
+        }
+        cout << endl;
     }
 
     cout << "Degree table (in, out)\n";
@@ -285,4 +294,28 @@ void Graph::printIt() const {
         cout << "  Node(" << r << "," << key << "):";
         cout << " " << inDegree(key) << ", " << outDegree(key) << endl;
     }
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Returns the minimum between two numbers
+int min(int x, int y) {
+    int rc = x;
+    if (y < x) {
+	    rc = y;
+    }
+    return(rc);
+}
+
+//******************************************************************************
+// Aidan Wright
+
+// Returns the maximum between two numbers
+int max(int x, int y) {
+    int rc = x;
+    if (y > x) {
+	    rc = y;
+    }
+    return(rc);
 }
