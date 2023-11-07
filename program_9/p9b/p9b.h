@@ -22,11 +22,11 @@ class Graph {
         int eCount; // Tracks the number of edges in the graph
         bool directed; // Keeps track of whether the graph is directed or not
 
-        int labelToVid(int label) const;// Converts a label to a virtual id
+        int labelToVid(int label) const; // Converts a label to a virtual id
 
         //p9b functions
-        int vidToLabel(int vid) const;
-        iQ *a;
+        int vidToLabel(int vid) const; // Converts a virtual id to a label
+        iQ *q; // pointer to an iQ ADT
     public:
         Graph(int n = 100, bool directed = true); // Graph constructor
         ~Graph(); // Graph destructor

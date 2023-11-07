@@ -6,7 +6,7 @@
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
-#include "p9a.h"
+#include "p9b.h"
 
 using namespace std;
 
@@ -14,6 +14,8 @@ using namespace std;
 // DONT FORGET TO DO DELETE EDGE
 //******************************************************************************
 // Andrew Chapuis
+
+// MAKE SURE TO ALLOCATE THE IQ AND DELETE IT AFTERWARDS
 
 // Constructor for the Graph class
 Graph::Graph(int n, bool directed) {
@@ -324,3 +326,26 @@ int max(int x, int y) {
     }
     return(rc);
 }
+
+//p9b functions
+
+//******************************************************************************
+// Aidan Wright
+int Graph::vidToLabel(int vid) const {
+    int rc = -1;
+    labels->readAt(vid, rc);
+    return rc;
+}; // Converts a virtual id to a label
+
+//******************************************************************************
+// Aidan Wright
+void Graph::bfPrint(int label) const {};
+
+//******************************************************************************
+// Aidan Wright
+bool Graph::isPath(int ulabel, int vlabel) const {};
+
+//******************************************************************************
+// Aidan Wright
+void Graph::printPaths() const {};
+
