@@ -2,7 +2,7 @@
 // Team 3
 // Course: CSC 255
 // Program 9b
-// Date: 
+// Date: 11/08/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
@@ -49,13 +49,11 @@ Graph::~Graph() {
     // delete the both a and labels
     if (a) {
         delete [] q;
-	q = NULL;
-	delete [] b;
-	b = NULL;
-	delete [] labels;
-	labels = NULL;
-	delete [] a;
-	a = NULL;
+        q = NULL;
+        delete [] labels;
+        labels = NULL;
+        delete [] a;
+        a = NULL;
     }
 }
 
@@ -84,48 +82,48 @@ bool Graph::createV(int label) {
     return(rc);
 }
 
-//******************************************************************************
-// Andrew Chapuis
+// //******************************************************************************
+// // Andrew Chapuis
 
-// Adds an edge, and the vertices if they do not exist, to the graph 
-// unless one of the conditions cannot be met. 
-bool Graph::addEdge(int uLabel, int vLabel, int weight) {
-    bool rc = false;
-    // An edge will not be added if there is already an edge there or the weight
-    // is non-positive
-    if ((weight > 0) && !isEdge(uLabel, vLabel)) {
-	// An edge will not be added if uLabel and vLabel do not exist and there
-	// is not enough room to be created
-        if (!isV(uLabel) && !isV(vLabel) && (vCount < (n - 1))) {
-            createV(uLabel);
-            createV(vLabel);
-            // Set the index of the graph matrix to weight
-            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-            eCount++;
-            rc = true;
-	// An edge will not be added if one of the vertices do not exist and 
-	// there is not enough space to add it
-        } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
-            createV(vLabel);
-            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-            eCount++;
-            rc = true;
-        // An edge will not be added if one of the vertices do not exist and 
-        // there is not enough space to add it
-        } else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
-            createV(uLabel);
-            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-            eCount++;
-            rc = true;
-        // If both vertices already exist, the edge will be created
-        } else if (isV(uLabel) && isV(vLabel)) {
-            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-            eCount++;
-            rc = true;
-        }
-    }
-    return(rc);
-}
+// // Adds an edge, and the vertices if they do not exist, to the graph 
+// // unless one of the conditions cannot be met. 
+// bool Graph::addEdge(int uLabel, int vLabel, int weight) {
+//     bool rc = false;
+//     // An edge will not be added if there is already an edge there or the weight
+//     // is non-positive
+//     if ((weight > 0) && !isEdge(uLabel, vLabel)) {
+// 	// An edge will not be added if uLabel and vLabel do not exist and there
+// 	// is not enough room to be created
+//         if (!isV(uLabel) && !isV(vLabel) && (vCount < (n - 1))) {
+//             createV(uLabel);
+//             createV(vLabel);
+//             // Set the index of the graph matrix to weight
+//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+//             eCount++;
+//             rc = true;
+// 	// An edge will not be added if one of the vertices do not exist and 
+// 	// there is not enough space to add it
+//         } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
+//             createV(vLabel);
+//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+//             eCount++;
+//             rc = true;
+//         // An edge will not be added if one of the vertices do not exist and 
+//         // there is not enough space to add it
+//         } else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
+//             createV(uLabel);
+//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+//             eCount++;
+//             rc = true;
+//         // If both vertices already exist, the edge will be created
+//         } else if (isV(uLabel) && isV(vLabel)) {
+//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+//             eCount++;
+//             rc = true;
+//         }
+//     }
+//     return(rc);
+// }
 
 
 //******************************************************************************
@@ -152,8 +150,8 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
             eCount++;
             rc = true;
         }
-    return(rc);
     }
+    return(rc);
 }
 
 
@@ -165,9 +163,9 @@ bool Graph::deleteEdge(int uLabel, int vLabel) {
     bool rc = false;
     // If the edge exists, then it will be deleted
     if (isEdge(uLabel, vLabel)) {
-	a[labelToVid(uLabel)][labelToVid(vLabel)] = 0;
-	eCount--;
-	rc = true;
+        a[labelToVid(uLabel)][labelToVid(vLabel)] = 0;
+        eCount--;
+        rc = true;
     }
     return(rc);
 }
@@ -359,7 +357,28 @@ int Graph::vidToLabel(int vid) const {
 // Aidan Wright
 
 void Graph::bfPrint(int label) const {
-    
+    bool *sally = new bool[vCount];
+    for (int i = 0; i < vCount; i++) {
+        sally[i] = false;
+    }
+    q->enq(label);
+    bool worked = true;
+    while (worked) {
+        int root = 0;
+        q->deq(root);
+        cout << root << labelToVid(root);
+        worked = false;
+        for (int u = 0; u < vCount; u++) {
+            int uVid = vidToLabel(u);
+            if (isEdge(root, uVid) && !sally[uVid]) {
+                sally[u] = true;
+                worked = true;
+                q->enq(uVid);
+            }
+        }
+    }
+    delete [] sally;
+    sally = NULL;
 };
 
 //******************************************************************************

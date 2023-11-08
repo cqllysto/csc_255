@@ -2,13 +2,13 @@
 // Team 3
 // Course: CSC 255
 // Program 9
-// Date: 11/1/23
+// Date: 11/08/23
 
 #ifndef __P9B_H
 #define __P9B_H
 
-#include "../p9b/IQ/iq.h"
-#include "../p8.h"
+#include "iq.h"
+#include "p8.h"
 
 int min(int x, int y); // returns the minimum between x and y
 int max(int x, int y); // returns the greater of x and y

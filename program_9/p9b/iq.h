@@ -2,12 +2,12 @@
 // Team 3
 // Course: CSC 255
 // Program 9b
-// Date: 
+// Date: 11/08/23
 
 #ifndef __IQ_H
 #define __IQ_H
 
-#include "../cIntList/cil.h"
+#include "cil.h"
 
 class iQ {
     private:
