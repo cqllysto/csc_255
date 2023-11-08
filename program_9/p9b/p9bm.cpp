@@ -40,7 +40,7 @@ main(int argc, char *argv[]) {
     }
     myGraph.printIt();
     myGraph.printPaths();
-    cout << "*** start of bfPrint() output\n";
+    cout << "*** start of bfPrint() output" << endl;
     for (i = 0; i < count; i++) {
 		label = mytable[i];
 		doit = true;
@@ -57,5 +57,5 @@ main(int argc, char *argv[]) {
 			myGraph.bfPrint(label);
 		}
     }
-    cout << "*** end of bfPrint() output\n";
+    cout << "*** end of bfPrint() output" << endl;
 }

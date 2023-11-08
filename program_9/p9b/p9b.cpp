@@ -13,8 +13,6 @@ using namespace std;
 //******************************************************************************
 // Andrew Chapuis
 
-// MAKE SURE TO ALLOCATE THE IQ AND DELETE IT AFTERWARDS
-
 // Constructor for the Graph class
 Graph::Graph(int n, bool directed) {
     // Set a as a new pointer to an array of pointers
@@ -30,7 +28,7 @@ Graph::Graph(int n, bool directed) {
         }
     }
     
-    iQ *q = new iQ(n);
+    q = new iQ(n);
     // Create an array to keep track of the labels of the vertices
     labels = new intList(n);
     this->n = n;
@@ -45,13 +43,20 @@ Graph::Graph(int n, bool directed) {
 // Destructor of the Graph
 Graph::~Graph() {
     // delete the both a and labels
+    for (int i = 0; i < n; i++) {
+	    delete a[i];
+    }
     if (a) {
-        delete [] q;
-        q = NULL;
-        delete [] labels;
-        labels = NULL;
         delete [] a;
         a = NULL;
+    }
+    if (q) {
+        delete q;
+        q = NULL;
+    }
+    if (labels) {
+        delete labels;
+        labels = NULL;
     }
 }
 
@@ -349,61 +354,43 @@ int Graph::vidToLabel(int vid) const {
     int rc = -1;
     labels->readAt(vid, rc);
     return rc;
-}; // Converts a virtual id to a label
+} // Converts a virtual id to a label
+
+
 
 //******************************************************************************
 // Aidan Wright
 
 void Graph::bfPrint(int label) const {
     int root = labelToVid(label);
-    printf("-----------\n");
     if(root != -1) {
+        q->enq(root);
+
         bool *sally = new bool[vCount];
         for (int i = 0; i < vCount; i++) {
             sally[i] = false;
         }
-
         sally[root] = true;
-        q->clear();
-        q->enq(root);
+        int count = -1;
 
-        int x = 0;
-        while(q->count()) {
-            q->clear();
-            q->enq(root);
-            int x = 0;
-            while(q->count()){
-                q->deq(root);
-                cout << "Item " << x << " is " << "(" << root << "," << vidToLabel(root) << ")";
-                x++;
-                for(int j = 0; j < vCount; j++) {
-                    if(sally[j] != true && isEdge(vidToLabel(root), vidToLabel(j))) {
-                        sally[j] = true;
-                        q->enq(j);
+        for (int k = 0; k < vCount; k++) {
+            if(!sally[k]) {
+                int dq = 0;
+                while(dq != -1) {
+                    q->deq(dq);
+                    count++;
+                    cout << " Item " << count << " is " << "(" << dq << "," << vidToLabel(dq) << ")" << endl;
+                    for (int i = 0; i < vCount; i++) {
+                        if(!sally[i] && isEdge(dq,i)) {
+                            q->enq(i);
+                            sally[i] = true;
+                        }
                     }
                 }
             }
-
         }
-        // bool worked = true;
-        // while (worked) {
-        //     int root = 0;
-        //     q->deq(root);
-        //     cout << root << labelToVid(root);
-        //     worked = false;
-        //     for (int u = 0; u < vCount; u++) {
-        //         int uVid = vidToLabel(u);
-        //         if (isEdge(root, uVid) && !sally[uVid]) {
-        //             sally[u] = true;
-        //             worked = true;
-        //             q->enq(uVid);
-        //         }
-        //     }
-        // }
-        delete [] sally;
-        sally = NULL;
     }
-};
+}
 
 //******************************************************************************
 // Aidan Wright
@@ -411,11 +398,11 @@ void Graph::bfPrint(int label) const {
 bool Graph::isPath(int ulabel, int vlabel) const {
     bool rc = false;
     return(rc);
-};
+}
 
 //******************************************************************************
 // Aidan Wright
 
 void Graph::printPaths() const {
-};
+}
 

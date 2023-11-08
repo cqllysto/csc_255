@@ -27,6 +27,7 @@ class Graph {
         //p9b functions
         int vidToLabel(int vid) const; // Converts a virtual id to a label
         iQ *q; // pointer to an iQ ADT
+        void visit(int x) const;
     public:
         Graph(int n = 100, bool directed = true); // Graph constructor
         ~Graph(); // Graph destructor
