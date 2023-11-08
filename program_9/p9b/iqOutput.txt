@@ -11,16 +11,16 @@ Enq of 9 got: true
 Enq of 10 got: false
 Enq of 11 got: false
 Q size is 10
-At pos 0 there is 0
-At pos 1 there is 1
-At pos 2 there is 2
-At pos 3 there is 3
-At pos 4 there is 4
-At pos 5 there is 5
-At pos 6 there is 6
-At pos 7 there is 7
-At pos 8 there is 8
-At pos 9 there is 9
+Queue item 0 = 0
+Queue item 1 = 1
+Queue item 2 = 2
+Queue item 3 = 3
+Queue item 4 = 4
+Queue item 5 = 5
+Queue item 6 = 6
+Queue item 7 = 7
+Queue item 8 = 8
+Queue item 9 = 9
 Deq got true and v = 0
 Deq got true and v = 1
 Deq got true and v = 2
@@ -28,19 +28,19 @@ Deq got true and v = 3
 Deq got true and v = 4
 Enq of 24 got: true
 Q size is 6
-At pos 0 there is 5
-At pos 1 there is 6
-At pos 2 there is 7
-At pos 3 there is 8
-At pos 4 there is 9
-At pos 5 there is 24
+Queue item 0 = 5
+Queue item 1 = 6
+Queue item 2 = 7
+Queue item 3 = 8
+Queue item 4 = 9
+Queue item 5 = 24
 Deq got true and v = 5
 Deq got true and v = 6
 Deq got true and v = 7
 Deq got true and v = 8
 Deq got true and v = 9
 Q size is 1
-At pos 0 there is 24
+Queue item 0 = 24
 Deq got true and v = 24
 Deq got false and v = -1
 Q size is 0

@@ -44,7 +44,7 @@ Graph::Graph(int n, bool directed) {
 Graph::~Graph() {
     // delete the both a and labels
     for (int i = 0; i < n; i++) {
-	    delete a[i];
+	//delete a[i];
     }
     if (a) {
         delete [] a;
@@ -85,50 +85,6 @@ bool Graph::createV(int label) {
     return(rc);
 }
 
-// //******************************************************************************
-// // Andrew Chapuis
-
-// // Adds an edge, and the vertices if they do not exist, to the graph 
-// // unless one of the conditions cannot be met. 
-// bool Graph::addEdge(int uLabel, int vLabel, int weight) {
-//     bool rc = false;
-//     // An edge will not be added if there is already an edge there or the weight
-//     // is non-positive
-//     if ((weight > 0) && !isEdge(uLabel, vLabel)) {
-// 	// An edge will not be added if uLabel and vLabel do not exist and there
-// 	// is not enough room to be created
-//         if (!isV(uLabel) && !isV(vLabel) && (vCount < (n - 1))) {
-//             createV(uLabel);
-//             createV(vLabel);
-//             // Set the index of the graph matrix to weight
-//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-//             eCount++;
-//             rc = true;
-// 	// An edge will not be added if one of the vertices do not exist and 
-// 	// there is not enough space to add it
-//         } else if (isV(uLabel) && !isV(vLabel) && (vCount < n)) {
-//             createV(vLabel);
-//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-//             eCount++;
-//             rc = true;
-//         // An edge will not be added if one of the vertices do not exist and 
-//         // there is not enough space to add it
-//         } else if (!isV(uLabel) && isV(vLabel) && (vCount < n)) {
-//             createV(uLabel);
-//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-//             eCount++;
-//             rc = true;
-//         // If both vertices already exist, the edge will be created
-//         } else if (isV(uLabel) && isV(vLabel)) {
-//             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
-//             eCount++;
-//             rc = true;
-//         }
-//     }
-//     return(rc);
-// }
-
-
 //******************************************************************************
 // Andrew Chapuis
 
@@ -142,14 +98,16 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
         // An edge will not be added if uLabel and vLabel do not exist and there
         // is not enough room to be created
         int count = 0;
-        if (!isV(uLabel)) {count ++;}
-        if (!isV(vLabel)) {count ++;}
+        if (!isV(uLabel)) {
+	    count ++;
+	}
+        if (!isV(vLabel)) {
+	    count ++;
+	}
         if (count <= n - vCount) {
             createV(uLabel);
             createV(vLabel);
-            int uVid = labelToVid(uLabel);
-            int vVid = labelToVid(vLabel);
-            a[uVid][vVid] = weight;
+            a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
             eCount++;
             rc = true;
         }
@@ -345,68 +303,126 @@ int max(int x, int y) {
     return(rc);
 }
 
-//p9b functions
-
 //******************************************************************************
 // Aidan Wright
 
+// Converts a virtual id to a label
 int Graph::vidToLabel(int vid) const {
     int rc = -1;
+    // Return the entry of labels at the virtual id
     labels->readAt(vid, rc);
     return rc;
-} // Converts a virtual id to a label
+} 
 
 
 
 //******************************************************************************
 // Aidan Wright
 
+// Prints the graph through 
 void Graph::bfPrint(int label) const {
+    // Root is the beginning vertex which branches out from there
     int root = labelToVid(label);
     if (root != -1) {
+	// Root is enqueued
         q->enq(root);
         int count = 0;
-        cout << " Item " << count << " is (" << root << 
+        cout << "       Item " << count << " is (" << root << 
         "," << vidToLabel(root) << ")" << endl;
-
+	
+	// Sally is an array that keeps track of whether a node has been visited
         bool *sally = new bool[vCount];
         for (int i = 0; i < vCount; i++) {
             sally[i] = false;
         }
         sally[root] = true;
-
+	
+	// Starting at root, each neighbor will be enqueued and marked as true
+	// in Sally
         while (true) {
             int dq = 0;
             q->deq(dq);
+	    // When everything has been dequeued, the loop will break
             if (dq == -1) {
                 break;
             }
+	    // This will enqueue and print every neighbor of a root
             for (int i = 0; i < vCount; i++) {
                 if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
                     q->enq(i);
                     sally[i] = true;
                     count++;
-                    cout << " Item " << count << " is (" << i << "," << 
+                    cout << "       Item " << count << " is (" << i << "," << 
                         vidToLabel(i) << ")" << endl;
                 }
             }
         }
+	// Delete Sally after done
         delete[] sally;
     }
 }
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
 
+// Returns true if a path can be found from ulabel to vlabel
 bool Graph::isPath(int ulabel, int vlabel) const {
     bool rc = false;
+    int root = labelToVid(ulabel);
+    if (root != -1) {
+        q->enq(root);
+	
+	// Create Sally to keep track of whether a vertex has been visited
+        bool *sally = new bool[vCount];
+        for (int i = 0; i < vCount; i++) {
+            sally[i] = false;
+        }
+        sally[root] = true;
+	
+	// Starting at root, each neighbor will be searched and if vLabel is 
+	// found, the function will return true
+        while (true) {
+            int dq = 0;
+            q->deq(dq);
+            if (dq == -1) {
+                break;
+            } else if (dq == labelToVid(vlabel)) {
+		rc = true;
+		break;
+	    }
+            for (int i = 0; i < vCount; i++) {
+                if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
+                    q->enq(i);
+                    sally[i] = true;
+                }
+            }
+        }
+	// Delete Sally once the function is finished
+        delete[] sally;
+    }
     return(rc);
 }
 
 //******************************************************************************
-// Aidan Wright
+// Andrew Chapuis
 
 void Graph::printPaths() const {
+    // Create variables to be used when labels is read
+    int uNode;
+    int vNode;
+    // Go through every vertex and check whether there is a path
+    for (int i = 0; i < vCount; i++) {
+	labels->readAt(i, uNode);
+	for (int j = 0; j < vCount; j++) {
+	    labels->readAt(j, vNode);
+	    cout << uNode << " does ";
+	    // If there is not a path, not will be added to the sentence
+	    if (!isPath(uNode, vNode)) {
+		cout << "not ";
+	    }
+	    cout << "have a path to " << vNode << endl;
+	}
+    }
 }
 
 

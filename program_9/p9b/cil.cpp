@@ -260,7 +260,7 @@ void cIntList::printIt() const {
     for (int i = 0; i < listCount; i++ ) {
 	// i is used to keep track of the virtual index while ind is what is 
 	// being used for the physical index of the array
-	std::cout << "At pos " << i << " there is " << a[ind] << "\n";
+	std::cout << "Queue item " << i << " = " << a[ind] << "\n";
 	// makes sure the ind wraps around the dateline
 	ind = (ind + 1) % listCapacity;
     }
