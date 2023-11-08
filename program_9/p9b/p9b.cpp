@@ -363,32 +363,35 @@ int Graph::vidToLabel(int vid) const {
 
 void Graph::bfPrint(int label) const {
     int root = labelToVid(label);
-    if(root != -1) {
+    if (root != -1) {
         q->enq(root);
+        int count = 0;
+        cout << " Item " << count << " is (" << root << 
+        "," << vidToLabel(root) << ")" << endl;
 
         bool *sally = new bool[vCount];
         for (int i = 0; i < vCount; i++) {
             sally[i] = false;
         }
         sally[root] = true;
-        int count = -1;
 
-        for (int k = 0; k < vCount; k++) {
-            if(!sally[k]) {
-                int dq = 0;
-                while(dq != -1) {
-                    q->deq(dq);
+        while (true) {
+            int dq = 0;
+            q->deq(dq);
+            if (dq == -1) {
+                break;
+            }
+            for (int i = 0; i < vCount; i++) {
+                if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
+                    q->enq(i);
+                    sally[i] = true;
                     count++;
-                    cout << " Item " << count << " is " << "(" << dq << "," << vidToLabel(dq) << ")" << endl;
-                    for (int i = 0; i < vCount; i++) {
-                        if(!sally[i] && isEdge(dq,i)) {
-                            q->enq(i);
-                            sally[i] = true;
-                        }
-                    }
+                    cout << " Item " << count << " is (" << i << "," << 
+                        vidToLabel(i) << ")" << endl;
                 }
             }
         }
+        delete[] sally;
     }
 }
 
@@ -405,4 +408,5 @@ bool Graph::isPath(int ulabel, int vlabel) const {
 
 void Graph::printPaths() const {
 }
+
 
