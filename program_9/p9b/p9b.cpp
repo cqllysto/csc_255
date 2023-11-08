@@ -10,8 +10,6 @@
 
 using namespace std;
 
-// THE CONSTRUCTOR AND DESTRUCTOR NEED TO BE FIRST IN THE FILE
-// DONT FORGET TO DO DELETE EDGE
 //******************************************************************************
 // Andrew Chapuis
 
@@ -357,28 +355,54 @@ int Graph::vidToLabel(int vid) const {
 // Aidan Wright
 
 void Graph::bfPrint(int label) const {
-    bool *sally = new bool[vCount];
-    for (int i = 0; i < vCount; i++) {
-        sally[i] = false;
-    }
-    q->enq(label);
-    bool worked = true;
-    while (worked) {
-        int root = 0;
-        q->deq(root);
-        cout << root << labelToVid(root);
-        worked = false;
-        for (int u = 0; u < vCount; u++) {
-            int uVid = vidToLabel(u);
-            if (isEdge(root, uVid) && !sally[uVid]) {
-                sally[u] = true;
-                worked = true;
-                q->enq(uVid);
-            }
+    int root = labelToVid(label);
+    printf("-----------\n");
+    if(root != -1) {
+        bool *sally = new bool[vCount];
+        for (int i = 0; i < vCount; i++) {
+            sally[i] = false;
         }
+
+        sally[root] = true;
+        q->clear();
+        q->enq(root);
+
+        int x = 0;
+        while(q->count()) {
+            q->clear();
+            q->enq(root);
+            int x = 0;
+            while(q->count()){
+                q->deq(root);
+                cout << "Item " << x << " is " << "(" << root << "," << vidToLabel(root) << ")";
+                x++;
+                for(int j = 0; j < vCount; j++) {
+                    if(sally[j] != true && isEdge(vidToLabel(root), vidToLabel(j))) {
+                        sally[j] = true;
+                        q->enq(j);
+                    }
+                }
+            }
+
+        }
+        // bool worked = true;
+        // while (worked) {
+        //     int root = 0;
+        //     q->deq(root);
+        //     cout << root << labelToVid(root);
+        //     worked = false;
+        //     for (int u = 0; u < vCount; u++) {
+        //         int uVid = vidToLabel(u);
+        //         if (isEdge(root, uVid) && !sally[uVid]) {
+        //             sally[u] = true;
+        //             worked = true;
+        //             q->enq(uVid);
+        //         }
+        //     }
+        // }
+        delete [] sally;
+        sally = NULL;
     }
-    delete [] sally;
-    sally = NULL;
 };
 
 //******************************************************************************
@@ -386,7 +410,6 @@ void Graph::bfPrint(int label) const {
 
 bool Graph::isPath(int ulabel, int vlabel) const {
     bool rc = false;
-
     return(rc);
 };
 
@@ -394,6 +417,5 @@ bool Graph::isPath(int ulabel, int vlabel) const {
 // Aidan Wright
 
 void Graph::printPaths() const {
-
 };
 

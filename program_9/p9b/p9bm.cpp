@@ -42,21 +42,20 @@ main(int argc, char *argv[]) {
     myGraph.printPaths();
     cout << "*** start of bfPrint() output\n";
     for (i = 0; i < count; i++) {
-	
-	label = mytable[i];
-	doit = true;
-	for (j = 0; j < count2; j++ ) {
-	    if (label == mytable2[j]) {
-		doit = false;
-		break;
-	    }
-	}
+		label = mytable[i];
+		doit = true;
+		for (j = 0; j < count2; j++ ) {
+			if (label == mytable2[j]) {
+			doit = false;
+			break;
+			}
+		}
 
-	if (doit) {
-	    mytable2[count2++] = label;
-	    cout << "   Printing from " << label << endl;
-	    myGraph.bfPrint(label);
-	}
+		if (doit) {
+			mytable2[count2++] = label;
+			cout << "   Printing from " << label << endl;
+			myGraph.bfPrint(label);
+		}
     }
     cout << "*** end of bfPrint() output\n";
 }
