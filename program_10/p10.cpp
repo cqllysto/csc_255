@@ -1,12 +1,12 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 9b
-// Date: 11/08/23
+// Program 10
+// Date: 11/15/23
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
-#include "p9b.h"
+#include "p10.h"
 
 using namespace std;
 
@@ -35,6 +35,8 @@ Graph::Graph(int n, bool directed) {
     // Initialize vCount and eCount to zero
     vCount = eCount = 0;
     this->directed = directed;
+    lambda = new int[n];
+    set = new int[n];
 }
 
 //******************************************************************************
@@ -377,7 +379,6 @@ bool Graph::isPath(int ulabel, int vlabel) const {
         for (int i = 0; i < vCount; i++) {
             sally[i] = false;
         }
-        sally[root] = true;
 	
 	// Starting at root, each neighbor will be searched and if vLabel is 
 	// found, the function will return true
@@ -425,4 +426,65 @@ void Graph::printPaths() const {
     }
 }
 
+//******************************************************************************
+// Andrew Chapuis
+
+// Public method that will return true if both nodes exist or false if not
+bool Graph::dijkstra(int sLabel, int dLabel, int &distance) {
+    bool rc = false;
+    // If the vertices do not exist, distance will be changed to -1
+    distance = -1;
+    if (isV(sLabel) && isV(dLabel)) {
+	rc = true;
+	// Call the private method to find the shortest paths from the starting
+	// vertex
+	dijkstra(labelToVid(sLabel));
+	// Distance will be set to the lambda value of the destination vertex
+	distance = lambda[labelToVid(dLabel)];
+    }
+    return(rc);
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+void Graph::dijkstra(int s) {
+    // All of the set array will get initialized to Y
+    for (int i = 0; i < vCount; i++) {
+	set[i] = Y;
+	lambda[i] = INFINITE;
+    }
+    // Set the starting vertex to X in set and 0 in lambda
+    set[s] = X;
+    lambda[s] = 0;
+    // Create a variable that will follow which nodes get added to X
+    int v = s;
+    bool doit = true;
+    while (doit) {
+	set[v] = X;
+	for (int i = 0; i < vCount; i++) {
+	    if ((set[i] == Y) && (isEdge(vidToLabel(v), vidToLabel(i)))) {
+		lambda[i] = min(lambda[i], lambda[v] + a[v][i]);
+	    }
+    	}
+	doit = minLambdaY(v);
+    }
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+bool Graph::minLambdaY(int &minV) {
+    bool rc = false;
+    minV = -1;
+    for (int i = 0; i < vCount; i++) {
+	if ((set[i] == Y) && ((minV == -1) || (lambda[minV] > lambda[i]))) { 
+	    minV = i;
+        }
+    }
+    if (minV != -1) {
+	rc = true;
+    }
+    return(rc);
+}
 

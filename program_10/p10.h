@@ -1,11 +1,11 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 9
-// Date: 11/08/23
+// Program 10
+// Date: 11/15/23
 
-#ifndef __P9B_H
-#define __P9B_H
+#ifndef __P10B_H
+#define __P10B_H
 
 #include "iq.h"
 #include "p8.h"
@@ -21,13 +21,20 @@ class Graph {
         int vCount; // Tracks the number of vertices in the graph
         int eCount; // Tracks the number of edges in the graph
         bool directed; // Keeps track of whether the graph is directed or not
+	int *lambda; // Array that will hold the distances used
+	int *set; // Array that follows whether a node is in set X or set Y
+	int const INFINITE = 1000000;
+	int const X = 0; // Used with "set"
+	int const Y = 1; // Used with "set" 
 
         int labelToVid(int label) const; // Converts a label to a virtual id
 
-        //p9b functions
         int vidToLabel(int vid) const; // Converts a virtual id to a label
         iQ *q; // pointer to an iQ ADT
-        void visit(int x) const;
+	
+	void dijkstra(int s); // Will populate lambda with the distances
+	bool minLambdaY(int &minV); // Finds the minimum value in Y
+
     public:
         Graph(int n = 100, bool directed = true); // Graph constructor
         ~Graph(); // Graph destructor
@@ -45,10 +52,15 @@ class Graph {
         int sizeE() const; // returns the number of edges in the graph
         void printIt() const; // Prints the graph
 
-        //p9b functions
+        // Prints each item found in a breadth-first search
         void bfPrint(int label) const;
+	// Returns true if a path can be found from a node to a node
         bool isPath(int ulabel, int vlabel) const;
-        void printPaths() const;
+	// Prints whether there is a path from each node to each node
+        void printPaths() const; 
+	
+	// Returns true if both nodes exist and changes distance
+	bool dijkstra(int sLabel, int dLabel, int &distance);
 };
 
 #endif
