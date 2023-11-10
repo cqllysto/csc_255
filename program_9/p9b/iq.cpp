@@ -16,7 +16,7 @@ iQ::iQ(int n) {
 
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 iQ::~iQ() {
     if(j) {
         delete j;
@@ -25,7 +25,7 @@ iQ::~iQ() {
 
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 bool iQ::enq(int v) {
     return(j->add(v));
 };
@@ -45,7 +45,7 @@ bool iQ::deq(int &v) {
 
 
 //******************************************************************************
-// Andrew Chapuis 
+// Aidan Wright
 void iQ::clear() {
     j->clear();
 };
@@ -59,7 +59,7 @@ int iQ::count() const {
 
 
 //******************************************************************************
-// Andrew Chapuis 
+// Aidan Wright
 void iQ::printIt() const {
     j->printIt();
 };
