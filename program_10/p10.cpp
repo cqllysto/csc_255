@@ -370,6 +370,7 @@ void Graph::bfPrint(int label) const {
 // Returns true if a path can be found from ulabel to vlabel
 bool Graph::isPath(int ulabel, int vlabel) const {
     bool rc = false;
+    q->clear();
     int root = labelToVid(ulabel);
     if (root != -1) {
         q->enq(root);
@@ -387,12 +388,12 @@ bool Graph::isPath(int ulabel, int vlabel) const {
             q->deq(dq);
             if (dq == -1) {
                 break;
-            } else if (dq == labelToVid(vlabel)) {
+            } else if ((sally[dq]) && (dq == labelToVid(vlabel))) {
 		rc = true;
 		break;
 	    }
             for (int i = 0; i < vCount; i++) {
-                if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
+                if ((!sally[i]) && (isEdge(vidToLabel(dq), vidToLabel(i)))) {
                     q->enq(i);
                     sally[i] = true;
                 }
