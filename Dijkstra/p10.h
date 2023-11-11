@@ -1,11 +1,11 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 9
+// Program 10
 // Date: 11/08/23
 
-#ifndef __P9B_H
-#define __P9B_H
+#ifndef __P10_H
+#define __P10_H
 
 #include "iq.h"
 #include "p8.h"
@@ -49,6 +49,23 @@ class Graph {
         void bfPrint(int label) const;
         bool isPath(int ulabel, int vlabel) const;
         void printPaths() const;
-};
+
+        //p10 
+        bool dijkstra(int sLabel, int dLabel, int &distance);   // this will return true if sLabel and dLabel are both valid labels of
+                                                                // real nodes. It will also return the distance from node sLabel
+                                                                // to node dLabel. If either label is not a valid node, distance
+                                                                // will be set to -1.
+        int *lambda; // This will be an array of size n that will hold distances used in performing Dijkstra
+        int *set; // This will be an array of size n to track which set, X or Y, that a given node is in.
+        int const INFINITE = 1000000;
+        int const X = 0; // Used with “set”, this will mark a node in set X
+        int const Y = 1; // Used with “set”, this will mark a node in set Y
+        void dijkstra(int s);   // will populate lambda with the distances from node 
+                                // s to all other nodes; note that s is an index, not a label
+        bool minLambdaY(int &minV); // If at least one node is in Y,
+                                    // this will return true with minV set to the index of a node in Y
+                                    // that has minimum value of all nodes in Y. If no node is in Y,
+                                    // minLambdaY returns false with minV set to -1
+};  
 
 #endif

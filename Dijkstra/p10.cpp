@@ -6,7 +6,7 @@
 
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
-#include "p9b.h"
+#include "p10.h"
 
 using namespace std;
 
@@ -328,8 +328,6 @@ void Graph::bfPrint(int label) const {
         q->clear();
         q->enq(root);
         int count = 0;
-        cout << "       Item " << count << " is (" << root << 
-        "," << vidToLabel(root) << ")" << endl;
 	
 	// Sally is an array that keeps track of whether a node has been visited
         bool *sally = new bool[vCount];
@@ -343,18 +341,18 @@ void Graph::bfPrint(int label) const {
         while (true) {
             int dq = 0;
             q->deq(dq);
-	    // When everything has been dequeued, the loop will break
+	        // When everything has been dequeued, the loop will break
+            cout << "       Item " << count << " is (" << dq << "," << 
+                        vidToLabel(dq) << ")" << endl;
             if (dq == -1) {
                 break;
             }
-	    // This will enqueue and print every neighbor of a root
+	        // This will enqueue and print every neighbor of a root
             for (int i = 0; i < vCount; i++) {
                 if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
                     q->enq(i);
                     sally[i] = true;
                     count++;
-                    cout << "       Item " << count << " is (" << i << "," << 
-                        vidToLabel(i) << ")" << endl;
                 }
             }
         }
@@ -363,46 +361,46 @@ void Graph::bfPrint(int label) const {
     }
 }
 
-//******************************************************************************
-// Andrew Chapuis
+// //******************************************************************************
+// // Andrew Chapuis
 
-// Returns true if a path can be found from ulabel to vlabel
-bool Graph::isPath(int ulabel, int vlabel) const {
-    bool rc = false;
-    int root = labelToVid(ulabel);
-    if (root != -1) {
-        q->enq(root);
+// // Returns true if a path can be found from ulabel to vlabel
+// bool Graph::isPath(int ulabel, int vlabel) const {
+//     bool rc = false;
+//     int root = labelToVid(ulabel);
+//     if (root != -1) {
+//         q->enq(root);
 	
-	// Create Sally to keep track of whether a vertex has been visited
-        bool *sally = new bool[vCount];
-        for (int i = 0; i < vCount; i++) {
-            sally[i] = false;
-        }
-        sally[root] = true;
+// 	// Create Sally to keep track of whether a vertex has been visited
+//         bool *sally = new bool[vCount];
+//         for (int i = 0; i < vCount; i++) {
+//             sally[i] = false;
+//         }
+//         sally[root] = true;
 	
-	// Starting at root, each neighbor will be searched and if vLabel is 
-	// found, the function will return true
-        while (true) {
-            int dq = 0;
-            q->deq(dq);
-            if (dq == -1) {
-                break;
-            } else if (dq == labelToVid(vlabel)) {
-		rc = true;
-		break;
-	    }
-            for (int i = 0; i < vCount; i++) {
-                if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
-                    q->enq(i);
-                    sally[i] = true;
-                }
-            }
-        }
-	// Delete Sally once the function is finished
-        delete[] sally;
-    }
-    return(rc);
-}
+// 	// Starting at root, each neighbor will be searched and if vLabel is 
+// 	// found, the function will return true
+//         while (true) {
+//             int dq = 0;
+//             q->deq(dq);
+//             if (dq == -1) {
+//                 break;
+//             } else if (dq == labelToVid(vlabel)) {
+// 		rc = true;
+// 		break;
+// 	    }
+//             for (int i = 0; i < vCount; i++) {
+//                 if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
+//                     q->enq(i);
+//                     sally[i] = true;
+//                 }
+//             }
+//         }
+// 	// Delete Sally once the function is finished
+//         delete[] sally;
+//     }
+//     return(rc);
+// }
 
 //******************************************************************************
 // Andrew Chapuis
@@ -456,50 +454,4 @@ bool Graph::isPath(int ulabel, int vlabel) const {
         delete [] sally;
     }
     return rc;
-}
-
-
-Make a set that will determine if a vertex is cooked or not
-set = new bool[vC] // set is a private variable as big as as the graph
-// but here we only have to worry about it to vCount
-// same thing for lambda
-start vid = vidStart
-for() {
-    set[i] = Y;;
-}
-if vidStart is a real vertice
-set[vidStart] = X
-
-establish lambda values in a for loop, giving everything infinity 
-unless it has an edge to the start vertex,
-start vertex has a 0 lambda value
-while (minLambdaY(wVid)) {
-    X<-w
-    for all edges that w has
-        is edge? if so update the lambda
-        update lambda[x]
-}
-
-
-
-
-private function called bool min_lambda_y
-
-bool minLambdaY (int &vid) {
-minVal = infinite;
-minVid = -1;
-bool rc = false
-for (i = 0; i < vCount; i++) {
-if (set[i] == Y) {
-if(lambda[i] <= minVal) {
-minVal = lambda[i];
-minVid = i;
-}
-}
-}
-if(minVid >= 0) {
-vid = minVid;
-rc = true;
-}
-return rc;
 }
