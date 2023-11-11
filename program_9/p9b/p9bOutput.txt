@@ -75,9 +75,9 @@ Degree table (in, out)
 50 does have a path to 33
 50 does have a path to 19
 50 does have a path to 14
-10 does have a path to 88
-10 does have a path to 44
-10 does have a path to 50
+10 does not have a path to 88
+10 does not have a path to 44
+10 does not have a path to 50
 10 does have a path to 10
 10 does have a path to 15
 10 does have a path to 25
@@ -132,62 +132,69 @@ Degree table (in, out)
 *** start of bfPrint() output
    Printing from 88
        Item 0 is (0,88)
-       Item 1 is (1,44)
-       Item 2 is (8,14)
+       Item 2 is (1,44)
+       Item 3 is (8,14)
        Item 3 is (7,19)
        Item 4 is (6,33)
        Item 5 is (2,50)
        Item 6 is (3,10)
-       Item 7 is (4,15)
+       Item 8 is (4,15)
        Item 8 is (5,25)
+       Item 8 is (-1,-1)
    Printing from 44
        Item 0 is (1,44)
        Item 1 is (7,19)
        Item 2 is (6,33)
        Item 3 is (2,50)
-       Item 4 is (3,10)
-       Item 5 is (8,14)
-       Item 6 is (4,15)
-       Item 7 is (5,25)
+       Item 5 is (3,10)
+       Item 7 is (8,14)
+       Item 8 is (4,15)
+       Item 8 is (5,25)
        Item 8 is (0,88)
+       Item 8 is (-1,-1)
    Printing from 50
        Item 0 is (2,50)
-       Item 1 is (3,10)
-       Item 2 is (6,33)
-       Item 3 is (8,14)
-       Item 4 is (4,15)
-       Item 5 is (5,25)
+       Item 3 is (3,10)
+       Item 5 is (6,33)
+       Item 5 is (8,14)
+       Item 6 is (4,15)
+       Item 6 is (5,25)
        Item 6 is (0,88)
        Item 7 is (1,44)
        Item 8 is (7,19)
+       Item 8 is (-1,-1)
    Printing from 10
        Item 0 is (3,10)
-       Item 1 is (4,15)
+       Item 2 is (4,15)
        Item 2 is (5,25)
+       Item 2 is (-1,-1)
    Printing from 25
        Item 0 is (5,25)
        Item 1 is (3,10)
        Item 2 is (4,15)
+       Item 2 is (-1,-1)
    Printing from 33
        Item 0 is (6,33)
        Item 1 is (2,50)
-       Item 2 is (3,10)
-       Item 3 is (8,14)
-       Item 4 is (4,15)
-       Item 5 is (5,25)
+       Item 3 is (3,10)
+       Item 5 is (8,14)
+       Item 6 is (4,15)
+       Item 6 is (5,25)
        Item 6 is (0,88)
        Item 7 is (1,44)
        Item 8 is (7,19)
+       Item 8 is (-1,-1)
    Printing from 19
        Item 0 is (7,19)
-       Item 1 is (1,44)
+       Item 2 is (1,44)
        Item 2 is (6,33)
        Item 3 is (2,50)
-       Item 4 is (3,10)
-       Item 5 is (8,14)
-       Item 6 is (4,15)
-       Item 7 is (5,25)
+       Item 5 is (3,10)
+       Item 7 is (8,14)
+       Item 8 is (4,15)
+       Item 8 is (5,25)
        Item 8 is (0,88)
+       Item 8 is (-1,-1)
    Printing from 14
        Item 0 is (8,14)
        Item 1 is (0,88)
@@ -196,10 +203,12 @@ Degree table (in, out)
        Item 4 is (6,33)
        Item 5 is (2,50)
        Item 6 is (3,10)
-       Item 7 is (4,15)
+       Item 8 is (4,15)
        Item 8 is (5,25)
+       Item 8 is (-1,-1)
    Printing from 15
        Item 0 is (4,15)
+       Item 0 is (-1,-1)
    Printing from 22
    Printing from 99
 *** end of bfPrint() output
