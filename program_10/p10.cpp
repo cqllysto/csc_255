@@ -370,39 +370,36 @@ void Graph::bfPrint(int label) const {
 // Returns true if a path can be found from ulabel to vlabel
 bool Graph::isPath(int ulabel, int vlabel) const {
     bool rc = false;
-    q->clear();
-    int root = labelToVid(ulabel);
-    if (root != -1) {
-        q->enq(root);
-	
-	// Create Sally to keep track of whether a vertex has been visited
+
+    // if the vertices given exist, then try to find a path
+    if(isV(ulabel) && isV(vlabel)) {
+        int uV = labelToVid(ulabel);
+        int vV = labelToVid(vlabel);
+        // Create Sally to keep track of whether a vertex has been visited
         bool *sally = new bool[vCount];
         for (int i = 0; i < vCount; i++) {
             sally[i] = false;
         }
-	
-	// Starting at root, each neighbor will be searched and if vLabel is 
-	// found, the function will return true
-        while (true) {
-            int dq = 0;
-            q->deq(dq);
-            if (dq == -1) {
-                break;
-            } else if ((sally[dq]) && (dq == labelToVid(vlabel))) {
-		rc = true;
-		break;
-	    }
+        q->clear();
+        q->enq(uV); 
+        int wV;
+        // Starting at root, each neighbor will be searched and if vLabel is 
+	    // found, the function will return true
+        while(q->deq(wV)) {
             for (int i = 0; i < vCount; i++) {
-                if ((!sally[i]) && (isEdge(vidToLabel(dq), vidToLabel(i)))) {
-                    q->enq(i);
-                    sally[i] = true;
+                if(!sally[i]){
+                    if (isEdge(vidToLabel(wV),vidToLabel(i))) {
+                        sally[i] = true;
+                        q->enq(i);
+                    }
                 }
             }
         }
-	// Delete Sally once the function is finished
-        delete[] sally;
+        // Delete Sally once the function is finished
+        rc = sally[vV];
+        delete [] sally;
     }
-    return(rc);
+    return rc;
 }
 
 //******************************************************************************
