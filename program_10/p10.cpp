@@ -462,12 +462,18 @@ void Graph::dijkstra(int s) {
     int v = s;
     bool doit = true;
     while (doit) {
+	// Change the current minimum to X
 	set[v] = X;
+	// Go through the lambda array and update their values with edges 
+	// starting at v
 	for (int i = 0; i < vCount; i++) {
 	    if ((set[i] == Y) && (isEdge(vidToLabel(v), vidToLabel(i)))) {
+		// Lambda will be set to the minimum of the current lambda
+		// or the lambda of the vertex just added and its weight edge
 		lambda[i] = min(lambda[i], lambda[v] + a[v][i]);
 	    }
     	}
+	// If there are no more values in Y, do it will return false
 	doit = minLambdaY(v);
     }
 }
@@ -475,10 +481,16 @@ void Graph::dijkstra(int s) {
 //******************************************************************************
 // Andrew Chapuis
 
+// Returns true if there are indices in Y and changes minV to the minimum value
 bool Graph::minLambdaY(int &minV) {
+    // 
     bool rc = false;
     minV = -1;
+    // Go through set to find Y and compare the min index with each index to 
+    // find the minimum value in Y
     for (int i = 0; i < vCount; i++) {
+	// If the index is Y, it will change minV if it is equal to -1 
+	// or it is smaller than the current minimum
 	if ((set[i] == Y) && ((minV == -1) || (lambda[minV] > lambda[i]))) { 
 	    minV = i;
         }
