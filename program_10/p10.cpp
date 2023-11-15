@@ -365,7 +365,7 @@ void Graph::bfPrint(int label) const {
 }
 
 //******************************************************************************
-// Andrew Chapuis
+// Aidan Wright
 
 // Returns true if a path can be found from ulabel to vlabel
 bool Graph::isPath(int ulabel, int vlabel) const {
