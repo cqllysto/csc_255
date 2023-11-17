@@ -21,19 +21,19 @@ class Graph {
         int vCount; // Tracks the number of vertices in the graph
         int eCount; // Tracks the number of edges in the graph
         bool directed; // Keeps track of whether the graph is directed or not
-	int *lambda; // Array that will hold the distances used
-	int *set; // Array that follows whether a node is in set X or set Y
-	int const INFINITE = 1000000;
-	int const X = 0; // Used with "set"
-	int const Y = 1; // Used with "set" 
+        int *lambda; // Array that will hold the distances used
+        int *set; // Array that follows whether a node is in set X or set Y
+        int const INFINITE = 1000000;
+        int const X = 0; // Used with "set"
+        int const Y = 1; // Used with "set" 
 
         int labelToVid(int label) const; // Converts a label to a virtual id
 
         int vidToLabel(int vid) const; // Converts a virtual id to a label
         iQ *q; // pointer to an iQ ADT
-	
-	void dijkstra(int s); // Will populate lambda with the distances
-	bool minLambdaY(int &minV); // Finds the minimum value in Y
+        
+        void dijkstra(int s); // Will populate lambda with the distances
+        bool minLambdaY(int &minV); // Finds the minimum value in Y
 
     public:
         Graph(int n = 100, bool directed = true); // Graph constructor
@@ -54,13 +54,13 @@ class Graph {
 
         // Prints each item found in a breadth-first search
         void bfPrint(int label) const;
-	// Returns true if a path can be found from a node to a node
+        // Returns true if a path can be found from a node to a node
         bool isPath(int ulabel, int vlabel) const;
-	// Prints whether there is a path from each node to each node
+        // Prints whether there is a path from each node to each node
         void printPaths() const; 
-	
-	// Returns true if both nodes exist and changes distance
-	bool dijkstra(int sLabel, int dLabel, int &distance);
+        
+        // Returns true if both nodes exist and changes distance
+        bool dijkstra(int sLabel, int dLabel, int &distance);
 };
 
 #endif

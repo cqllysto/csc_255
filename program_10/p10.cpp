@@ -21,7 +21,7 @@ Graph::Graph(int n, bool directed) {
     int *b = new int[n * n];
     // Sets the different indices of a as pointers to different sections of b
     for (int i = 0; i < n; i++) {
-	    a[i] = &(b[i * n]);
+            a[i] = &(b[i * n]);
         // Initialize every value as 0
         for (int j = 0; j < n; j++) {
             a[i][j] = 0;
@@ -46,7 +46,7 @@ Graph::Graph(int n, bool directed) {
 Graph::~Graph() {
     // delete the both a and labels
     for (int i = 0; i < n; i++) {
-	//delete a[i];
+        //delete a[i];
     }
     if (a) {
         delete [] a;
@@ -80,7 +80,7 @@ bool Graph::createV(int label) {
     // created
     if ((vCount < n) && !isV(label)) {
         rc = true;
-	    // Add the label to the labels array
+            // Add the label to the labels array
         labels->add(label);
         vCount++;
     }
@@ -101,11 +101,11 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
         // is not enough room to be created
         int count = 0;
         if (!isV(uLabel)) {
-	    count ++;
-	}
+            count ++;
+        }
         if (!isV(vLabel)) {
-	    count ++;
-	}
+            count ++;
+        }
         if (count <= n - vCount) {
             createV(uLabel);
             createV(vLabel);
@@ -326,29 +326,29 @@ void Graph::bfPrint(int label) const {
     // Root is the beginning vertex which branches out from there
     int root = labelToVid(label);
     if (root != -1) {
-	// Root is enqueued
+        // Root is enqueued
         q->enq(root);
         int count = 0;
         cout << "       Item " << count << " is (" << root << 
         "," << vidToLabel(root) << ")" << endl;
-	
-	// Sally is an array that keeps track of whether a node has been visited
+        
+        // Sally is an array that keeps track of whether a node has been visited
         bool *sally = new bool[vCount];
         for (int i = 0; i < vCount; i++) {
             sally[i] = false;
         }
         sally[root] = true;
-	
-	// Starting at root, each neighbor will be enqueued and marked as true
-	// in Sally
+        
+        // Starting at root, each neighbor will be enqueued and marked as true
+        // in Sally
         while (true) {
             int dq = 0;
             q->deq(dq);
-	    // When everything has been dequeued, the loop will break
+            // When everything has been dequeued, the loop will break
             if (dq == -1) {
                 break;
             }
-	    // This will enqueue and print every neighbor of a root
+            // This will enqueue and print every neighbor of a root
             for (int i = 0; i < vCount; i++) {
                 if (!sally[i] && isEdge(vidToLabel(dq), vidToLabel(i))) {
                     q->enq(i);
@@ -359,7 +359,7 @@ void Graph::bfPrint(int label) const {
                 }
             }
         }
-	// Delete Sally after done
+        // Delete Sally after done
         delete[] sally;
     }
 }
@@ -384,7 +384,7 @@ bool Graph::isPath(int ulabel, int vlabel) const {
         q->enq(uV); 
         int wV;
         // Starting at root, each neighbor will be searched and if vLabel is 
-	    // found, the function will return true
+        // found, the function will return true
         while(q->deq(wV)) {
             for (int i = 0; i < vCount; i++) {
                 if(!sally[i]){
@@ -411,16 +411,16 @@ void Graph::printPaths() const {
     int vNode;
     // Go through every vertex and check whether there is a path
     for (int i = 0; i < vCount; i++) {
-	labels->readAt(i, uNode);
-	for (int j = 0; j < vCount; j++) {
-	    labels->readAt(j, vNode);
-	    cout << uNode << " does ";
-	    // If there is not a path, not will be added to the sentence
-	    if (!isPath(uNode, vNode)) {
-		cout << "not ";
-	    }
-	    cout << "have a path to " << vNode << endl;
-	}
+        labels->readAt(i, uNode);
+        for (int j = 0; j < vCount; j++) {
+            labels->readAt(j, vNode);
+            cout << uNode << " does ";
+            // If there is not a path, not will be added to the sentence
+            if (!isPath(uNode, vNode)) {
+                cout << "not ";
+            }
+            cout << "have a path to " << vNode << endl;
+        }
     }
 }
 
@@ -433,12 +433,12 @@ bool Graph::dijkstra(int sLabel, int dLabel, int &distance) {
     // If the vertices do not exist, distance will be changed to -1
     distance = -1;
     if (isV(sLabel) && isV(dLabel)) {
-	rc = true;
-	// Call the private method to find the shortest paths from the starting
-	// vertex
-	dijkstra(labelToVid(sLabel));
-	// Distance will be set to the lambda value of the destination vertex
-	distance = lambda[labelToVid(dLabel)];
+        rc = true;
+        // Call the private method to find the shortest paths from the starting
+        // vertex
+        dijkstra(labelToVid(sLabel));
+        // Distance will be set to the lambda value of the destination vertex
+        distance = lambda[labelToVid(dLabel)];
     }
     return(rc);
 }
@@ -449,8 +449,8 @@ bool Graph::dijkstra(int sLabel, int dLabel, int &distance) {
 void Graph::dijkstra(int s) {
     // All of the set array will get initialized to Y
     for (int i = 0; i < vCount; i++) {
-	set[i] = Y;
-	lambda[i] = INFINITE;
+        set[i] = Y;
+        lambda[i] = INFINITE;
     }
     // Set the starting vertex to X in set and 0 in lambda
     set[s] = X;
@@ -459,19 +459,19 @@ void Graph::dijkstra(int s) {
     int v = s;
     bool doit = true;
     while (doit) {
-	// Change the current minimum to X
-	set[v] = X;
-	// Go through the lambda array and update their values with edges 
-	// starting at v
-	for (int i = 0; i < vCount; i++) {
-	    if ((set[i] == Y) && (isEdge(vidToLabel(v), vidToLabel(i)))) {
-		// Lambda will be set to the minimum of the current lambda
-		// or the lambda of the vertex just added and its weight edge
-		lambda[i] = min(lambda[i], lambda[v] + a[v][i]);
-	    }
-    	}
-	// If there are no more values in Y, do it will return false
-	doit = minLambdaY(v);
+        // Change the current minimum to X
+        set[v] = X;
+        // Go through the lambda array and update their values with edges 
+        // starting at v
+        for (int i = 0; i < vCount; i++) {
+            if ((set[i] == Y) && (isEdge(vidToLabel(v), vidToLabel(i)))) {
+                // Lambda will be set to the minimum of the current lambda
+                // or the lambda of the vertex just added and its weight edge
+                lambda[i] = min(lambda[i], lambda[v] + a[v][i]);
+            }
+            }
+        // If there are no more values in Y, do it will return false
+        doit = minLambdaY(v);
     }
 }
 
@@ -486,14 +486,14 @@ bool Graph::minLambdaY(int &minV) {
     // Go through set to find Y and compare the min index with each index to 
     // find the minimum value in Y
     for (int i = 0; i < vCount; i++) {
-	// If the index is Y, it will change minV if it is equal to -1 
-	// or it is smaller than the current minimum
-	if ((set[i] == Y) && ((minV == -1) || (lambda[minV] > lambda[i]))) { 
-	    minV = i;
+        // If the index is Y, it will change minV if it is equal to -1 
+        // or it is smaller than the current minimum
+        if ((set[i] == Y) && ((minV == -1) || (lambda[minV] > lambda[i]))) { 
+            minV = i;
         }
     }
     if (minV != -1) {
-	rc = true;
+        rc = true;
     }
     return(rc);
 }
