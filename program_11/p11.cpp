@@ -4,6 +4,7 @@
 // Program 10
 // Date: 11/15/23
 
+#include <iomanip>
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
 #include "p11.h"
@@ -110,6 +111,9 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
             createV(uLabel);
             createV(vLabel);
             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+            if (!directed) {
+                a[labelToVid(vLabel)][labelToVid(uLabel)] = weight;
+            }
             eCount++;
             rc = true;
         }
@@ -128,6 +132,9 @@ bool Graph::deleteEdge(int uLabel, int vLabel, int &weight) {
     if (isEdge(uLabel, vLabel)) {
         weight = a[labelToVid(uLabel)][labelToVid(vLabel)];
         a[labelToVid(uLabel)][labelToVid(vLabel)] = 0;
+        if (!directed) {
+            a[labelToVid(vLabel)][labelToVid(uLabel)] = 0;
+        }
         eCount--;
         rc = true;
     } else {
@@ -520,17 +527,14 @@ bool Graph::isCyclicDirected() {
 bool Graph::isCyclicUndirected() {
     bool rc = false;
     for (int i = 0; i < vCount; i++) {
-        if (isPath(vidToLabel(i),vidToLabel(i))) {
-            int w = 0;
-            for (int j = 0; j < vCount; j++) {
-                if (isEdge(vidToLabel(i),vidToLabel(j))) {
-                    deleteEdge(vidToLabel(i),vidToLabel(j),w);
-                    if (isPath(vidToLabel(i),vidToLabel(i))) {
-                        rc = true;
-                    }
-                    addEdge(vidToLabel(i),vidToLabel(j),w);
-                    break;
+        for (int j = 0; j < vCount; j++) {
+            if (isEdge(vidToLabel(i),vidToLabel(j))) {
+                int w = a[i][j];
+                a[i][j] = 0;
+                if (isPath(vidToLabel(i),vidToLabel(j))) {
+                    rc = true;
                 }
+                a[i][j] = w;
             }
         }
     }
