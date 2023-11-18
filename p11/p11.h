@@ -36,8 +36,8 @@ class Graph {
         bool minLambdaY(int &minV); // Finds the minimum value in Y
 
         //p11 functions
-        bool isCyclicDirected();
         bool isCyclicUndirected();
+        bool isCyclicDirected();
 
 
     public:

@@ -122,13 +122,16 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
 // Andrew Chapuis
 
 // Deletes an edge from the graph matrix
-bool Graph::deleteEdge(int uLabel, int vLabel) {
+bool Graph::deleteEdge(int uLabel, int vLabel, int &weight) {
     bool rc = false;
     // If the edge exists, then it will be deleted
     if (isEdge(uLabel, vLabel)) {
+        weight = a[labelToVid(uLabel)][labelToVid(vLabel)];
         a[labelToVid(uLabel)][labelToVid(vLabel)] = 0;
         eCount--;
         rc = true;
+    } else {
+        weight = -1;
     }
     return(rc);
 }
@@ -192,12 +195,14 @@ int Graph::inDegree(int label) const {
     // If the node doesn't exist, the function will return -1, otherwise
     // it will calculate the inDegree of the vertex
     if (isV(label)) {
-        rc = 0;
-        // The index of the label will stay constant as the matrix is searched
-        int index = labelToVid(label);
-        for (int i = 0; i < n; i++) {
-            if (a[i][index]) {
-                rc += 1;
+        if (!directed) {
+            rc = 0;
+            // The index of the label will stay constant as the matrix is searched
+            int index = labelToVid(label);
+            for (int i = 0; i < n; i++) {
+                if (a[i][index]) {
+                    rc += 1;
+                }
             }
         }
     }
@@ -212,12 +217,14 @@ int Graph::outDegree(int label) const {
     // If the node doesn't exist, the function will return -1, otherwise
     // it will calculate the inDegree of the vertex
     if (isV(label)) {
-        rc = 0;
-        // The index of the label will stay constant as the matrix is searched
-        int index = labelToVid(label);
-        for (int i = 0; i < n; i++) {
-            if (a[index][i]) {
-                rc += 1;
+        if (!directed) {
+            rc = 0;
+            // The index of the label will stay constant as the matrix is searched
+            int index = labelToVid(label);
+            for (int i = 0; i < n; i++) {
+                if (a[index][i]) {
+                    rc += 1;
+                }
             }
         }
     }
@@ -498,12 +505,44 @@ bool Graph::minLambdaY(int &minV) {
     return(rc);
 }
 
-bool isCyclicDirected();
+bool Graph::isCyclicDirected() {
+    bool rc = false;
+    for (int i = 0; i < vCount; i++) {
+        if(isPath(vidToLabel(i),vidToLabel(i))) {
+            rc = true;
+            break;
+        }
+    }
+    return rc;
+}
 
 
-bool isCyclicUndirected();
+bool Graph::isCyclicUndirected() {
+    bool rc = false;
+    for (int i = 0; i < vCount; i++) {
+        if (isPath(vidToLabel(i),vidToLabel(i))) {
+            int w = 0;
+            for (int j = 0; j < vCount; j++) {
+                if (isEdge(vidToLabel(i),vidToLabel(j))) {
+                    deleteEdge(vidToLabel(i),vidToLabel(j),w);
+                    if (isPath(vidToLabel(i),vidToLabel(i))) {
+                        rc = true;
+                    }
+                    addEdge(vidToLabel(i),vidToLabel(j),w);
+                    break;
+                }
+            }
+        }
+    }
+    return rc;
+}
 
-
-
-
-
+bool Graph::isCyclic() {
+    bool rc = false;
+    if (directed) {
+        rc = isCyclicDirected();
+    } else {
+        rc = isCyclicUndirected();
+    }
+    return rc;
+}
