@@ -19,19 +19,19 @@ Graph info:
   eCount = 9
 
 Graph contents:
-  Node(0,10): 0 1 12 0 0 0
-  Node(1,20): 0 0 9 3 0 0
-  Node(2,30): 0 0 0 0 5 0
-  Node(3,40): 0 0 4 0 13 15
-  Node(4,50): 0 0 0 0 0 4
-  Node(5,60): 0 0 0 0 0 0
-Degree table (in, out)
-  Node(0,10): -1, -1
-  Node(1,20): -1, -1
-  Node(2,30): -1, -1
-  Node(3,40): -1, -1
-  Node(4,50): -1, -1
-  Node(5,60): -1, -1
+  Node(0,10):  0  1 12  0  0  0
+  Node(1,20):  0  0  9  3  0  0
+  Node(2,30):  0  0  0  0  5  0
+  Node(3,40):  0  0  4  0 13 15
+  Node(4,50):  0  0  0  0  0  4
+  Node(5,60):  0  0  0  0  0  0
+Degree table (normal, in, out)
+  Node(0,10):    -1, 0, 2
+  Node(1,20):    -1, 1, 2
+  Node(2,30):    -1, 3, 1
+  Node(3,40):    -1, 1, 3
+  Node(4,50):    -1, 2, 1
+  Node(5,60):    -1, 2, 0
 10 does not have a path to 10
 10 does have a path to 20
 10 does have a path to 30

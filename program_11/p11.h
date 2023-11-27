@@ -1,11 +1,11 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 10
-// Date: 11/15/23
+// Program 11
+// Date: 11/27/23
 
-#ifndef __P10B_H
-#define __P10B_H
+#ifndef __P11_H
+#define __P11_H
 
 #include "iq.h"
 #include "p8.h"
@@ -35,7 +35,8 @@ class Graph {
         void dijkstra(int s); // Will populate lambda with the distances
         bool minLambdaY(int &minV); // Finds the minimum value in Y
 
-        //p11 functions
+        // Functions that will check whether an undirected or directed graph
+        // is cyclic
         bool isCyclicUndirected();
         bool isCyclicDirected();
 
@@ -67,8 +68,9 @@ class Graph {
         // Returns true if both nodes exist and changes distance
         bool dijkstra(int sLabel, int dLabel, int &distance);
 
-        //p11
-        int degree(int label);
+        // Returns the degree for an undirected graph
+        int degree(int label) const;
+        // Calls the private function for either a directed or undirected graph
         bool isCyclic();
         
 };

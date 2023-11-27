@@ -7,7 +7,7 @@
 using namespace std;
 
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     int action, unode, vnode, weight;
     int mytable[40];
     int mytable2[40];
