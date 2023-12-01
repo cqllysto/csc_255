@@ -35,18 +35,13 @@ class Graph {
         void dijkstra(int s); // Will populate lambda with the distances
         bool minLambdaY(int &minV); // Finds the minimum value in Y
 
-        //p11 functions
-        bool isCyclicUndirected();
-        bool isCyclicDirected();
-
-
     public:
         Graph(int n = 100, bool directed = true); // Graph constructor
         ~Graph(); // Graph destructor
         
         bool createV(int label); // Creates a vertex with the inputed label
         bool addEdge(int uLabel, int vLabel, int weight); // adds an edge 
-        bool deleteEdge(int uLabel, int vLabel, int &weight); // deletes an edge
+        bool deleteEdge(int uLabel, int vLabel); // deletes an edge
         void clear(); // clears the graph
         bool isEdge(int uLabel, int vLabel) const; // checks if an edge exists
         bool isV(int label) const; // checks if a vertex with label exists
@@ -66,11 +61,6 @@ class Graph {
         
         // Returns true if both nodes exist and changes distance
         bool dijkstra(int sLabel, int dLabel, int &distance);
-
-        //p11
-        int degree(int label);
-        bool isCyclic();
-        
 };
 
 #endif

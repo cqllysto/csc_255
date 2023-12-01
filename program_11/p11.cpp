@@ -1,9 +1,10 @@
 // Name: Andrew Chapuis and Aidan Wright
 // Team 3
 // Course: CSC 255
-// Program 10
-// Date: 11/15/23
+// Program 11
+// Date: 11/27/23
 
+#include <iomanip>
 #include <iostream>   // gets cin, cout, cerr
 #include "p8.h"
 #include "p11.h"
@@ -21,7 +22,7 @@ Graph::Graph(int n, bool directed) {
     int *b = new int[n * n];
     // Sets the different indices of a as pointers to different sections of b
     for (int i = 0; i < n; i++) {
-            a[i] = &(b[i * n]);
+        a[i] = &(b[i * n]);
         // Initialize every value as 0
         for (int j = 0; j < n; j++) {
             a[i][j] = 0;
@@ -80,7 +81,7 @@ bool Graph::createV(int label) {
     // created
     if ((vCount < n) && !isV(label)) {
         rc = true;
-            // Add the label to the labels array
+        // Add the label to the labels array
         labels->add(label);
         vCount++;
     }
@@ -110,6 +111,11 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
             createV(uLabel);
             createV(vLabel);
             a[labelToVid(uLabel)][labelToVid(vLabel)] = weight;
+            // If the graph is undirected, whenever one edge is created, it's 
+            // mirror edge will also be created
+            if (!directed) {
+                a[labelToVid(vLabel)][labelToVid(uLabel)] = weight;
+            }
             eCount++;
             rc = true;
         }
@@ -128,6 +134,11 @@ bool Graph::deleteEdge(int uLabel, int vLabel, int &weight) {
     if (isEdge(uLabel, vLabel)) {
         weight = a[labelToVid(uLabel)][labelToVid(vLabel)];
         a[labelToVid(uLabel)][labelToVid(vLabel)] = 0;
+        // If the graph is undirected, whenever one edge is deleted, it's 
+        // mirror edge will also be deleted
+        if (!directed) {
+            a[labelToVid(vLabel)][labelToVid(uLabel)] = weight;
+        }
         eCount--;
         rc = true;
     } else {
@@ -194,15 +205,13 @@ int Graph::inDegree(int label) const {
     int rc = -1;
     // If the node doesn't exist, the function will return -1, otherwise
     // it will calculate the inDegree of the vertex
-    if (isV(label)) {
-        if (!directed) {
-            rc = 0;
-            // The index of the label will stay constant as the matrix is searched
-            int index = labelToVid(label);
-            for (int i = 0; i < n; i++) {
-                if (a[i][index]) {
-                    rc += 1;
-                }
+    if ((directed) && (isV(label))) {      
+        rc = 0;
+        // The index of the label will stay constant as the matrix is searched
+        int index = labelToVid(label);
+        for (int i = 0; i < n; i++) {
+            if (a[i][index]) {
+                rc += 1;
             }
         }
     }
@@ -216,15 +225,13 @@ int Graph::outDegree(int label) const {
     int rc = -1;
     // If the node doesn't exist, the function will return -1, otherwise
     // it will calculate the inDegree of the vertex
-    if (isV(label)) {
-        if (!directed) {
-            rc = 0;
-            // The index of the label will stay constant as the matrix is searched
-            int index = labelToVid(label);
-            for (int i = 0; i < n; i++) {
-                if (a[index][i]) {
-                    rc += 1;
-                }
+    if ((directed) && (isV(label))) {      
+        rc = 0;
+        // The index of the label will stay constant as the matrix is searched
+        int index = labelToVid(label);
+        for (int i = 0; i < n; i++) {
+            if (a[index][i]) {
+                rc += 1;
             }
         }
     }
@@ -273,18 +280,19 @@ void Graph::printIt() const {
         cout << "  Node(" << r << "," << key << "):";
         // Prints each row of the graph matrix
         for (c = 0; c < vCount; c++) {
-            cout << " " << a[r][c];
+            cout << setw(3) << a[r][c];
         }
         cout << endl;
     }
 
-    cout << "Degree table (in, out)\n";
+    cout << "Degree table (normal, in, out)\n";
     
     // Prints the degree of each vertex
     for (r = 0; r < vCount; r++) {
         labels->readAt(r, key);
         cout << "  Node(" << r << "," << key << "):";
-        cout << " " << inDegree(key) << ", " << outDegree(key) << endl;
+        cout << setw(6) << degree(key) << ", " << inDegree(key) << ", " 
+            << outDegree(key) << endl;
     }
 }
 
@@ -322,8 +330,6 @@ int Graph::vidToLabel(int vid) const {
     labels->readAt(vid, rc);
     return rc;
 } 
-
-
 
 //******************************************************************************
 // Aidan Wright
@@ -505,44 +511,88 @@ bool Graph::minLambdaY(int &minV) {
     return(rc);
 }
 
+//******************************************************************************
+// Andrew Chapuis
+
+// Returns whether a directed graph is cyclic
 bool Graph::isCyclicDirected() {
     bool rc = false;
+    // At every vertex, search for a path back to itself and if one exists
+    // the function will return true and break from the loop
     for (int i = 0; i < vCount; i++) {
         if(isPath(vidToLabel(i),vidToLabel(i))) {
             rc = true;
             break;
         }
     }
-    return rc;
+    return(rc);
 }
 
+//******************************************************************************
+// Aidan Wright
 
+// Returns whether an undirected graph is cyclic
 bool Graph::isCyclicUndirected() {
     bool rc = false;
     for (int i = 0; i < vCount; i++) {
-        if (isPath(vidToLabel(i),vidToLabel(i))) {
-            int w = 0;
-            for (int j = 0; j < vCount; j++) {
-                if (isEdge(vidToLabel(i),vidToLabel(j))) {
-                    deleteEdge(vidToLabel(i),vidToLabel(j),w);
-                    if (isPath(vidToLabel(i),vidToLabel(i))) {
-                        rc = true;
-                    }
-                    addEdge(vidToLabel(i),vidToLabel(j),w);
-                    break;
+        for (int j = 0; j < vCount; j++) {
+            // Once an edge is found, the edge will be temporarily deleted so
+            // a search for a different path back to the vertex exists
+            if (isEdge(vidToLabel(i),vidToLabel(j))) {
+                // w is a temporary variable to hold the weight of the edge
+                int w = a[i][j];
+                a[i][j] = 0;
+                // If there is a path, the function will return true
+                if (isPath(vidToLabel(i),vidToLabel(j))) {
+                    rc = true;
                 }
+                a[i][j] = w;
             }
+            // Break out of both loops once one cycle has been found
+            if (rc) {
+                break;
+            }
+        }
+        if (rc) {
+            break;
         }
     }
     return rc;
 }
 
+//******************************************************************************
+// Andrew Chapuis
+
+// Returns whether a graph is cyclic
 bool Graph::isCyclic() {
     bool rc = false;
+    // Will call the respective function for directed or undirected
     if (directed) {
         rc = isCyclicDirected();
     } else {
         rc = isCyclicUndirected();
     }
-    return rc;
+    return(rc);
+}
+
+//******************************************************************************
+// Andrew Chapuis
+
+// Returns the degree of a vertex, or -1 if it doesn't exist or the graph is 
+// undirected
+int Graph::degree(int label) const {
+    int rc = -1;
+    // If the graph is undirected and the label exists
+    if (!directed && isV(label)) {
+        rc = 0;
+        // The index of the label will stay constant as the matrix is searched
+        int index = labelToVid(label);
+        // Goes through each row counting the number of edges
+        for (int i = 0; i < n; i++) {
+            if (a[index][i]) {
+                rc += 1;
+            }
+        }
+    }
+    return(rc);
 }
