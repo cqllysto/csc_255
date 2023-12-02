@@ -5,13 +5,18 @@
 // Date: 12/04/23
 
 #include <iostream>   // gets cin, cout, cerr
+#include <fstream>
+#include <string>
 #include "p13.h"
 using namespace std;
 
 //******************************************************************************
 huffman::huffman() {
-    huffPQ pq = huffPQ(FCOUNT);
+    huffPQ *pq = new huffPQ(FCOUNT);
     freqs = new int [FCOUNT];
+    for (int i = 0; i < FCOUNT; ++i) {
+        freqs[i] = 0;
+    }
     fileSize = 0;
     root = NULL;
 }
@@ -103,14 +108,43 @@ int huffman::getInFileSizeBytes() const {
 //******************************************************************************
 // Aidan Wright
 
-bool huffman::importFile(std::string fname) {
+bool huffman::importFile(string fname) {
+    bool rc = false;
+    ifstream file(fname);
+        
+    if (!file.is_open()) {
+        rc = false;
+    } else {
+        rc = true;
+        char a = 0;
+        while (file.get(a)) {
+            // Update character frequency
+            freqs[a]++;
+            // Update file size
+            fileSize++;
+        }
+        file.close();
+    }
+    
+    // Testing this function
+    // for (int i = 0; i < FCOUNT; ++i) {
+    //     cout << freqs[i] << endl;
+    // }
+    // cout << fileSize;
 
+    return rc;
 } // reads the input file
 
 //******************************************************************************
 // Aidan Wright
 
 void huffman::buildTree(){
+    for (int i = 0; i < FCOUNT; i++) {
+        if (freqs[i] != 0) {
+            huffNode *a = new huffNode(i,freqs[i]);
+            pq->enq(a);
+        }
+    }
 
 }
 
@@ -121,12 +155,9 @@ void huffman::clear(huffNode *p){} // the private, recursive function of clear
 
 //******************************************************************************
 // Aidan Wright
-void huffman::getEncodings(huffNode *p, encoding code, encoding *v) const{}
-
-
-//******************************************************************************
-// Aidan Wright
-void huffman::printPattern(char val, int freq, encoding code) const{}
+void huffman::getEncodings(huffNode *p, encoding code, encoding *v) const{
+    
+}
 
 
 //******************************************************************************
