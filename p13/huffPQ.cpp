@@ -11,14 +11,6 @@ using namespace std;
 
 
 //******************************************************************************
-// Andrew Chapui
-
-huffPQ::huffPQ(int n) {
-
-}
-
-
-//******************************************************************************
 // Aidan Wright
 
 huffNode::huffNode(char val, int key, huffNode *left, huffNode *right) {
@@ -101,7 +93,7 @@ void huffPQ::bubbleUp(int index) {
     // their values will be swapped and then the value will be compared to it's 
     // new parent's value. It will keep swapping until a parent is greater or 
     // the value reaches the top of the queue
-    while ((entries[per] < entries[index])) {
+    while ((entries[per]->val < entries[index]->val)) {
         swap(entries[index], entries[per]);
         index = per;
         per = parent(index);
@@ -122,14 +114,14 @@ void huffPQ::heapify(int index) {
     if (l < qCount) {
         // If the left child has a larger value than its parent, largest will
         // equal the index of the left child
-        if (entries[l] > entries[largest]) {
+        if (entries[l]->val > entries[largest]->val) {
             largest = l;
         }
     }
     if (r < qCount) {
         // if the right child has a larger value than the larger of the left 
         // child or the parent, largest will equal the index of the right child
-        if (entries[r] > entries[largest]) {
+        if (entries[r]->val > entries[largest]->val) {
             largest = r;		    
         }
     }
@@ -194,3 +186,6 @@ void huffPQ::clear() {
 int huffPQ::count() const {
     return qCount;
 }
+
+
+

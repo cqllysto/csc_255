@@ -10,10 +10,16 @@ using namespace std;
 
 //******************************************************************************
 huffman::huffman() {
+    huffPQ pq = huffPQ(FCOUNT);
+    freqs = new int [FCOUNT];
+    fileSize = 0;
+    root = NULL;
 }
 
 //******************************************************************************
 huffman::~huffman() {
+    delete pq;
+    delete freqs;
 }
 
 
@@ -85,8 +91,49 @@ int huffman::getOutFileSizeBits() const {
 
     return rc;
 }
+
+
 //******************************************************************************
 
 int huffman::getInFileSizeBytes() const {
     return fileSize;
 }
+
+
+//******************************************************************************
+// Aidan Wright
+
+bool huffman::importFile(std::string fname) {
+
+} // reads the input file
+
+//******************************************************************************
+// Aidan Wright
+
+void huffman::buildTree(){
+
+}
+
+//******************************************************************************
+// Aidan Wright
+
+void huffman::clear(huffNode *p){} // the private, recursive function of clear
+
+//******************************************************************************
+// Aidan Wright
+void huffman::getEncodings(huffNode *p, encoding code, encoding *v) const{}
+
+
+//******************************************************************************
+// Aidan Wright
+void huffman::printPattern(char val, int freq, encoding code) const{}
+
+
+//******************************************************************************
+// Aidan Wright
+void huffman::printIt(huffNode *p, encoding code) const{}
+
+
+//******************************************************************************
+// Aidan Wright
+void huffman::dumpTree(huffNode *p, encoding code) const{}
