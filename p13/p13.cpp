@@ -150,26 +150,25 @@ bool huffman::importFile(string fname) {
 void huffman::buildTree(){
     for (int i = 0; i < FCOUNT; i++) {
         if (freqs[i] != 0) {
-            char c = static_cast<char>(i);
-            huffNode *a = new huffNode(c,freqs[i]);
+            huffNode *a = new huffNode(i,freqs[i]);
             pq->enq(a);
         }
     }
+    // cout << "first print statement" << endl;
+    // pq->printItQ();
+    // cout << "second print statement" << endl;
 
-    pq->printIt2();
-
+    huffNode *left, *right;
     while (pq->count() > 1) {
-        huffNode *leftChild, *rightChild;
-        if (pq->deq(leftChild) && pq->deq(rightChild)) {
-            huffNode *parent = new huffNode('\0', 
-                leftChild->key + rightChild->key, leftChild, rightChild);
+        if (pq->deq(left) && pq->deq(right)) {
+            huffNode *parent = new huffNode('@', left->key + right->key, left, right);
             pq->enq(parent);
         }
     }
 
     // The last remaining node in the queue is the root of the Huffman tree
     pq->deq(root);
-    pq->printIt2();
+    // pq->printItQ();
 
 }
 

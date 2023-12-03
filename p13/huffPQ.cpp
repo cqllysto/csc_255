@@ -117,14 +117,14 @@ void huffPQ::heapify(int index) {
     if (l < qCount) {
         // If the left child has a larger value than its parent, largest will
         // equal the index of the left child
-        if (entries[l]->key > entries[largest]->key) {
+        if (entries[l]->key < entries[largest]->key) {
             largest = l;
         }
     }
     if (r < qCount) {
         // if the right child has a larger value than the larger of the left 
         // child or the parent, largest will equal the index of the right child
-        if (entries[r]->key > entries[largest]->key) {
+        if (entries[r]->key < entries[largest]->key) {
             largest = r;		    
         }
     }
@@ -192,7 +192,7 @@ int huffPQ::count() const {
 
 
 
-void huffPQ::printIt(int ind, int count) const {
+void huffPQ::printItQ(int ind, int count) const {
     // create a local variable to account for indices
     int ind2;
     // create a local variable level that will account for the level being
@@ -211,11 +211,11 @@ void huffPQ::printIt(int ind, int count) const {
     
     // If there are more levels to be printed, call printIt again
     if (level < log2(qCount) - 1) {
-        printIt(ind2, pow(2, (level + 1)));
+        printItQ(ind2, pow(2, (level + 1)));
     }
 } 
 
 // Public function that calls the private printIt to print the queue
-void huffPQ::printIt2() const {
-    printIt(0, 1);
+void huffPQ::printItQ() const {
+    printItQ(0, 1);
 }

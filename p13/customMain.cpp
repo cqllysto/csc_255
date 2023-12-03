@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
 
 	string s(argv[1]);
 	myHuff->importFile(s);
+	cout << "import" << endl;
 	myHuff->buildTree();
 	//myHuff->printIt();
 
@@ -25,5 +26,3 @@ int main(int argc, char *argv[]) {
 	cerr << "Usage: " << argv[0] << " filename" << endl;
     }
 }
-
-//******************************************************************************

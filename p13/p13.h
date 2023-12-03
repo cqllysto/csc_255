@@ -27,7 +27,7 @@ class huffPQ {
 	int right(int index) const;
 
 	//DEBUG FUNCTIONS:
-	void printIt(int ind, int count) const {};
+	void printItQ(int ind, int count) const;
 	
 
 	void swap(huffNode *&x, huffNode *&y); // Traditional swap
@@ -43,7 +43,7 @@ class huffPQ {
 	int count () const; // Returns the number of items in the PQ
 
 	//DEBUG
-	void printIt2() const {};
+	void printItQ() const;
 };
 
 class encoding {
