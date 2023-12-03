@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     int bitCount;
     int byteCount;
 
-    if (argc == 2) {
+    if (argc >= 2) {
 	huffman *myHuff = new huffman();
 
 	string s(argv[1]);

@@ -26,6 +26,10 @@ class huffPQ {
 	int left(int index) const;
 	int right(int index) const;
 
+	//DEBUG FUNCTIONS:
+	void printIt(int ind, int count) const {};
+	
+
 	void swap(huffNode *&x, huffNode *&y); // Traditional swap
 	void bubbleUp(int index); // Moves the huffNode up the heap if needed
 	void heapify(int i); // Moves the huffNose down the heap if needed
@@ -37,6 +41,9 @@ class huffPQ {
 	bool deq(huffNode *&v);
 	void clear(); // Causes the PQ to be cleared
 	int count () const; // Returns the number of items in the PQ
+
+	//DEBUG
+	void printIt2() const {};
 };
 
 class encoding {
@@ -51,7 +58,7 @@ class huffman {
 	huffPQ *pq; // The queue to be used
 	int *freqs; // an array of frequencies
 	int fileSize; // The character count of the input file
-	huffNode *root; // This is sthe root of the Huffman tree
+	huffNode *root; // This is the root of the Huffman tree
 
 	void clear(huffNode *p); // the private, recursive function of clear
 	void getEncodings(huffNode *p, encoding code, encoding *v) const;

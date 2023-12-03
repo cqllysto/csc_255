@@ -5,9 +5,11 @@
 // Date: 12/04/23
 
 #include <iostream>   // gets cin, cout, cerr
+#include <cmath>
 #include "p13.h"
 
 using namespace std;
+
 
 
 //******************************************************************************
@@ -28,6 +30,7 @@ huffNode::huffNode(char val, int key, huffNode *left, huffNode *right) {
 huffPQ::huffPQ(int n) {
     entries = new huffNode *[n];
     qCount = 0;
+    pqSize = n;
 }
 
 //******************************************************************************
@@ -35,7 +38,7 @@ huffPQ::huffPQ(int n) {
 
 huffPQ::~huffPQ() {
     if(entries) {
-        delete entries;
+        delete [] entries;
     }
 }
 
@@ -93,7 +96,7 @@ void huffPQ::bubbleUp(int index) {
     // their values will be swapped and then the value will be compared to it's 
     // new parent's value. It will keep swapping until a parent is greater or 
     // the value reaches the top of the queue
-    while ((entries[per]->val < entries[index]->val)) {
+    while ((entries[per]->key > entries[index]->key)) {
         swap(entries[index], entries[per]);
         index = per;
         per = parent(index);
@@ -114,14 +117,14 @@ void huffPQ::heapify(int index) {
     if (l < qCount) {
         // If the left child has a larger value than its parent, largest will
         // equal the index of the left child
-        if (entries[l]->val > entries[largest]->val) {
+        if (entries[l]->key > entries[largest]->key) {
             largest = l;
         }
     }
     if (r < qCount) {
         // if the right child has a larger value than the larger of the left 
         // child or the parent, largest will equal the index of the right child
-        if (entries[r]->val > entries[largest]->val) {
+        if (entries[r]->key > entries[largest]->key) {
             largest = r;		    
         }
     }
@@ -144,7 +147,7 @@ bool huffPQ::enq(huffNode *v ) {
     if (qCount < pqSize) {
         // Insert the value at the end of the array
         entries[qCount] = v;
-        // Push the value up the heap if it is greater than its parent
+        // Push the value up the heap if it is less than its parent
         bubbleUp(qCount);
         qCount++;
         rc = true;
@@ -189,3 +192,30 @@ int huffPQ::count() const {
 
 
 
+void huffPQ::printIt(int ind, int count) const {
+    // create a local variable to account for indices
+    int ind2;
+    // create a local variable level that will account for the level being
+    // printed
+    int level = log2(ind + 1);
+    cout << "level[" << level << "]->";
+    
+    // Print each value on the level 
+    for (int i = ind; count > 0 && i < qCount; count--) {
+        cout << entries[i] << " ";
+        i++;
+        ind2 = i;
+    }
+    
+    cout << endl;
+    
+    // If there are more levels to be printed, call printIt again
+    if (level < log2(qCount) - 1) {
+        printIt(ind2, pow(2, (level + 1)));
+    }
+} 
+
+// Public function that calls the private printIt to print the queue
+void huffPQ::printIt2() const {
+    printIt(0, 1);
+}

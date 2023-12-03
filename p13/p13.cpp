@@ -12,7 +12,7 @@ using namespace std;
 
 //******************************************************************************
 huffman::huffman() {
-    huffPQ *pq = new huffPQ(FCOUNT);
+    pq = new huffPQ(FCOUNT);
     freqs = new int [FCOUNT];
     for (int i = 0; i < FCOUNT; ++i) {
         freqs[i] = 0;
@@ -23,8 +23,17 @@ huffman::huffman() {
 
 //******************************************************************************
 huffman::~huffman() {
-    delete pq;
-    delete freqs;
+    clear(root);
+
+    if (pq != NULL) {
+        delete pq;
+        pq = NULL;
+    }
+
+    if (freqs != NULL) {
+        delete[] freqs;
+        freqs = NULL;
+    }
 }
 
 
@@ -141,30 +150,95 @@ bool huffman::importFile(string fname) {
 void huffman::buildTree(){
     for (int i = 0; i < FCOUNT; i++) {
         if (freqs[i] != 0) {
-            huffNode *a = new huffNode(i,freqs[i]);
+            char c = static_cast<char>(i);
+            huffNode *a = new huffNode(c,freqs[i]);
             pq->enq(a);
         }
     }
 
+    pq->printIt2();
+
+    while (pq->count() > 1) {
+        huffNode *leftChild, *rightChild;
+        if (pq->deq(leftChild) && pq->deq(rightChild)) {
+            huffNode *parent = new huffNode('\0', 
+                leftChild->key + rightChild->key, leftChild, rightChild);
+            pq->enq(parent);
+        }
+    }
+
+    // The last remaining node in the queue is the root of the Huffman tree
+    pq->deq(root);
+    pq->printIt2();
+
 }
 
 //******************************************************************************
 // Aidan Wright
 
-void huffman::clear(huffNode *p){} // the private, recursive function of clear
+void huffman::clear(huffNode *p){
+    if (p) {
+        clear(p->left);
+        clear(p->right);
+        delete p;
+    }
+} // the private, recursive function of clear
 
 //******************************************************************************
 // Aidan Wright
 void huffman::getEncodings(huffNode *p, encoding code, encoding *v) const{
-    
+    if (p) {
+        if (p->left == NULL && p->right == NULL) {
+            // Leaf node, save the encoding in rv
+            v[static_cast<unsigned char>(p->val)] = code;
+        } else {
+            // Traverse left with '0'
+            encoding left = code;
+            left.pat = (left.pat <<= 1);
+            left.patCount++;
+            getEncodings(p->left, left, v);
+
+            // Traverse right with '1'
+            encoding right = code;
+            right.pat <<= 1;
+            right.pat |= 1;
+            right.patCount++;
+            getEncodings(p->right, right, v);
+        }
+    }
 }
 
 
 //******************************************************************************
 // Aidan Wright
-void huffman::printIt(huffNode *p, encoding code) const{}
+void huffman::printIt(huffNode *p, encoding code) const{
+    if (p) {
+        if (p->left == NULL && p->right == NULL) {
+            // Leaf node, save the encoding in rv
+            printPattern(p->val, p->key, code);
+        } else {
+            // Traverse left with '0'
+            encoding left = code;
+            left.pat = (left.pat << 1);
+            left.patCount++;
+            printIt(p->left, left);
+
+            // Traverse right with '1'
+            encoding right = code;
+            right.pat = (right.pat << 1) | 1;
+            right.patCount++;
+            printIt(p->right, right);
+        }
+    }
+}
 
 
 //******************************************************************************
 // Aidan Wright
-void huffman::dumpTree(huffNode *p, encoding code) const{}
+void huffman::dumpTree(huffNode *p, encoding code) const{
+    if (p) {
+        dumpTree(p->left, code);
+        printPattern(p->val, p->key, code);
+        dumpTree(p->right, code);
+    }
+}
