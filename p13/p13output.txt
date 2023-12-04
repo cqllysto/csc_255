@@ -79,3 +79,4 @@ E(0.0719403%) 11010111000
 T(0.300694%) 110101111
 r(4.35619%) 11011
  (18.6371%) 111
+The encoded file would have 17684917 bits which would be 2210615 bytes; giving a ratio of 56.6153%

@@ -10,23 +10,10 @@
 
 using namespace std;
 
-
-
 //******************************************************************************
 // Aidan Wright
 
-huffNode::huffNode(char val, int key, huffNode *left, huffNode *right) {
-    // Instructor provided
-    this->val = val;
-    this->key = key;
-    this->left = left;
-    this->right = right;
-}
-
-
-//******************************************************************************
-// Aidan Wright
-
+// Constructor
 huffPQ::huffPQ(int n) {
     entries = new huffNode *[n];
     qCount = 0;
@@ -36,6 +23,7 @@ huffPQ::huffPQ(int n) {
 //******************************************************************************
 // Aidan Wright
 
+// Destructor
 huffPQ::~huffPQ() {
     if(entries) {
         delete [] entries;
@@ -91,15 +79,15 @@ void huffPQ::swap(huffNode *&x, huffNode *&y) {
 
 // A private function that will move a value up the tree when it is inserted
 void huffPQ::bubbleUp(int index) {
-    int per = parent(index);
+    int par = parent(index);
     // If the passed index's value is greater than it's parent's value
     // their values will be swapped and then the value will be compared to it's 
     // new parent's value. It will keep swapping until a parent is greater or 
     // the value reaches the top of the queue
-    while ((entries[per]->key > entries[index]->key)) {
-        swap(entries[index], entries[per]);
-        index = per;
-        per = parent(index);
+    while ((entries[par]->key > entries[index]->key)) {
+        swap(entries[index], entries[par]);
+        index = par;
+        par = parent(index);
     }
 }
 
@@ -125,7 +113,7 @@ void huffPQ::heapify(int index) {
         // if the right child has a larger value than the larger of the left 
         // child or the parent, largest will equal the index of the right child
         if (entries[r]->key < entries[largest]->key) {
-            largest = r;		    
+            largest = r;                    
         }
     }
     
@@ -187,35 +175,6 @@ void huffPQ::clear() {
 
 // Returns the number of entries in the list
 int huffPQ::count() const {
-    return qCount;
+    return(qCount);
 }
 
-
-
-void huffPQ::printItQ(int ind, int count) const {
-    // create a local variable to account for indices
-    int ind2;
-    // create a local variable level that will account for the level being
-    // printed
-    int level = log2(ind + 1);
-    cout << "level[" << level << "]->";
-    
-    // Print each value on the level 
-    for (int i = ind; count > 0 && i < qCount; count--) {
-        cout << entries[i] << " ";
-        i++;
-        ind2 = i;
-    }
-    
-    cout << endl;
-    
-    // If there are more levels to be printed, call printIt again
-    if (level < log2(qCount) - 1) {
-        printItQ(ind2, pow(2, (level + 1)));
-    }
-} 
-
-// Public function that calls the private printIt to print the queue
-void huffPQ::printItQ() const {
-    printItQ(0, 1);
-}
